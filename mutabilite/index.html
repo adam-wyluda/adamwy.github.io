@@ -85,7 +85,7 @@ span.hljs-tag, span.hljs-symbol{
     <h1 id="Features" style="display: block;" class=" scalatex-site-Styles-hoverContainer scalatex-site-Styles-headerTag"><a class=" scalatex-site-Styles-headerLink" href="#Features" style="position: absolute;right: 0px;"><i class="fa fa-link"></i></a>Features</h1>
       <ul>
         <li>No boxing when using primitives mixed with reference types (like in Map[Int, String])</li>
-        <li>Lightweight - whole library weighs about 500kB (vs. 15MB of debox + spire dependency)</li>
+        <li>Lightweight - library runtime weighs about 200kB (vs. 15MB of debox + spire dependency)</li>
         <li>Macros for higher-order functions that inline given closures</li>
         <li>Specialized interfaces that guarantee that you don't box</li>
 </ul>
@@ -115,7 +115,7 @@ span.hljs-tag, span.hljs-symbol{
       For example: <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">Seq_Char, Map_Int_Object[String]</code>
     </p>
     <h1 id="Example" style="display: block;" class=" scalatex-site-Styles-hoverContainer scalatex-site-Styles-headerTag"><a class=" scalatex-site-Styles-headerLink" href="#Example" style="position: absolute;right: 0px;"><i class="fa fa-link"></i></a>Example</h1>
-      <pre><code class="scala scalatex-site-Styles-highlightMe">val seq = new BufferSeq_Int
+      <pre><code class="scala scalatex-site-Styles-highlightMe">val seq = new Seq_Int
 seq.append(1)
 seq.append(2)
 seq.append(3)

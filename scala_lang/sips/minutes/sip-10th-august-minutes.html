@@ -1,0 +1,555 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SIP Meeting Minutes - 10th August 2016 - Scala Documentation</title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+
+    <!-- prettify js and CSS -->
+    <link rel="stylesheet" href="/resources/stylesheets/prettify.css" type="text/css" />
+    <script src="/resources/javascript/prettify/prettify.js" type="text/javascript" ></script>
+
+
+    <!-- jquery js -->
+    <script src="/resources/javascript/jquery.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/effects.core.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/effects.highlight.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/moveScroller.js" type="text/javascript" ></script>
+
+    <!-- Bootstrap JS and CSS -->
+    <link rel="stylesheet" href="/resources/stylesheets/bootstrap.css" type="text/css" />
+	  <script src="/resources/javascript/bootstrap-dropdown.js" type="text/javascript" ></script>
+	  <script src="/resources/javascript/bootstrap-dropdown-app.js" type="text/javascript" ></script>
+
+    <!-- Base stylesheet for all pages -->
+    <link rel="stylesheet" href="/resources/stylesheets/base.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css" />
+    <link rel="stylesheet" href="/resources/stylesheets/search.css" type="text/css" />
+
+    <!-- table of contents js -->
+    <script src="/resources/javascript/toc.js" type="text/javascript" ></script>
+
+
+    <!-- styles for pager and table of contents -->
+    <link rel="stylesheet" href="/resources/stylesheets/pager.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/stylesheets/toc.css" type="text/css" />
+
+    <!-- google analytics -->
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-574683-5']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+
+    <!-- prettyprint js to prepend generated pre/code tags -->
+    <script type="text/javascript">
+      function styleCode()
+        {
+          if (typeof disableStyleCode != "undefined")
+          {
+              return;
+          }
+          var a = false;
+          $("pre code").parent().each(function()
+          {
+              if (!$(this).hasClass("prettyprint"))
+              {
+                  $(this).addClass("prettyprint lang-scala linenums");
+                  a = true
+              }
+          });
+          if (a) { prettyPrint() }
+      }
+    </script>
+
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+
+            $(".scroll").click(function(event){
+              event.preventDefault();
+              $('html,body').animate({scrollTop:$(this.hash).offset().top}, 500);
+              $('html,body').animate({scrollTop:$(this.hash).offset().top-=50}, 500);
+              $(this.hash).effect("highlight", {color: "#FFCC85"}, 3000);
+            });
+      });
+    </script>
+
+    <script type="text/javascript">
+      $(window).ready(function goToSubsection() {
+          if (window.location.hash)
+          {
+              $('html,body').animate({scrollTop:$(window.location.hash).offset().top}, 500);
+              $('html,body').animate({scrollTop:$(window.location.hash).offset().top-=50}, 500);
+              $(window.location.hash).effect("highlight", {color: "#FFCC85"}, 3000);
+          }
+        });
+    </script>
+
+    <style type="text/css">
+
+       p.contents {
+           margin-left: 15px;
+           font-weight: bold;
+           font-size: 16px;
+       }
+
+       div#toc ul {
+           list-style: none;
+       }
+
+       div#toc ul a {
+           display: block;
+           list-style: none;
+           line-height: 22px;
+           font-weight: bold;
+           width: 100%;
+       }
+
+      div#toc ul li ul {
+           list-style: disc;
+      }
+
+      div#toc ul li ul a {
+           line-height: 18px;
+           font-weight: normal;
+      }
+
+      div#toc ul li ul li ul {
+           list-style: square;
+      }
+       div#toc ul li ul li ul a {
+       }
+
+       div#scroller-anchor {
+           width: inherit;
+       }
+
+       div#scroller {
+           width: inherit;
+       }
+
+       div#guide-title {
+        text-transform: capitalize;
+        font-size: 16px;
+        padding-bottom: 6px;
+        color: #BFBFBF;
+        text-transform: uppercase;
+        font-weight: bold;
+       }
+
+       input, textarea, select, .uneditable-input {
+	       width: 165px;
+	     }
+
+    </style>
+
+</head>
+<body onload="styleCode()">
+    
+    <!-- Topbar
+    ================================================== -->
+    <div class="topbar" >
+      <div class="topbar-inner">
+        <div class="container">
+          <a class="brand" href="/sips/index.html"><img src="/resources/images/scala-logo.png"> Improvement Process</a>
+          <ul class="nav">
+           <li><a href="/sips/sip-list.html">SIP List</a></li>
+           <li><a href="/sips/minutes-list.html">Minutes</a></li>
+           <li><a href="/sips/sip-submission.html">Submitting a SIP</a></li>
+           <li><a href="/sips/slip-submission.html">Submitting a SLIP</a></li>
+           <li><a href="/sips/sip-tutorial.html">Tutorial: Writing a SIP</a></li>
+           <li><a href="https://groups.google.com/forum/#!forum/scala-sips">Mailing List</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+<div class="wrapper">
+  <div class="container">
+    <div class="row">
+    
+      <h1>SIP Meeting Minutes - 10th August 2016</h1>    
+    
+      <div class="span10">
+        <h1 id="minutes">Minutes</h1>
+
+<p>The following agenda was distributed to attendees:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Topic</th>
+      <th>Reviewer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="http://docs.scala-lang.org/sips/pending/uncluttering-control.html">SIP-12: Uncluttering Scala’s syntax for control structures</a></td>
+      <td>Seth Tisue</td>
+    </tr>
+    <tr>
+      <td><a href="http://docs.scala-lang.org/sips/pending/self-cleaning-macros.html">SIP-16: Self-cleaning macros</a></td>
+      <td>Eugene Burmako</td>
+    </tr>
+    <tr>
+      <td><a href="http://docs.scala-lang.org/sips/pending/spores.html">SIP-21: Spores</a></td>
+      <td>Martin Odersky</td>
+    </tr>
+    <tr>
+      <td><a href="http://docs.scala-lang.org/sips/pending/42.type.html">SIP-23: Literal-based singleton types</a></td>
+      <td>Adriaan Moors</td>
+    </tr>
+    <tr>
+      <td><a href="http://docs.scala-lang.org/sips/pending/repeated-byname.html">SIP-24: Repeated by-name parameters</a></td>
+      <td>Andrew Marki</td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/scala/scala.github.com/pull/533#issuecomment-232959066">SIP-27: Trailing commas</a></td>
+      <td>Eugene Burmako</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Jorge Vicente Cantero was the Process Lead and acting secretary of the meeting.</p>
+
+<p>The following proposals were rejected:</p>
+
+<ul>
+  <li>SIP-12: Uncluttering Scala’s syntax for control structures</li>
+  <li>SIP-16: Self-cleaning macros</li>
+</ul>
+
+<p>The following proposals will have a follow-up evaluation:</p>
+
+<ul>
+  <li>SIP-23: Literal-based singleton types</li>
+  <li>SIP-27: Trailing commas</li>
+</ul>
+
+<h2 id="date-time-and-location">Date, Time and Location</h2>
+
+<p>The meeting took place at 5:15pm Central European Time / 8:15am Pacific Daylight
+Time on Wednesday, July 13th, 2016 via Google Hangouts.</p>
+
+<p>Minutes were taken by Jorge Vicente Cantero, acting secretary.</p>
+
+<h2 id="attendees">Attendees</h2>
+
+<p>Attendees Present:</p>
+
+<ul>
+  <li>Seth Tisue (<a href="https://github.com/SethTisue">@SethTisue</a>), EPFL</li>
+  <li>Adriaan Moors (<a href="https://github.com/adriaanm">@adriaanm</a>), Lightbend</li>
+  <li>Heather Miller (<a href="https://github.com/heathermiller">@heathermiller</a>), Scala Center</li>
+  <li>Eugene Burmako (<a href="https://github.com/xeno-by">@xeno-by</a>), EPFL</li>
+  <li>Andrew Marki (<a href="https://github.com/som-snytt">@som-snytt</a>), independent</li>
+  <li>Josh Suereth (<a href="https://github.com/jsuereth">@jsuereth</a>), Google</li>
+  <li>Jorge Vicente Cantero (<a href="https://github.com/jvican">@jvican</a>), Process Lead</li>
+</ul>
+
+<h2 id="apologies">Apologies</h2>
+
+<ul>
+  <li>Martin Odersky (<a href="https://github.com/odersky">@odersky</a>), EPFL</li>
+  <li>Sébastien Doeraene (<a href="https://github.com/sjrd">@sjrd</a>), EPFL</li>
+</ul>
+
+<h2 id="proceedings">Proceedings</h2>
+<p>### Opening Remarks</p>
+
+<p>As acting Process Lead, Jorge Vicente Cantero conducted the meeting, and made
+some opening remarks:</p>
+
+<ul>
+  <li>
+    <p>No abstentions are allowed, abstentions count as ‘no’s.</p>
+  </li>
+  <li>
+    <p>The quorum is 2/3 out of the committee. The quorum for this meeting is
+reached.</p>
+  </li>
+</ul>
+
+<h3 id="discussion-of-sip-12-uncluttering-scalas-syntax-for-control-structures">Discussion of SIP-12: Uncluttering Scala’s syntax for control structures</h3>
+
+<p>The original proposer Martin Odersky is not present, so he can’t weigh in. Seth
+Tisue presents the main points of his review and kick starts the discussion.</p>
+
+<p>Seth Tisue presents the main points of his review:</p>
+
+<ul>
+  <li>There is no clear consensus that this change is desirable.</li>
+  <li>The major downsides are that it makes Scala look and feel noticeably less
+like Java and other C-like languages, significant migration pain for
+users would be involved, and it’s unclear that the actual benefits of the
+change are really that big.</li>
+</ul>
+
+<p>Seth also points out that the community isn’t really clamoring this change,
+there seems to be no interest.</p>
+
+<p>In the ensuing discussion, there is a bit of confusion over whether the old
+syntax would continue to be supported, and if so, if adding more ways to
+express the same thing is bad. The proposal recommends supporting the old
+syntax temporarily, and deprecate it after some concrete period.</p>
+
+<p>The Committee sees no added value in the proposal, and all seem to be against
+it. Adriaan wants only one way to do things, and avoid diversity of syntax
+options.  Josh points out that second ways for specifying constructs
+are useful under concrete scenarios, but not in this one. Andrew proposes to put
+the feature under -Y (experimental flag) as a starting point. Heather questions
+the utility of such a syntax change. The committee discusses about the parens
+and braces differences.</p>
+
+<p>Jorge and Josh point out that in addition to the obvious migration pain of
+users needing to update their code, there would be pain for the makers of tools
+such as IDEs and the proposed code-rewriting tool. Adriaan says that even if an
+automatic code-writing tool existed, you still have the universal pain of
+having the needed changes cluttering up the version control history of every
+Scala project.</p>
+
+<p><strong>Outcome</strong>: The committee votes unanimously to reject the change. The
+conclusion is that there is not a clear benefit for it and the required
+invested time and efforts would be too high.</p>
+
+<h3 id="discussion-of-sip-16-self-cleaning-macros">Discussion of SIP-16: Self-cleaning macros</h3>
+
+<p>Eugene Burmako, reviewer and author of the proposal, acknowledges the value of
+macros in the language and how useful they are for the Scala community to build
+their tools and frameworks. He thinks that macros have been a successful
+experiment, but one that needs to end. He then points out some of the issues
+with macros (IDE support and dependency on Scala Reflection, which he considers
+overdesigned for its purpose).</p>
+
+<p>As these are problems present in the very foundations of macros, he proposes to
+reject the SIP and commits to write up a new proposal based on <a href="http://scalameta.org/">Scala
+Meta</a>, the successor of the old Scala macros, redesigned
+from the ground up to overcome the current metaprogramming shortcomings.</p>
+
+<p>Josh agrees that macros are very useful but, as in their existing form, not
+really what the Committee wants long-term. The Committee discusses how to
+announce this decision, Adriaan is worried that people will believe that macros
+are going away.  Everybody agrees that the communication of this decision should
+be made carefully.</p>
+
+<p>Andrew proposes to use the same number proposal for the upcoming Scala Meta
+proposal. Jorge thinks that it would make more sense to create a new proposal
+with a new number, since they will greatly differ in design.</p>
+
+<p><strong>Outcome</strong>: The board votes and the proposal is therefore rejected unanimously.
+A new Scala Meta proposal is coming soon.</p>
+
+<h3 id="discussion-of-sip-27-trailing-commas">Discussion of SIP-27: Trailing Commas</h3>
+
+<p>Eugene Burmako thanks Dale, the author of the proposal, by the provided
+feedback from the last meeting’s discussion. Dale did a detailed analysis of the
+required feature interaction for trailing commas. Eugene explains the concerns
+of the last meeting and encourages the Committee to have a look at the recent
+comments provided by Martin on the GitHub discussion.</p>
+
+<p>Heather reads Martin’s reply. Martin says that we need to be careful with this
+proposal, because it could disable future support for <code class="highlighter-rouge">HList</code>s (heterogeneous
+lists, tuples of unbounded sizes). This proposal is of primary concern for both
+Martin and other people in the Committee. He proposes to accept trailing
+commas just in tuples to avoid overshooting.</p>
+
+<p>Adriaan points out that this is a problem that IDEs should solve, not the
+design of programming languages. He doesn’t share the motivation of this
+change. Seth says that it’s not worth it to accept this change only in tuples,
+because the major benefit would come in parameter lists. Andrew says that it
+would also be important to adopt trailing commas in import syntax and agrees
+with Adriaan.</p>
+
+<p>Josh wants trailing commas, but if he needs to judge his utility he wants to
+know more about the HList proposal. He also thinks that including this change
+would be a huge win for sbt. Adriaan proposes to include trailing commas only
+in sbt, instead of the Scala parser. Josh states it’s physically possible, but
+he’s not sure the sbt team would welcome such change.</p>
+
+<p>The Committee engages in more discussion about how cherry-pick parts of the
+proposal or study it further.</p>
+
+<p><strong>Conclusion</strong>: The Committee asks Dale to explicitly summarize the potential
+conflicts with tuple syntax, review the initial <a href="https://github.com/lampepfl/dotty/issues/964">HList proposal in
+Dotty</a> to figure out potential
+conflicts with his proposal. Eugene also proposes Dale to consider whether the
+Committee can salvage non-controversial parts of this proposal and reduce this
+SIP just to them, as well as discussing the utility of having two ways of doing
+the same thing.</p>
+
+<h3 id="discussion-of-sip-23-singleton-literal-based-types">Discussion of SIP-23: Singleton literal-based types</h3>
+
+<p>Adriaan explains what the proposal is about. He’s happy that George Leontiev’s
+proposal is getting to the finish line by Miles. He wants to decouple more the
+design and implementation of the proposal, e.g. removing implementation details
+in the original SIP. Adriaan will also want the authors to better work out the
+interaction with other Scala features, like the equality against the <code class="highlighter-rouge">Any</code> type,
+and <code class="highlighter-rouge">asInstanceOf</code>. He points out that quasiquotes should eventually be
+addressed.</p>
+
+<p>Josh needs to leave the meeting and transfers his vote to Adriaan. The
+Committee agrees to put this under review for the next meeting, waiting for the
+author’s feedback.</p>
+
+<p><strong>Outcome</strong>: The proposal is under review until the next meeting. Adriaan asks
+the authors to separate the spec and the implementation and address some
+technical issues in the current implementation. More information on Adriaan’s
+review can be found in <a href="https://github.com/scala/scala.github.com/pull/346#issuecomment-240029772">the original GitHub proposal</a>.</p>
+
+<h2 id="closing-remarks">Closing remarks</h2>
+<p>See you next time!</p>
+
+        
+      </div>
+    
+      <div class="span6">
+        <h3>Pending SIPs</h3>
+<ul class="post-list">
+  
+    <li><a href="/sips/pending/inline-meta.html">SIP-28 and SIP-29 - Inline meta</a> <span class="date">( Sep 2016 )</span>
+    
+      
+        <span class="label notice">Numbered</span>
+      
+    
+    </li>
+  
+    <li><a href="/sips/pending/trailing-commas.html">SIP-27 - Trailing Commas</a> <span class="date">( Jun 2016 )</span>
+    
+      
+        <span class="label warning">Under Review</span>
+      
+    
+    </li>
+  
+    <li><a href="/sips/pending/static-members.html">SIP 25 - @static fields and methods in Scala objects(SI-4581)</a> <span class="date">( Jan 2016 )</span>
+    
+    </li>
+  
+    <li><a href="/sips/pending/trait-parameters.html">SIP 25 - Trait Parameters</a> <span class="date">( Jun 2015 )</span>
+    
+    </li>
+  
+    <li><a href="/sips/pending/repeated-byname.html">SIP-24 - Repeated By Name Parameters</a> <span class="date">( Jun 2015 )</span>
+    
+    </li>
+  
+    <li><a href="/sips/pending/42.type.html">SIP-23 - Literal-based singleton types</a> <span class="date">( Jun 2014 )</span>
+    
+    </li>
+  
+    <li><a href="/sips/pending/async.html">SIP-22 - Async</a> <span class="date">( Jun 2013 )</span>
+    
+      
+        <span class="label light-warning">Postponed</span>
+      
+    
+    </li>
+  
+    <li><a href="/sips/pending/spores.html">SIP-21 - Spores</a> <span class="date">( Jun 2013 )</span>
+    
+      
+        <span class="label warning">Under Review</span>
+      
+    
+    </li>
+  
+    <li><a href="/sips/pending/improved-lazy-val-initialization.html">SIP-20 - Improved Lazy Vals Initialization</a> <span class="date">( May 2013 )</span>
+    
+      
+        <span class="label warning">Under Review</span>
+      
+    
+    </li>
+  
+</ul>
+
+      </div>
+    
+	
+    </div>
+  </div>
+  <div class="push"></div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<ul>
+			<li><h5>API</h5></li>
+			<li><a href="http://www.scala-lang.org/api/current/">Current</a></li>
+			<li><a href="http://www.scala-lang.org/files/archive/nightly/2.11.x/api/2.11.x/">Nightly</a></li>
+		</ul>
+		<ul>
+			<li><h5>Learn</h5></li>
+			<li><a href="/overviews">Guides & Overviews</a></li>
+			<li><a href="/tutorials">Tutorials</a></li>
+			<li><a href="/style">Scala Style Guide</a></li>
+		</ul>
+		<ul>
+			<li><h5>Quickref</h5></li>
+			<li><a href="/glossary">Glossary</a></li>
+			<li><a href="/cheatsheets">Cheatsheets</a></li>
+		</ul>
+		<ul>
+			<li><h5>Contribute</h5></li>
+			<li><a href="http://github.com/scala/scala.github.com">Source Code</a></li>
+			<li><a href="/contribute.html">Contributors Guide</a></li>
+			<li><a href="http://getsatisfaction.com/scaladocs">Suggestions</a></li>
+		</ul>
+		<ul>
+			<li><h5>Other Resources</h5></li>
+			<li><a href="/sips">Scala Improvement Process</a></li>
+		</ul>
+	</div>
+	<div class="container copyright">
+ 		<p>
+			Copyright &copy; 2011-2015 EPFL. All rights reserved.
+			<a href="https://github.com/scala/scala.github.com/commits/gh-pages.atom"><img align="right" height="20px" width="20px" src="/resources/images/rss.png" alt="RSS feed of updates to the github repo hosting this site"></a>
+		</p>
+	</div>
+</div>
+
+<!-- search -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+  apiKey: 'b66eaeec6bd214ea6c0fcd2d7b7fdfe8',
+  indexName: 'scala-docs',
+  inputSelector: '#q',
+	autocompleteOptions: {
+    debug: true
+  },
+  algoliaOptions: {
+		"hitsPerPage": 5,
+		"facetFilters": "(tags:en)"
+	}
+});
+</script>
+
+
+
+<script type="text/javascript">
+  $('#toc').toc({exclude: 'h1, h5, h6', context: '', autoId: true, numerate: false});
+</script>
+
+<script type="text/javascript">
+  $(function() {
+    moveScroller();
+  });
+</script>
+
+  </body>
+</html>
+
+    

@@ -1,0 +1,429 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SIP 25 - @static fields and methods in Scala objects(SI-4581) - Scala Documentation</title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+
+    <!-- prettify js and CSS -->
+    <link rel="stylesheet" href="/resources/stylesheets/prettify.css" type="text/css" />
+    <script src="/resources/javascript/prettify/prettify.js" type="text/javascript" ></script>
+
+
+    <!-- jquery js -->
+    <script src="/resources/javascript/jquery.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/effects.core.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/effects.highlight.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/moveScroller.js" type="text/javascript" ></script>
+
+    <!-- Bootstrap JS and CSS -->
+    <link rel="stylesheet" href="/resources/stylesheets/bootstrap.css" type="text/css" />
+	  <script src="/resources/javascript/bootstrap-dropdown.js" type="text/javascript" ></script>
+	  <script src="/resources/javascript/bootstrap-dropdown-app.js" type="text/javascript" ></script>
+
+    <!-- Base stylesheet for all pages -->
+    <link rel="stylesheet" href="/resources/stylesheets/base.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css" />
+    <link rel="stylesheet" href="/resources/stylesheets/search.css" type="text/css" />
+
+    <!-- table of contents js -->
+    <script src="/resources/javascript/toc.js" type="text/javascript" ></script>
+
+
+    <!-- styles for pager and table of contents -->
+    <link rel="stylesheet" href="/resources/stylesheets/pager.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/stylesheets/toc.css" type="text/css" />
+
+    <!-- google analytics -->
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-574683-5']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+
+    <!-- prettyprint js to prepend generated pre/code tags -->
+    <script type="text/javascript">
+      function styleCode()
+        {
+          if (typeof disableStyleCode != "undefined")
+          {
+              return;
+          }
+          var a = false;
+          $("pre code").parent().each(function()
+          {
+              if (!$(this).hasClass("prettyprint"))
+              {
+                  $(this).addClass("prettyprint lang-scala linenums");
+                  a = true
+              }
+          });
+          if (a) { prettyPrint() }
+      }
+    </script>
+
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+
+            $(".scroll").click(function(event){
+              event.preventDefault();
+              $('html,body').animate({scrollTop:$(this.hash).offset().top}, 500);
+              $('html,body').animate({scrollTop:$(this.hash).offset().top-=50}, 500);
+              $(this.hash).effect("highlight", {color: "#FFCC85"}, 3000);
+            });
+      });
+    </script>
+
+    <script type="text/javascript">
+      $(window).ready(function goToSubsection() {
+          if (window.location.hash)
+          {
+              $('html,body').animate({scrollTop:$(window.location.hash).offset().top}, 500);
+              $('html,body').animate({scrollTop:$(window.location.hash).offset().top-=50}, 500);
+              $(window.location.hash).effect("highlight", {color: "#FFCC85"}, 3000);
+          }
+        });
+    </script>
+
+    <style type="text/css">
+
+       p.contents {
+           margin-left: 15px;
+           font-weight: bold;
+           font-size: 16px;
+       }
+
+       div#toc ul {
+           list-style: none;
+       }
+
+       div#toc ul a {
+           display: block;
+           list-style: none;
+           line-height: 22px;
+           font-weight: bold;
+           width: 100%;
+       }
+
+      div#toc ul li ul {
+           list-style: disc;
+      }
+
+      div#toc ul li ul a {
+           line-height: 18px;
+           font-weight: normal;
+      }
+
+      div#toc ul li ul li ul {
+           list-style: square;
+      }
+       div#toc ul li ul li ul a {
+       }
+
+       div#scroller-anchor {
+           width: inherit;
+       }
+
+       div#scroller {
+           width: inherit;
+       }
+
+       div#guide-title {
+        text-transform: capitalize;
+        font-size: 16px;
+        padding-bottom: 6px;
+        color: #BFBFBF;
+        text-transform: uppercase;
+        font-weight: bold;
+       }
+
+       input, textarea, select, .uneditable-input {
+	       width: 165px;
+	     }
+
+    </style>
+
+</head>
+<body onload="styleCode()">
+    
+    <!-- Topbar
+    ================================================== -->
+    <div class="topbar" >
+      <div class="topbar-inner">
+        <div class="container">
+          <a class="brand" href="/sips/index.html"><img src="/resources/images/scala-logo.png"> Improvement Process</a>
+          <ul class="nav">
+           <li><a href="/sips/sip-list.html">SIP List</a></li>
+           <li><a href="/sips/minutes-list.html">Minutes</a></li>
+           <li><a href="/sips/sip-submission.html">Submitting a SIP</a></li>
+           <li><a href="/sips/slip-submission.html">Submitting a SLIP</a></li>
+           <li><a href="/sips/sip-tutorial.html">Tutorial: Writing a SIP</a></li>
+           <li><a href="https://groups.google.com/forum/#!forum/scala-sips">Mailing List</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+<div class="container">
+  <div class="row">    
+
+    <div class="span12">
+      <h1>SIP 25 - @static fields and methods in Scala objects(SI-4581)</h1>    
+      <p><strong>Dmitry Petrashko, Sébastien Doeraene and Martin Odersky</strong></p>
+
+<p><strong>first submitted 11 January 2016</strong></p>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>We would like to allow methods and fields to be compiled as static. This is usable for interop with Java and other JVM languages, as well as with JavaScript, and is convenient for optimizations.</p>
+
+<h2 id="use-cases">Use Cases</h2>
+
+<p>Some JVM and JavaScript frameworks require classes to have specific static fields and/or methods.</p>
+
+<p>For example, classes extending <code class="highlighter-rouge">android.os.Parcelable</code> are required to have a static field named <code class="highlighter-rouge">CREATOR</code> of type <code class="highlighter-rouge">android.os.Parcelable$Creator</code>.</p>
+
+<p>Another example is using an <a href="http://docs.oracle.com/javase/8/docs/api/java/util/concurrent/atomic/AtomicReferenceFieldUpdater.html"><code class="highlighter-rouge">AtomicReferenceFieldUpdater</code></a>.</p>
+
+<p>On the JavaScript side, one example is <a href="https://facebook.github.io/relay/docs/guides-routes.html">Relay Route Definitions</a>, whose subclasses must define static fields such as <code class="highlighter-rouge">queries</code>.
+Static methods and fields for JavaScript classes are one of the very few things (if not the only thing) that Scala.js “cannot do” at the moment, at least not declaratively.</p>
+
+<h2 id="overview">Overview</h2>
+
+<p>In order for a method or field to be considered static it needs to be defined in an <code class="highlighter-rouge">object</code> and annotated <code class="highlighter-rouge">@static</code>.
+There is no special syntax proposed to access these members, they are accessed as if they were a member of defining objects with all appropriate access requirements for accessing them.</p>
+
+<p>For example:</p>
+
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">class</span> <span class="nc">Foo</span>
+
+<span class="k">object</span> <span class="nc">Foo</span> <span class="o">{</span>
+  <span class="nd">@static</span> <span class="k">val</span> <span class="n">x</span> <span class="k">=</span> <span class="mi">5</span>
+  <span class="nd">@static</span> <span class="k">def</span> <span class="n">bar</span><span class="o">(</span><span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="o">}</span>
+
+<span class="n">println</span><span class="o">(</span><span class="nc">Foo</span><span class="o">.</span><span class="n">x</span><span class="o">)</span>
+<span class="n">println</span><span class="o">(</span><span class="nc">Foo</span><span class="o">.</span><span class="n">bar</span><span class="o">(</span><span class="mi">12</span><span class="o">))</span></code></pre></figure>
+
+<p>Intuitively, the presence of the <code class="highlighter-rouge">@static</code> annotation ensures that a field/method is declared as a static member of the companion class.
+For the JVM, the above would therefore look to other Java code as if it had been declared with the following Java code:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">Foo</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">5</span><span class="o">;</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">bar</span><span class="o">(</span><span class="kt">int</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>In Scala.js, the <code class="highlighter-rouge">@static</code> annotation has no semantic effect in Scala objects, as they are not visible from JavaScript anyway (it could be used for optimizations).
+It has a semantic effect on Scala.js-defined JS classes, for example:</p>
+
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="nd">@ScalaJSDefined</span>
+<span class="k">class</span> <span class="nc">Foo</span> <span class="k">extends</span> <span class="n">js</span><span class="o">.</span><span class="nc">Object</span>
+
+<span class="nd">@ScalaJSDefined</span>
+<span class="k">object</span> <span class="nc">Foo</span> <span class="k">extends</span> <span class="n">js</span><span class="o">.</span><span class="nc">Object</span> <span class="o">{</span>
+  <span class="nd">@static</span> <span class="k">val</span> <span class="n">x</span> <span class="k">=</span> <span class="mi">5</span>
+  <span class="nd">@static</span> <span class="k">def</span> <span class="n">bar</span><span class="o">(</span><span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>would look to JavaScript code as if it had been declared with the following JavaScript code:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">class</span> <span class="nx">Foo</span> <span class="kr">extends</span> <span class="nb">Object</span> <span class="p">{</span>
+  <span class="kr">static</span> <span class="nx">bar</span><span class="p">(</span><span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">Foo</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="c1">// in ES6, there is no declarative syntax for static fields yet</span></code></pre></figure>
+
+<h2 id="comparison-with-mirror-classes">Comparison with mirror classes</h2>
+
+<p>Scalac currently generates static forwarders for fields and methods in top-level objects:</p>
+
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">object</span> <span class="nc">O</span> <span class="o">{</span>
+  <span class="k">val</span> <span class="n">d</span> <span class="k">=</span> <span class="mi">1</span> 
+  <span class="k">object</span> <span class="nc">I</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">f</span> <span class="k">=</span> <span class="mi">1</span>
+  <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Under the proposed scheme users will be able to opt-in to have the field <code class="highlighter-rouge">f</code> defined in the inner object <code class="highlighter-rouge">I</code> emited as a static field. 
+In case <code class="highlighter-rouge">O.d</code> is annotated with <code class="highlighter-rouge">@static</code> the field will be created as a static field <code class="highlighter-rouge">d</code> in <code class="highlighter-rouge">class O</code>.
+If not annotated, it will be created in the companion module with a static forwarder <code class="highlighter-rouge">d</code> in <code class="highlighter-rouge">class O</code>.</p>
+
+<h2 id="restrictions">Restrictions</h2>
+
+<p>The following rules ensure that methods can be correctly compiled into static members on both JVM and JavaScript:</p>
+
+<ol>
+  <li>
+    <p>Only objects can have members annotated with <code class="highlighter-rouge">@static</code></p>
+  </li>
+  <li>
+    <p>The fields annotated with <code class="highlighter-rouge">@static</code> should preceed any non-<code class="highlighter-rouge">@static</code> fields. This ensures that we do not introduce surprises for users in initialization order.</p>
+  </li>
+  <li>
+    <p>The right hand side of a method or field annotated with <code class="highlighter-rouge">@static</code> can only refer to top-level classes, members of globally accessible objects and <code class="highlighter-rouge">@static</code> members. In particular, for non-static objects <code class="highlighter-rouge">this</code> is not accesible. <code class="highlighter-rouge">super</code> is never accessible.</p>
+  </li>
+  <li>
+    <p>If a member <code class="highlighter-rouge">foo</code> of an <code class="highlighter-rouge">object C</code> is annotated with <code class="highlighter-rouge">@static</code>, the companion class <code class="highlighter-rouge">C</code> is not allowed to define term members with name <code class="highlighter-rouge">foo</code>.</p>
+  </li>
+  <li>
+    <p>If a member <code class="highlighter-rouge">foo</code> of an <code class="highlighter-rouge">object C</code> is annotated with <code class="highlighter-rouge">@static</code>, the companion class <code class="highlighter-rouge">C</code> is not allowed to inherit classes that define a term member with name <code class="highlighter-rouge">foo</code>.</p>
+  </li>
+  <li>
+    <p>Only <code class="highlighter-rouge">@static</code> methods and vals are supported in companions of traits. Java8 supports those, but not vars, and JavaScript does not have interfaces at all.</p>
+  </li>
+</ol>
+
+<h2 id="compilation-scheme">Compilation scheme</h2>
+
+<p>No modification of the typer is planned. The current proposed scheme piggybacks on already existing scoping restrictions in the typer, thus requiring <code class="highlighter-rouge">@static</code> methods to be defined in <code class="highlighter-rouge">object</code>s.</p>
+
+<p>If implemented in the dotty code base, the following modifications would be needed:</p>
+
+<ul>
+  <li>extend <code class="highlighter-rouge">RefChecks</code> to check restrictions 1, 2, 4, 5 and 6. This can be done in a separate mini-phase;</li>
+  <li>extend <code class="highlighter-rouge">LambdaLift.CollectDependencies</code> to be aware that accessing a member annotated <code class="highlighter-rouge">@static</code> should not trigger capturing the object that contains this member;</li>
+  <li>extend <code class="highlighter-rouge">LambdaLift</code> to trigger an error if a method annotated with <code class="highlighter-rouge">@static</code> method cannot be lifted to the top level scope;</li>
+  <li>extend <code class="highlighter-rouge">GenBCode</code> to emit static fields and methods in companion classes and forwarders to them in companion modules.</li>
+</ul>
+
+<h2 id="overriding--hiding">Overriding &amp; Hiding</h2>
+<p>Java allows classes to define static methods with the same name and signature as a static method of a superclass. In order to define the semantics of such cases, the Java Specification introduces the notion of <a href="http://docs.oracle.com/javase/specs/jls/se8/html/jls-8.html#jls-8.4.8.2">hiding</a>.</p>
+
+<p>This is required because in Java calling a <code class="highlighter-rouge">static</code> method on a class instance is supported.
+This proposal does not need to introduce this notion as we do not support such calls.</p>
+
+<h2 id="comparison-with-lrytzs-proposalhttpsgistgithubcomlrytz80f3141de8240f9629da">Comparison with <a href="https://gist.github.com/lrytz/80f3141de8240f9629da">@lrytz’s proposal</a></h2>
+<p>Lukas Rytz has proposed a similar SIP, but his SIP requires changes to the typer to ensure that <code class="highlighter-rouge">@static</code> fields do not capture <code class="highlighter-rouge">this</code>, as in his proposal <code class="highlighter-rouge">@static</code> fields are defined in the class, rather than its companion object.
+It also does not address the question of <code class="highlighter-rouge">@static</code> members in inner objects and inheritance/hiding of those methods in subclasses.</p>
+
+<h2 id="open-questions">Open questions</h2>
+<ul>
+  <li>@static lazy val</li>
+</ul>
+
+<h2 id="see-also">See Also</h2>
+<ul>
+  <li><a href="https://issues.scala-lang.org/browse/SI-4581">SI-4581</a> is a request for a <code class="highlighter-rouge">@static</code> annotation</li>
+  <li><a href="https://github.com/scala-js/scala-js/issues/1902">Scala.js issue #1902</a> is a request for defining static fields in Scala.js-defined JS classes</li>
+  <li><a href="https://gist.github.com/lrytz/80f3141de8240f9629da">Another proposal by @lrytz</a></li>
+  <li><a href="https://groups.google.com/forum/#!searchin/scala-internals/static/scala-internals/vOps4k8CADY/Dq1I3Ysvao0J">Old discussion on scala-internals mailing list</a></li>
+  <li><a href="https://groups.google.com/forum/#!searchin/scala-internals/static/scala-internals/Y3OlFWPvnyM/tGE5BQw4Pe0J">Another discussion of scala-internals mailing list</a></li>
+</ul>
+
+      <div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  
+    var disqus_shortname = 'scalasip'; // required: replace example with your forum shortname
+  
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    </div>
+    
+    <div class="span4">
+      <div id="scroller-anchor">
+  <div id="scroller">
+              
+    <p class="contents">Contents</p>
+    <div id="toc"></div>    
+  </div>
+</div>
+
+    </div>
+  
+  </div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<ul>
+			<li><h5>API</h5></li>
+			<li><a href="http://www.scala-lang.org/api/current/">Current</a></li>
+			<li><a href="http://www.scala-lang.org/files/archive/nightly/2.11.x/api/2.11.x/">Nightly</a></li>
+		</ul>
+		<ul>
+			<li><h5>Learn</h5></li>
+			<li><a href="/overviews">Guides & Overviews</a></li>
+			<li><a href="/tutorials">Tutorials</a></li>
+			<li><a href="/style">Scala Style Guide</a></li>
+		</ul>
+		<ul>
+			<li><h5>Quickref</h5></li>
+			<li><a href="/glossary">Glossary</a></li>
+			<li><a href="/cheatsheets">Cheatsheets</a></li>
+		</ul>
+		<ul>
+			<li><h5>Contribute</h5></li>
+			<li><a href="http://github.com/scala/scala.github.com">Source Code</a></li>
+			<li><a href="/contribute.html">Contributors Guide</a></li>
+			<li><a href="http://getsatisfaction.com/scaladocs">Suggestions</a></li>
+		</ul>
+		<ul>
+			<li><h5>Other Resources</h5></li>
+			<li><a href="/sips">Scala Improvement Process</a></li>
+		</ul>
+	</div>
+	<div class="container copyright">
+ 		<p>
+			Copyright &copy; 2011-2015 EPFL. All rights reserved.
+			<a href="https://github.com/scala/scala.github.com/commits/gh-pages.atom"><img align="right" height="20px" width="20px" src="/resources/images/rss.png" alt="RSS feed of updates to the github repo hosting this site"></a>
+		</p>
+	</div>
+</div>
+
+<!-- search -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+  apiKey: 'b66eaeec6bd214ea6c0fcd2d7b7fdfe8',
+  indexName: 'scala-docs',
+  inputSelector: '#q',
+	autocompleteOptions: {
+    debug: true
+  },
+  algoliaOptions: {
+		"hitsPerPage": 5,
+		"facetFilters": "(tags:en)"
+	}
+});
+</script>
+
+
+
+<script type="text/javascript">
+  $('#toc').toc({exclude: 'h1, h5, h6', context: '', autoId: true, numerate: false});
+</script>
+
+<script type="text/javascript">
+  $(function() {
+    moveScroller();
+  });
+</script>
+
+  </body>
+</html>
+
+    

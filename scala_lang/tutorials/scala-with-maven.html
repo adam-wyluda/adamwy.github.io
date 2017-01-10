@@ -1,0 +1,655 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Scala with Maven - Scala Documentation</title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+
+    <!-- prettify js and CSS -->
+    <link rel="stylesheet" href="/resources/stylesheets/prettify.css" type="text/css" />
+    <script src="/resources/javascript/prettify/prettify.js" type="text/javascript" ></script>
+
+
+    <!-- jquery js -->
+    <script src="/resources/javascript/jquery.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/effects.core.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/effects.highlight.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/moveScroller.js" type="text/javascript" ></script>
+
+    <!-- Bootstrap JS and CSS -->
+    <link rel="stylesheet" href="/resources/stylesheets/bootstrap.css" type="text/css" />
+	  <script src="/resources/javascript/bootstrap-dropdown.js" type="text/javascript" ></script>
+	  <script src="/resources/javascript/bootstrap-dropdown-app.js" type="text/javascript" ></script>
+
+    <!-- Base stylesheet for all pages -->
+    <link rel="stylesheet" href="/resources/stylesheets/base.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css" />
+    <link rel="stylesheet" href="/resources/stylesheets/search.css" type="text/css" />
+
+    <!-- table of contents js -->
+    <script src="/resources/javascript/toc.js" type="text/javascript" ></script>
+
+
+    <!-- styles for pager and table of contents -->
+    <link rel="stylesheet" href="/resources/stylesheets/pager.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/stylesheets/toc.css" type="text/css" />
+
+    <!-- google analytics -->
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-574683-5']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+
+    <!-- prettyprint js to prepend generated pre/code tags -->
+    <script type="text/javascript">
+      function styleCode()
+        {
+          if (typeof disableStyleCode != "undefined")
+          {
+              return;
+          }
+          var a = false;
+          $("pre code").parent().each(function()
+          {
+              if (!$(this).hasClass("prettyprint"))
+              {
+                  $(this).addClass("prettyprint lang-scala linenums");
+                  a = true
+              }
+          });
+          if (a) { prettyPrint() }
+      }
+    </script>
+
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+
+            $(".scroll").click(function(event){
+              event.preventDefault();
+              $('html,body').animate({scrollTop:$(this.hash).offset().top}, 500);
+              $('html,body').animate({scrollTop:$(this.hash).offset().top-=50}, 500);
+              $(this.hash).effect("highlight", {color: "#FFCC85"}, 3000);
+            });
+      });
+    </script>
+
+    <script type="text/javascript">
+      $(window).ready(function goToSubsection() {
+          if (window.location.hash)
+          {
+              $('html,body').animate({scrollTop:$(window.location.hash).offset().top}, 500);
+              $('html,body').animate({scrollTop:$(window.location.hash).offset().top-=50}, 500);
+              $(window.location.hash).effect("highlight", {color: "#FFCC85"}, 3000);
+          }
+        });
+    </script>
+
+    <style type="text/css">
+
+       p.contents {
+           margin-left: 15px;
+           font-weight: bold;
+           font-size: 16px;
+       }
+
+       div#toc ul {
+           list-style: none;
+       }
+
+       div#toc ul a {
+           display: block;
+           list-style: none;
+           line-height: 22px;
+           font-weight: bold;
+           width: 100%;
+       }
+
+      div#toc ul li ul {
+           list-style: disc;
+      }
+
+      div#toc ul li ul a {
+           line-height: 18px;
+           font-weight: normal;
+      }
+
+      div#toc ul li ul li ul {
+           list-style: square;
+      }
+       div#toc ul li ul li ul a {
+       }
+
+       div#scroller-anchor {
+           width: inherit;
+       }
+
+       div#scroller {
+           width: inherit;
+       }
+
+       div#guide-title {
+        text-transform: capitalize;
+        font-size: 16px;
+        padding-bottom: 6px;
+        color: #BFBFBF;
+        text-transform: uppercase;
+        font-weight: bold;
+       }
+
+       input, textarea, select, .uneditable-input {
+	       width: 165px;
+	     }
+
+    </style>
+
+</head>
+<body onload="styleCode()">
+
+    <!-- Topbar
+    ================================================== -->
+<div class="topbar">
+    <div class="topbar-inner">
+        <div class="container">
+            <a class="brand" href="/index.html"><img src="/resources/images/scala-logo.png"> Documentation</a>
+            <ul class="nav">
+
+                <li class="menu">
+                      <a href="#" class="menu">API</a>
+                      <ul class="menu-dropdown">
+                        <li><a href="http://www.scala-lang.org/api/current/">Current</a></li>
+                        <li><a href="http://www.scala-lang.org/files/archive/nightly/2.11.x/api/2.11.x/">Nightly</a></li>
+                        <!--<li class="divider"></li>
+                        <li><a href="#">Previous Versions</a></li>
+                        -->
+                      </ul>
+                </li>
+
+                <li class="menu">
+                      <a href="#" class="menu">Learn</a>
+                      <ul class="menu-dropdown">
+                        <li><a href="/overviews">Guides & Overviews</a></li>
+                        <li><a href="/tutorials">Tutorials</a></li>
+                        <li><a href="/style">Scala Style Guide</a></li>
+                      </ul>
+                </li>
+
+                <li class="menu">
+                      <a href="#" class="menu">Quickref</a>
+                      <ul class="menu-dropdown">
+                        <li><a href="/glossary">Glossary</a></li>
+                        <li><a href="/cheatsheets">Cheatsheets</a></li>
+                      </ul>
+                </li>
+
+                <li><a href="/contribute.html">Contribute</a></li>
+                <li><a href="/sips">SIPs/SLIPs</a></li>
+                <li>
+                    <form id="searchform" action="#">
+                        <input type="text" placeholder="Search in documentation..." class="field" name="q" id="q"/>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="span10"><h1>Scala with Maven</h1></div>
+
+    
+
+    
+
+    
+
+    <div class="span6">
+      
+      <ul class="langbar">
+        <li><a href="/tutorials/scala-with-maven" class="lang">English</a></li>
+        
+          
+          <li><a href="/ja/tutorials/scala-with-maven" class="lang">日本語</a></li>
+        
+          
+          <li><a href="/zh-cn/tutorials/scala-with-maven" class="lang">中文 (简体)</a></li>
+        
+      </ul>
+      
+    </div>
+
+    <div class="span10">
+      <p>By Adrian Null</p>
+
+<h2 id="introduction">Introduction</h2>
+<p><a href="http://maven.apache.org">Maven</a> is a build/project management tool. It favours “convention over configuration”; it can greatly simplify builds for “standard” projects and a Maven user can usually understand the structure of another Maven project just by looking at its <code class="highlighter-rouge">pom.xml</code> (Project Object Model). Maven is a plugin-based architecture, making it easy to add new libraries and modules to existing projects. For example, adding a new dependency usually involves only 5 extra lines in the <code class="highlighter-rouge">pom.xml</code>. These “artifacts” are downloaded from repositories such as <a href="http://maven.org">The Central Repository</a>.</p>
+
+<p>You can also check out the official <a href="https://github.com/scala/scala-module-dependency-sample">example project</a> which uses the same Scala plugin we will show here.</p>
+
+<h2 id="jumping-ahead">Jumping Ahead</h2>
+<p>If you’re familiar with Maven, you can go ahead with the <a href="https://github.com/davidB/scala-maven-plugin">Scala Maven Plugin</a>.</p>
+
+<h2 id="the-scala-maven-plugin">The Scala Maven Plugin</h2>
+<p>We’ll be using the Scala Maven Plugin (<a href="https://github.com/davidB/scala-maven-plugin">GitHub repo</a>, <a href="http://davidb.github.io/scala-maven-plugin">website</a>) (formerly known as the maven-scala-plugin; renamed to honour the new naming policy where only Maven core plugins are prefixed with “maven”), by far the dominant plugin for Scala projects. <em>Note: the plugin includes Scala from the Central Repository so there’s no need to install it yourself if you’re compiling with Maven.</em></p>
+
+<h2 id="getting-maven">Getting Maven</h2>
+
+<h3 id="linux-debian">Linux (Debian)</h3>
+<p>On Debian and Debian-derivatives, Maven is usually available via <code class="highlighter-rouge">apt-get</code>. Just do <code class="highlighter-rouge">(sudo) apt-get install maven</code> and you’re good to go.</p>
+
+<h3 id="osx">OSX</h3>
+<p>OSX prior to 10.9 (Mavericks) comes with Maven 3 built in.
+If you don’t have it, you can get it with the package managers <a href="http://macports.org">MacPorts</a>, <a href="http://brew.sh">Homebrew</a>, or <a href="http://fink.sf.net">Fink</a>.
+The Scala Maven Plugin requires Maven 3.0+</p>
+
+<h3 id="manually-red-hat-linux-osx-windows">Manually (Red Hat Linux, OSX, Windows)</h3>
+<p>You can download Maven from its <a href="http://maven.apache.org/download.html">Apache homepage</a>. After extracting it (<code class="highlighter-rouge">tar -zxvf apache-maven-X.X.X-bin.tar.gz</code>, or use something like <a href="http://7-zip.org">7-zip</a>) to your directory of choice (on Linux and OSX, Unix-like systems, <a href="http://unix.stackexchange.com/questions/63531/">I like to put them in <code class="highlighter-rouge">/opt/</code></a>. On Windows I would probably put this in <code class="highlighter-rouge">C:/</code>), you need to add Maven to your environment Path variable:</p>
+
+<ul>
+  <li>Linux/OSX (option 1): Create a symlink to <code class="highlighter-rouge">/usr/bin</code>, which is already on your Path
+    <ul>
+      <li><code class="highlighter-rouge">ln -s /usr/bin/mvn /opt/apache-maven-X.X.X/bin/mvn</code></li>
+    </ul>
+  </li>
+  <li>Linux/OSX (option 2): Add the Maven <code class="highlighter-rouge">bin</code> folder directly to your path, using your <a href="http://wikipedia.org/wiki/Unix_shell#Configuration_files_for_shells">shell configuration</a> file (e.g. <code class="highlighter-rouge">~/.bash_profile</code>)
+    <ul>
+      <li>Add <code class="highlighter-rouge">export PATH=$PATH:/opt/apache-maven-X.X.X/bin</code> to <code class="highlighter-rouge">.bash_profile</code> (or whatever profile for the shell you use)</li>
+      <li>Example: <code class="highlighter-rouge">echo "export PATH=$PATH:/opt/apache-maven-X.X.X/bin" &gt;&gt; ~/.bash_profile</code></li>
+    </ul>
+  </li>
+  <li>Linux/OSX (option 3): Make a <code class="highlighter-rouge">mvn</code> shell script in an existing path location
+    <ul>
+      <li>Example: you have <code class="highlighter-rouge">$HOME/bin</code> in your path</li>
+      <li>Put the folder you extracted in <code class="highlighter-rouge">$HOME/bin</code> (<code class="highlighter-rouge">mv apache-maven-X.X.X "$HOME/bin/"</code>)</li>
+      <li>Create a file <code class="highlighter-rouge">mvn</code> in <code class="highlighter-rouge">$HOME/bin</code></li>
+      <li>Add <code class="highlighter-rouge">"$HOME/bin/apache-maven-X.X.X/bin/mvn" $@</code> to it, and <code class="highlighter-rouge">chmod u+x mvn</code> to make it executable</li>
+      <li>This is probably the least intrusive way; <code class="highlighter-rouge">$HOME/bin</code> is usually added to the user’s path by default, and if not, it’s a useful thing to do/have anyways. The shell script simply invokes the Maven location (which is at some other location) and passes on the arguments</li>
+    </ul>
+  </li>
+  <li>Windows
+    <ul>
+      <li>Hit Start. Right click on “My Computer” and go to “Properties”</li>
+      <li>This should bring you to “Control Panel -&gt; System and Security -&gt; System”, giving an overview of your computer</li>
+      <li>On the left sidebar there should be four options; click on “Advanced system settings” (fourth one)</li>
+      <li>Under the “Advanced” tab, hit “Environment Variables…” in the bottom right</li>
+      <li>Note: I recommend creating/editing your User variables (top box). You can do the same with System variables though (bottom box)</li>
+      <li>Create a new variable called “MAVEN3_HOME”. Point this to your Maven folder (e.g. <code class="highlighter-rouge">C:\apache-maven-X.X.X</code>). Use backslashes to be safe, and do not include a trailing slash</li>
+      <li>Create a new variable called “MAVEN3_BIN” with this value: <code class="highlighter-rouge">%MAVEN3_HOME%\bin</code></li>
+      <li>Edit your Path variable: being careful not to change anything else, append <code class="highlighter-rouge">;%MAVEN3_BIN%</code> to it</li>
+      <li>You’ll need to restart cmd to see these changes</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="creating-your-first-project">Creating Your First Project</h2>
+<p>The easiest way to create new projects is using an <a href="http://maven.apache.org/archetype/maven-archetype-plugin/">“archetype”</a>. An archetype is a general skeleton structure, or template for a project. Think back to “convention over configuration”; in our case, the Scala Maven Plugin provides an archetype for scala projects.</p>
+
+<p>You run the archetype plugin like this:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>mvn archetype:generate
+</code></pre>
+</div>
+
+<p>If this is your first time, you’ll notice that Maven is downloading many jar files. Maven resolves dependencies and downloads them as needed (and only once). Right now, Maven is downloading its core plugins.</p>
+
+<p>Afterwards, it should give you a list of archetypes (in the hundreds).
+The Scala Maven Plugin was 339 on my list: “net.alchim31.maven:scala-archetype-simple (The maven-scala-plugin is used for compiling/testing/running/documenting scala code in maven.)”.
+You can type “scala” (or something else) to filter the results.
+As of 2015 January 27, there you can choose version 3.1.4 or 3.1.5 of this plugin; you should choose the latest</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Choose net.alchim31.maven:scala-archetype-simple version:
+1: 1.4
+2: 1.5
+</code></pre>
+</div>
+
+<p>Next, Maven will ask you for a groupId, artifactId, and package. You can read the <a href="http://maven.apache.org/guides/mini/guide-naming-conventions.html">guide to naming conventions</a>, but in short:</p>
+
+<ul>
+  <li>groupId: inverted domain name (e.g. com.my-organization)</li>
+  <li>artifactId: project name (e.g. playground-project)</li>
+  <li>version: anything you want, but I recommend you read and follow the guidelines for <a href="http://semver.org">Semantic Versioning</a> (e.g. 0.0.1)</li>
+  <li>package: the default is the groupId, but you can change this (e.g. com.my-organization)</li>
+</ul>
+
+<p>The groupId and artifactId together should serve as a globally unique identifier for your project</p>
+
+<p>When it’s done, you should see a new folder named with the artifactId. <code class="highlighter-rouge">cd</code> into it and run:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>mvn package
+</code></pre>
+</div>
+
+<p>You’ll see Maven downloading dependencies including the Scala library (as mentioned above), <a href="http://junit.org">JUnit</a>, <a href="http://scalatest.org">ScalaTest</a>, and <a href="http://specs2.org">Specs2</a> (the latter three are test frameworks; the archetype includes an example “Hello world” program, and tests with each of the frameworks).</p>
+
+<h3 id="explaining-this-archetype">Explaining this Archetype</h3>
+<p>In your project root, you’ll see a <code class="highlighter-rouge">pom.xml</code>, <code class="highlighter-rouge">src</code> folder, and <code class="highlighter-rouge">target</code> folder (target folder only appears after building). <em>Note: this archetype also includes a <code class="highlighter-rouge">.gitignore</code></em></p>
+
+<p>Inside the <code class="highlighter-rouge">src</code> folder you’ll see <code class="highlighter-rouge">main</code> and <code class="highlighter-rouge">test</code>; <code class="highlighter-rouge">main</code> includes your application code, and <code class="highlighter-rouge">test</code> includes your test suites. Inside each of those you’ll find a <code class="highlighter-rouge">scala</code> folder, followed by your package structure (actually, <code class="highlighter-rouge">test/scala</code> includes a sample package, but you should replace this with your own package and tests). If you want to mix Scala and Java source code, simply add a <code class="highlighter-rouge">java</code> folder inside <code class="highlighter-rouge">main</code> or <code class="highlighter-rouge">test</code>.</p>
+
+<p><code class="highlighter-rouge">target</code> includes generated/built files, such as <code class="highlighter-rouge">.class</code> and <code class="highlighter-rouge">.jar</code> files. You can read about <code class="highlighter-rouge">pom.xml</code> at the <a href="http://maven.apache.org/pom.html">Maven page</a>.</p>
+
+<p>Example structure:</p>
+
+<ul>
+  <li>pom.xml</li>
+  <li>src
+    <ul>
+      <li>main
+        <ul>
+          <li>scala
+            <ul>
+              <li>com/my-package/…
+  *.scala</li>
+            </ul>
+          </li>
+          <li>java
+            <ul>
+              <li>com/my-package/…
+  *.java</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>test
+        <ul>
+          <li>scala
+            <ul>
+              <li>com/my-package/…
+  *.scala</li>
+            </ul>
+          </li>
+          <li>java
+            <ul>
+              <li>com/my-package/…
+  *.java</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>target
+  …</li>
+</ul>
+
+<p>Again, you can read more about the Scala Maven Plugin at its <a href="http://davidb.github.io/scala-maven-plugin">website</a>.</p>
+
+<h3 id="creating-a-jar">Creating a Jar</h3>
+<p>By default the jar created by the Scala Maven Plugin doesn’t include a <code class="highlighter-rouge">Main-Class</code> attribute in the manifest. I had to add the <a href="http://maven.apache.org/plugins/maven-assembly-plugin/">Maven Assembly Plugin</a> to my <code class="highlighter-rouge">pom.xml</code> in order to specify custom attributes in the manifest. You can check the latest version of this plugin at the <a href="http://maven.apache.org/plugins/maven-assembly-plugin/project-summary.html">project summary</a> or at <a href="http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22maven-assembly-plugin%22">The Central Repository</a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;project ...&gt;
+    &lt;modelVersion&gt;X.X.X&lt;/modelVersion&gt;
+    ...
+    &lt;licenses&gt;
+        ...
+    &lt;/licenses&gt;
+
+    &lt;properties&gt;
+        ...
+    &lt;/properties&gt;
+
+    &lt;dependencies&gt;
+        ...
+    &lt;/dependencies&gt;
+
+    &lt;build&gt;
+        ...
+        &lt;plugins&gt;
+            ...
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                &lt;artifactId&gt;maven-assembly-plugin&lt;/artifactId&gt;
+                &lt;version&gt;2.4&lt;/version&gt;
+                &lt;configuration&gt;
+                    &lt;descriptorRefs&gt;
+                        &lt;descriptorRef&gt;jar-with-dependencies&lt;/descriptorRef&gt;
+                    &lt;/descriptorRefs&gt;
+                    &lt;archive&gt;
+                        &lt;manifest&gt;
+                            &lt;mainClass&gt;com.your-package.MainClass&lt;/mainClass&gt;
+                        &lt;/manifest&gt;
+                    &lt;/archive&gt;
+                &lt;/configuration&gt;
+                &lt;executions&gt;
+                    &lt;execution&gt;
+                        &lt;phase&gt;package&lt;/phase&gt;
+                        &lt;goals&gt;
+                            &lt;goal&gt;single&lt;/goal&gt;
+                        &lt;/goals&gt;
+                    &lt;/execution&gt;
+                &lt;/executions&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+&lt;/project&gt;
+</code></pre>
+</div>
+
+<p>After adding this, <code class="highlighter-rouge">mvn package</code> will also create <code class="highlighter-rouge">[artifactId]-[version]-jar-with-dependencies.jar</code> under <code class="highlighter-rouge">target</code>. <em>Note: this will also copy the Scala library into your Jar. This is normal. Be careful that your dependencies use the same version of Scala, or you will quickly end up with a massive Jar.</em></p>
+
+<h3 id="useful-commands">Useful commands</h3>
+<ul>
+  <li><code class="highlighter-rouge">mvn dependency:copy-dependencies</code>: copy all libraries and dependencies to the <code class="highlighter-rouge">target/dependency</code> folder</li>
+  <li><code class="highlighter-rouge">mvn clean</code></li>
+  <li><code class="highlighter-rouge">mvn package</code>: compile, run tests, and create jar</li>
+</ul>
+
+<h3 id="integration-with-eclipse-scala-ide24">Integration with Eclipse (<a href="http://scala-ide.org">Scala IDE</a>)</h3>
+<p>There are instructions at the <a href="http://davidb.github.io/scala-maven-plugin/faq.html">Scala Maven Plugin FAQs</a>, but I thought I’d expand a bit. The <a href="http://maven.apache.org/plugins/maven-eclipse-plugin/">maven-eclipse-plugin</a> is a core plugin (all plugins prefixed with “maven” are, and are available by default) to generate Eclipse configuration files. However, this plugin does not know about our new Scala source files. We’ll be using the <a href="http://mojo.codehaus.org/build-helper-maven-plugin/">build-helper-maven-plugin</a> to add new source folders:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>...
+&lt;plugin&gt;
+    &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
+    &lt;artifactId&gt;build-helper-maven-plugin&lt;/artifactId&gt;
+    &lt;executions&gt;
+        &lt;execution&gt;
+            &lt;id&gt;add-source&lt;/id&gt;
+            &lt;phase&gt;generate-sources&lt;/phase&gt;
+            &lt;goals&gt;
+                &lt;goal&gt;add-source&lt;/goal&gt;
+            &lt;/goals&gt;
+            &lt;configuration&gt;
+                &lt;sources&gt;
+                    &lt;source&gt;src/main/scala&lt;/source&gt;
+                &lt;/sources&gt;
+            &lt;/configuration&gt;
+        &lt;/execution&gt;
+        &lt;execution&gt;
+            &lt;id&gt;add-test-source&lt;/id&gt;
+            &lt;phase&gt;generate-sources&lt;/phase&gt;
+            &lt;goals&gt;
+                &lt;goal&gt;add-test-source&lt;/goal&gt;
+            &lt;/goals&gt;
+            &lt;configuration&gt;
+                &lt;sources&gt;
+                    &lt;source&gt;src/test/scala&lt;/source&gt;
+                &lt;/sources&gt;
+            &lt;/configuration&gt;
+        &lt;/execution&gt;
+    &lt;/executions&gt;
+&lt;/plugin&gt;
+...
+</code></pre>
+</div>
+
+<p>After adding that to your <code class="highlighter-rouge">pom.xml</code>:</p>
+
+<ol>
+  <li>Run <code class="highlighter-rouge">mvn eclipse:eclipse</code> - this generates the Eclipse project files (which are already ignored by our archetype’s <code class="highlighter-rouge">.gitignore</code>)</li>
+  <li>Run <code class="highlighter-rouge">mvn -Declipse.workspace="path/to/your/eclipse/workspace" eclipse:configure-workspace</code> - this adds an <code class="highlighter-rouge">M2_REPO</code> classpath variable to Eclipse</li>
+  <li>Run <code class="highlighter-rouge">mvn package</code> to ensure you have all the dependencies in your local Maven repo</li>
+</ol>
+
+<p>Unfortunately, the integration isn’t perfect. Firstly, open up the generated <code class="highlighter-rouge">.classpath</code> file (it will be hidden by default as it’s a dotfile, but it should be in your project root directory; where you ran <code class="highlighter-rouge">mvn eclipse:eclipse</code>). You should see something like this near the top.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;classpathentry kind="src" path="src/test/scala" output="target/test-classes" including="**/*.java"/&gt;
+&lt;classpathentry kind="src" path="src/main/scala" including="**/*.java"/&gt;
+</code></pre>
+</div>
+
+<p>Change the <code class="highlighter-rouge">*.java</code> to <code class="highlighter-rouge">*.scala</code> (or duplicate the lines and change them to <code class="highlighter-rouge">*.scala</code> if you also have Java sources).</p>
+
+<p>Secondly, open the <code class="highlighter-rouge">.project</code> eclipse file (again, in the same folder). Change <code class="highlighter-rouge">&lt;buildSpec&gt;</code> and <code class="highlighter-rouge">&lt;natures&gt;</code> to look like this. Now Eclipse knows to use the Scala editor and it won’t think that everything is a syntax error.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;buildSpec&gt;
+  &lt;buildCommand&gt;
+    &lt;name&gt;org.scala-ide.sdt.core.scalabuilder&lt;/name&gt;
+  &lt;/buildCommand&gt;
+&lt;/buildSpec&gt;
+&lt;natures&gt;
+  &lt;nature&gt;org.scala-ide.sdt.core.scalanature&lt;/nature&gt;
+  &lt;nature&gt;org.eclipse.jdt.core.javanature&lt;/nature&gt;
+&lt;/natures&gt;
+</code></pre>
+</div>
+
+<p>Finally, in Eclipse, under “File” choose “Import…” and find your project.</p>
+
+<h4 id="using-m2eclipse-scala35-for-eclipse-integration">Using <a href="https://github.com/sonatype/m2eclipse-scala">m2eclipse-scala</a> for Eclipse integration</h4>
+<p>m2eclipse-scala is a work in progress, and their website/repository may have updated information.
+It aims to ease integration between m2eclipse and Scala IDE for Eclipse.</p>
+
+<p>Under “Help -&gt; Install New Software”, enter “http://alchim31.free.fr/m2e-scala/update-site” and hit enter.
+You should see “Maven Integration for Eclipse -&gt; Maven Integration for Scala IDE”.</p>
+
+<p>Afer it installs, go to “New -&gt; Project -&gt; Other” and select “Maven Project”.
+Search fo “scala-archetype” choose the one with the group “net.alchim31.maven”.
+The wizard will more or less guide you through what was done with <code class="highlighter-rouge">mvn archetype:generate</code> above, and you should end up with a new Scala project!</p>
+
+<p>To import an existing project, simply go to “File -&gt; Import -&gt; Existing Maven Project” and find the directory containing your project.</p>
+
+<h2 id="adding-dependencies">Adding Dependencies</h2>
+<p>The first thing I do is look for “Maven” in the project page. For example, Google’s [Guava] page includes <a href="http://search.maven.org/#artifactdetails%7Ccom.google.guava%7Cguava%7C14.0.1%7Cbundle">Maven Central links</a>. As you can see in the previous link, The Central Repository conveniently includes the snippet you have to add to your <code class="highlighter-rouge">pom.xml</code> on the left sidebar.</p>
+
+<p>If you can’t find Maven information at the project page, try a Google search for “[project name] maven”. Sometimes, you still won’t find anything. For <a href="https://github.com/scopt/scopt">scopt</a> (Scala command line option parser), I couldn’t find the latest version from Google. However, <a href="http://search.maven.org/#search%7Cga%7C1%7Cscopt">manually searching The Central Repository did</a></p>
+
+<p>Afterwards, running</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>mvn package
+</code></pre>
+</div>
+
+<p>Will download any new dependencies before packaging</p>
+
+<h2 id="other-useful-reading">Other Useful Reading</h2>
+<p>I’m not going to explain all of Maven in this tutorial (though I hope to add more in the future, because I do feel that the resources are a bit scattered), so here are some useful articles:
+- <a href="http://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html">Maven Lifecycle</a> (explanation of goals like clean, package, install)</p>
+
+
+      <div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  
+    var disqus_shortname = 'scalasip'; // required: replace example with your forum shortname
+  
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    </div>
+    
+    <div class="span6">
+      <div id="scroller-anchor">
+  <div id="scroller">
+              
+    <p class="contents">Contents</p>
+    <div id="toc"></div>    
+  </div>
+</div>
+
+    </div>
+    
+	
+  </div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<ul>
+			<li><h5>API</h5></li>
+			<li><a href="http://www.scala-lang.org/api/current/">Current</a></li>
+			<li><a href="http://www.scala-lang.org/files/archive/nightly/2.11.x/api/2.11.x/">Nightly</a></li>
+		</ul>
+		<ul>
+			<li><h5>Learn</h5></li>
+			<li><a href="/overviews">Guides & Overviews</a></li>
+			<li><a href="/tutorials">Tutorials</a></li>
+			<li><a href="/style">Scala Style Guide</a></li>
+		</ul>
+		<ul>
+			<li><h5>Quickref</h5></li>
+			<li><a href="/glossary">Glossary</a></li>
+			<li><a href="/cheatsheets">Cheatsheets</a></li>
+		</ul>
+		<ul>
+			<li><h5>Contribute</h5></li>
+			<li><a href="http://github.com/scala/scala.github.com">Source Code</a></li>
+			<li><a href="/contribute.html">Contributors Guide</a></li>
+			<li><a href="http://getsatisfaction.com/scaladocs">Suggestions</a></li>
+		</ul>
+		<ul>
+			<li><h5>Other Resources</h5></li>
+			<li><a href="/sips">Scala Improvement Process</a></li>
+		</ul>
+	</div>
+	<div class="container copyright">
+ 		<p>
+			Copyright &copy; 2011-2015 EPFL. All rights reserved.
+			<a href="https://github.com/scala/scala.github.com/commits/gh-pages.atom"><img align="right" height="20px" width="20px" src="/resources/images/rss.png" alt="RSS feed of updates to the github repo hosting this site"></a>
+		</p>
+	</div>
+</div>
+
+<!-- search -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+  apiKey: 'b66eaeec6bd214ea6c0fcd2d7b7fdfe8',
+  indexName: 'scala-docs',
+  inputSelector: '#q',
+	autocompleteOptions: {
+    debug: true
+  },
+  algoliaOptions: {
+		"hitsPerPage": 5,
+		"facetFilters": "(tags:en)"
+	}
+});
+</script>
+
+
+
+<script type="text/javascript">
+  $('#toc').toc({exclude: 'h1, h5, h6', context: '', autoId: true, numerate: false});
+</script>
+
+<script type="text/javascript">
+  $(function() {
+    moveScroller();
+  });
+</script>
+
+  </body>
+</html>
+
+    

@@ -1,0 +1,335 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Binary Compatibility of Scala Releases - Scala Documentation</title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+
+    <!-- prettify js and CSS -->
+    <link rel="stylesheet" href="/resources/stylesheets/prettify.css" type="text/css" />
+    <script src="/resources/javascript/prettify/prettify.js" type="text/javascript" ></script>
+
+
+    <!-- jquery js -->
+    <script src="/resources/javascript/jquery.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/effects.core.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/effects.highlight.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/moveScroller.js" type="text/javascript" ></script>
+
+    <!-- Bootstrap JS and CSS -->
+    <link rel="stylesheet" href="/resources/stylesheets/bootstrap.css" type="text/css" />
+	  <script src="/resources/javascript/bootstrap-dropdown.js" type="text/javascript" ></script>
+	  <script src="/resources/javascript/bootstrap-dropdown-app.js" type="text/javascript" ></script>
+
+    <!-- Base stylesheet for all pages -->
+    <link rel="stylesheet" href="/resources/stylesheets/base.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css" />
+    <link rel="stylesheet" href="/resources/stylesheets/search.css" type="text/css" />
+
+    <!-- table of contents js -->
+    <script src="/resources/javascript/toc.js" type="text/javascript" ></script>
+
+
+    <!-- styles for pager and table of contents -->
+    <link rel="stylesheet" href="/resources/stylesheets/pager.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/stylesheets/toc.css" type="text/css" />
+
+    <!-- google analytics -->
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-574683-5']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+
+    <!-- prettyprint js to prepend generated pre/code tags -->
+    <script type="text/javascript">
+      function styleCode()
+        {
+          if (typeof disableStyleCode != "undefined")
+          {
+              return;
+          }
+          var a = false;
+          $("pre code").parent().each(function()
+          {
+              if (!$(this).hasClass("prettyprint"))
+              {
+                  $(this).addClass("prettyprint lang-scala linenums");
+                  a = true
+              }
+          });
+          if (a) { prettyPrint() }
+      }
+    </script>
+
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+
+            $(".scroll").click(function(event){
+              event.preventDefault();
+              $('html,body').animate({scrollTop:$(this.hash).offset().top}, 500);
+              $('html,body').animate({scrollTop:$(this.hash).offset().top-=50}, 500);
+              $(this.hash).effect("highlight", {color: "#FFCC85"}, 3000);
+            });
+      });
+    </script>
+
+    <script type="text/javascript">
+      $(window).ready(function goToSubsection() {
+          if (window.location.hash)
+          {
+              $('html,body').animate({scrollTop:$(window.location.hash).offset().top}, 500);
+              $('html,body').animate({scrollTop:$(window.location.hash).offset().top-=50}, 500);
+              $(window.location.hash).effect("highlight", {color: "#FFCC85"}, 3000);
+          }
+        });
+    </script>
+
+    <style type="text/css">
+
+       p.contents {
+           margin-left: 15px;
+           font-weight: bold;
+           font-size: 16px;
+       }
+
+       div#toc ul {
+           list-style: none;
+       }
+
+       div#toc ul a {
+           display: block;
+           list-style: none;
+           line-height: 22px;
+           font-weight: bold;
+           width: 100%;
+       }
+
+      div#toc ul li ul {
+           list-style: disc;
+      }
+
+      div#toc ul li ul a {
+           line-height: 18px;
+           font-weight: normal;
+      }
+
+      div#toc ul li ul li ul {
+           list-style: square;
+      }
+       div#toc ul li ul li ul a {
+       }
+
+       div#scroller-anchor {
+           width: inherit;
+       }
+
+       div#scroller {
+           width: inherit;
+       }
+
+       div#guide-title {
+        text-transform: capitalize;
+        font-size: 16px;
+        padding-bottom: 6px;
+        color: #BFBFBF;
+        text-transform: uppercase;
+        font-weight: bold;
+       }
+
+       input, textarea, select, .uneditable-input {
+	       width: 165px;
+	     }
+
+    </style>
+
+</head>
+<body onload="styleCode()">
+
+    <!-- Topbar
+    ================================================== -->
+<div class="topbar">
+    <div class="topbar-inner">
+        <div class="container">
+            <a class="brand" href="/index.html"><img src="/resources/images/scala-logo.png"> Documentation</a>
+            <ul class="nav">
+
+                <li class="menu">
+                      <a href="#" class="menu">API</a>
+                      <ul class="menu-dropdown">
+                        <li><a href="http://www.scala-lang.org/api/current/">Current</a></li>
+                        <li><a href="http://www.scala-lang.org/files/archive/nightly/2.11.x/api/2.11.x/">Nightly</a></li>
+                        <!--<li class="divider"></li>
+                        <li><a href="#">Previous Versions</a></li>
+                        -->
+                      </ul>
+                </li>
+
+                <li class="menu">
+                      <a href="#" class="menu">Learn</a>
+                      <ul class="menu-dropdown">
+                        <li><a href="/overviews">Guides & Overviews</a></li>
+                        <li><a href="/tutorials">Tutorials</a></li>
+                        <li><a href="/style">Scala Style Guide</a></li>
+                      </ul>
+                </li>
+
+                <li class="menu">
+                      <a href="#" class="menu">Quickref</a>
+                      <ul class="menu-dropdown">
+                        <li><a href="/glossary">Glossary</a></li>
+                        <li><a href="/cheatsheets">Cheatsheets</a></li>
+                      </ul>
+                </li>
+
+                <li><a href="/contribute.html">Contribute</a></li>
+                <li><a href="/sips">SIPs/SLIPs</a></li>
+                <li>
+                    <form id="searchform" action="#">
+                        <input type="text" placeholder="Search in documentation..." class="field" name="q" id="q"/>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="span10"><h1>Binary Compatibility of Scala Releases</h1></div>
+
+    
+
+    
+
+    
+
+    <div class="span6">
+      
+    </div>
+
+    <div class="span10">
+      <p>When two versions of Scala are binary compatible, it is safe to compile your project on one Scala version and link against another Scala version at run time. Safe run-time linkage (only!) means that the JVM does not throw a (subclass of) <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/LinkageError.html"><code class="highlighter-rouge">LinkageError</code></a> when executing your program in the mixed scenario, assuming that none arise when compiling and running on the same version of Scala. Concretely, this means you may have external dependencies on your run-time classpath that use a different version of Scala than the one you’re compiling with, as long as they’re binary compatible. In other words, separate compilation on different binary compatible versions does not introduce problems compared to compiling and running everything on the same version of Scala.</p>
+
+<p>We check binary compatibility automatically with <a href="https://github.com/typesafehub/migration-manager">MiMa</a>. We strive to maintain a similar invariant for the <code class="highlighter-rouge">behavior</code> (as opposed to just linkage) of the standard library, but this is not checked mechanically (Scala is not a proof assistant so this is out of reach for its type system).</p>
+
+<h4 id="forwards-and-back">Forwards and Back</h4>
+<p>We distinguish forwards and backwards compatibility (think of these as properties of a sequence of versions, not of an individual version). Maintaining backwards compatibility means code compiled on an older version will link with code compiled with newer ones. Forwards compatibility allows you to compile on new versions and run on older ones.</p>
+
+<p>Thus, backwards compatibility precludes the removal of (non-private) methods, as older versions could call them, not knowing they would be removed, whereas forwards compatibility disallows adding new (non-private) methods, because newer programs may come to depend on them, which would prevent them from running on older versions (private methods are exempted here as well, as their definition and call sites must be in the same compilation unit).</p>
+
+<p>These are strict constraints, but they have worked well for us since Scala 2.10.x. They didn’t stop us from fixing large numbers of issues in minor releases. The advantages are clear, so we will maintain this policy for future Scala major releases.</p>
+
+<h4 id="meta">Meta</h4>
+<p>Note that so far we’ve only talked about the jars generated by scalac for the standard library and reflection.
+Our policies do not extend to the meta-issue: ensuring binary compatibility for bytecode generated from identical sources, by different version of scalac? (The same problem exists for compiling on different JDKs.) While we strive to achieve this, it’s not something we can test in general. Notable examples where we know meta-binary compatibility is hard to achieve: specialisation and the optimizer.</p>
+
+<p>In short, we recommend that library authors use to <a href="https://github.com/typesafehub/migration-manager">MiMa</a> to verify compatibility of minor versions before releasing.
+Compiling identical sources with different versions of the scala compiler (or on different JVM versions!) could result in binary incompatible bytecode. This is rare, and we try to avoid it, but we can’t guarantee it will never happen.</p>
+
+<h4 id="concretely">Concretely</h4>
+<p>We guarantee forwards and backwards compatibility of the <code class="highlighter-rouge">"org.scala-lang" % "scala-library" % "2.N.x"</code> and <code class="highlighter-rouge">"org.scala-lang" % "scala-reflect" % "2.N.x"</code> artifacts, except for anything under the <code class="highlighter-rouge">scala.reflect.internal</code> package, as scala-reflect is still experimental. We also strongly discourage relying on the stability of <code class="highlighter-rouge">scala.concurrent.impl</code> and <code class="highlighter-rouge">scala.reflect.runtime</code>, though we will only break compatibility for severe bugs here.</p>
+
+<p>Note that we will only enforce <em>backwards</em> binary compatibility for modules (artifacts under the groupId <code class="highlighter-rouge">org.scala-lang.modules</code>). As they are opt-in, it’s less of a burden to require having the latest version on the classpath. (Without forward compatibility, the latest version of the artifact must be on the run-time classpath to avoid linkage errors.)</p>
+
+<p>Finally, since Scala 2.11, <code class="highlighter-rouge">scala-library-all</code> aggregates all modules that constitute a Scala release. Note that this means it does not provide forward binary compatibility, whereas the core <code class="highlighter-rouge">scala-library</code> artifact does. We consider the versions of the modules that <code class="highlighter-rouge">"scala-library-all" % "2.N.x"</code> depends on to be the canonical ones, that are part of the official Scala distribution. (The distribution itself is defined by the <code class="highlighter-rouge">scala-dist</code> maven artifact.)</p>
+
+      
+    </div>
+    
+    <div class="span6">
+      <div id="scroller-anchor">
+  <div id="scroller">
+              
+    <p class="contents">Contents</p>
+    <div id="toc"></div>    
+  </div>
+</div>
+
+    </div>
+    
+	
+  </div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<ul>
+			<li><h5>API</h5></li>
+			<li><a href="http://www.scala-lang.org/api/current/">Current</a></li>
+			<li><a href="http://www.scala-lang.org/files/archive/nightly/2.11.x/api/2.11.x/">Nightly</a></li>
+		</ul>
+		<ul>
+			<li><h5>Learn</h5></li>
+			<li><a href="/overviews">Guides & Overviews</a></li>
+			<li><a href="/tutorials">Tutorials</a></li>
+			<li><a href="/style">Scala Style Guide</a></li>
+		</ul>
+		<ul>
+			<li><h5>Quickref</h5></li>
+			<li><a href="/glossary">Glossary</a></li>
+			<li><a href="/cheatsheets">Cheatsheets</a></li>
+		</ul>
+		<ul>
+			<li><h5>Contribute</h5></li>
+			<li><a href="http://github.com/scala/scala.github.com">Source Code</a></li>
+			<li><a href="/contribute.html">Contributors Guide</a></li>
+			<li><a href="http://getsatisfaction.com/scaladocs">Suggestions</a></li>
+		</ul>
+		<ul>
+			<li><h5>Other Resources</h5></li>
+			<li><a href="/sips">Scala Improvement Process</a></li>
+		</ul>
+	</div>
+	<div class="container copyright">
+ 		<p>
+			Copyright &copy; 2011-2015 EPFL. All rights reserved.
+			<a href="https://github.com/scala/scala.github.com/commits/gh-pages.atom"><img align="right" height="20px" width="20px" src="/resources/images/rss.png" alt="RSS feed of updates to the github repo hosting this site"></a>
+		</p>
+	</div>
+</div>
+
+<!-- search -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+  apiKey: 'b66eaeec6bd214ea6c0fcd2d7b7fdfe8',
+  indexName: 'scala-docs',
+  inputSelector: '#q',
+	autocompleteOptions: {
+    debug: true
+  },
+  algoliaOptions: {
+		"hitsPerPage": 5,
+		"facetFilters": "(tags:en)"
+	}
+});
+</script>
+
+
+
+<script type="text/javascript">
+  $('#toc').toc({exclude: 'h1, h5, h6', context: '', autoId: true, numerate: false});
+</script>
+
+<script type="text/javascript">
+  $(function() {
+    moveScroller();
+  });
+</script>
+
+  </body>
+</html>
+
+    

@@ -1,0 +1,806 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SIP-21 - Spores - Scala Documentation</title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+
+    <!-- prettify js and CSS -->
+    <link rel="stylesheet" href="/resources/stylesheets/prettify.css" type="text/css" />
+    <script src="/resources/javascript/prettify/prettify.js" type="text/javascript" ></script>
+
+
+    <!-- jquery js -->
+    <script src="/resources/javascript/jquery.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/effects.core.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/effects.highlight.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/moveScroller.js" type="text/javascript" ></script>
+
+    <!-- Bootstrap JS and CSS -->
+    <link rel="stylesheet" href="/resources/stylesheets/bootstrap.css" type="text/css" />
+	  <script src="/resources/javascript/bootstrap-dropdown.js" type="text/javascript" ></script>
+	  <script src="/resources/javascript/bootstrap-dropdown-app.js" type="text/javascript" ></script>
+
+    <!-- Base stylesheet for all pages -->
+    <link rel="stylesheet" href="/resources/stylesheets/base.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css" />
+    <link rel="stylesheet" href="/resources/stylesheets/search.css" type="text/css" />
+
+    <!-- table of contents js -->
+    <script src="/resources/javascript/toc.js" type="text/javascript" ></script>
+
+
+    <!-- styles for pager and table of contents -->
+    <link rel="stylesheet" href="/resources/stylesheets/pager.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/stylesheets/toc.css" type="text/css" />
+
+    <!-- google analytics -->
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-574683-5']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+
+    <!-- prettyprint js to prepend generated pre/code tags -->
+    <script type="text/javascript">
+      function styleCode()
+        {
+          if (typeof disableStyleCode != "undefined")
+          {
+              return;
+          }
+          var a = false;
+          $("pre code").parent().each(function()
+          {
+              if (!$(this).hasClass("prettyprint"))
+              {
+                  $(this).addClass("prettyprint lang-scala linenums");
+                  a = true
+              }
+          });
+          if (a) { prettyPrint() }
+      }
+    </script>
+
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+
+            $(".scroll").click(function(event){
+              event.preventDefault();
+              $('html,body').animate({scrollTop:$(this.hash).offset().top}, 500);
+              $('html,body').animate({scrollTop:$(this.hash).offset().top-=50}, 500);
+              $(this.hash).effect("highlight", {color: "#FFCC85"}, 3000);
+            });
+      });
+    </script>
+
+    <script type="text/javascript">
+      $(window).ready(function goToSubsection() {
+          if (window.location.hash)
+          {
+              $('html,body').animate({scrollTop:$(window.location.hash).offset().top}, 500);
+              $('html,body').animate({scrollTop:$(window.location.hash).offset().top-=50}, 500);
+              $(window.location.hash).effect("highlight", {color: "#FFCC85"}, 3000);
+          }
+        });
+    </script>
+
+    <style type="text/css">
+
+       p.contents {
+           margin-left: 15px;
+           font-weight: bold;
+           font-size: 16px;
+       }
+
+       div#toc ul {
+           list-style: none;
+       }
+
+       div#toc ul a {
+           display: block;
+           list-style: none;
+           line-height: 22px;
+           font-weight: bold;
+           width: 100%;
+       }
+
+      div#toc ul li ul {
+           list-style: disc;
+      }
+
+      div#toc ul li ul a {
+           line-height: 18px;
+           font-weight: normal;
+      }
+
+      div#toc ul li ul li ul {
+           list-style: square;
+      }
+       div#toc ul li ul li ul a {
+       }
+
+       div#scroller-anchor {
+           width: inherit;
+       }
+
+       div#scroller {
+           width: inherit;
+       }
+
+       div#guide-title {
+        text-transform: capitalize;
+        font-size: 16px;
+        padding-bottom: 6px;
+        color: #BFBFBF;
+        text-transform: uppercase;
+        font-weight: bold;
+       }
+
+       input, textarea, select, .uneditable-input {
+	       width: 165px;
+	     }
+
+    </style>
+
+</head>
+<body onload="styleCode()">
+    
+    <!-- Topbar
+    ================================================== -->
+    <div class="topbar" >
+      <div class="topbar-inner">
+        <div class="container">
+          <a class="brand" href="/sips/index.html"><img src="/resources/images/scala-logo.png"> Improvement Process</a>
+          <ul class="nav">
+           <li><a href="/sips/sip-list.html">SIP List</a></li>
+           <li><a href="/sips/minutes-list.html">Minutes</a></li>
+           <li><a href="/sips/sip-submission.html">Submitting a SIP</a></li>
+           <li><a href="/sips/slip-submission.html">Submitting a SLIP</a></li>
+           <li><a href="/sips/sip-tutorial.html">Tutorial: Writing a SIP</a></li>
+           <li><a href="https://groups.google.com/forum/#!forum/scala-sips">Mailing List</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+<div class="container">
+  <div class="row">    
+
+    <div class="span12">
+      <h1>SIP-21 - Spores</h1>    
+      <p><strong>By: Heather Miller, Martin Odersky, and Philipp Haller</strong></p>
+
+<p><span class="label success">Updated September 15th, 2013</span></p>
+
+<p> </p>
+
+<p>Functional programming languages are regularly touted as an enabling force, as
+an increasing number of applications become concurrent and distributed.
+However, managing closures in a concurrent or distributed environment, or
+writing APIs to be used by clients in such an environment, remains
+considerably precarious– complicated environments can be captured by these
+closures, which regularly leads to a whole host of potential hazards across
+libraries/frameworks in Scala’s standard library and its ecosystem.</p>
+
+<p>Potential hazards when using closures incorrectly:</p>
+
+<ul>
+  <li>Memory leaks</li>
+  <li>Race conditions, due to capturing mutable references</li>
+  <li>Runtime serialization errors, due to unintended capture of references</li>
+</ul>
+
+<p>This SIP outlines an abstraction, called <em>spores</em>, which enables safer use of
+closures in concurrent and distributed environments. This is achieved by
+controlling the environment which a spore can capture. Using an
+<em>assignment-on-capture</em> semantics, certain concurrency bugs due to capturing mutable
+references can be avoided.</p>
+
+<h2 id="motivating-examples">Motivating Examples</h2>
+
+<h3 id="futures-and-akka-actors">Futures and Akka Actors</h3>
+
+<p>In the following example, an Akka actor spawns a future to concurrently
+process incoming requests.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>def receive = {
+  case Request(data) =&gt;
+    Future {
+      val result = transform(data)
+      sender ! Response(result)
+    }
+}
+</code></pre>
+</div>
+
+<p>Capturing <code class="highlighter-rouge">sender</code> in the above example is problematic, since it does not
+return a stable value. It is possible that the future’s body is executed at a
+time when the actor has started processing the next <code class="highlighter-rouge">Request</code> message which
+could be originating from a different actor. As a result, the <code class="highlighter-rouge">Response</code>
+message of the future might be sent to the wrong receiver.</p>
+
+<h3 id="serialization">Serialization</h3>
+
+<p>The following example uses Java Serialization to serialize a closure. However,
+serialization fails with a <code class="highlighter-rouge">NotSerializableException</code> due to the unintended
+capture of a reference to an enclosing object.</p>
+
+<p><strong>Example 2:</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>case class Helper(name: String)
+
+class Main {
+  val helper = Helper("the helper")
+
+  val fun: Int =&gt; Unit = (x: Int) =&gt; {
+    val result = x + " " + helper.toString
+    println("The result is: " + result)
+  }
+}
+</code></pre>
+</div>
+
+<p>Given the above class definitions, serializing the <code class="highlighter-rouge">fun</code> member of an instance
+of <code class="highlighter-rouge">Main</code> throws a <code class="highlighter-rouge">NotSerializableException</code>. This is unexpected, since <code class="highlighter-rouge">fun</code>
+refers only to serializable objects: <code class="highlighter-rouge">x</code> (an <code class="highlighter-rouge">Int</code>) and <code class="highlighter-rouge">helper</code> (an instance
+of a case class).</p>
+
+<p>Here is an explanation of why the serialization of <code class="highlighter-rouge">fun</code> fails: since <code class="highlighter-rouge">helper</code>
+is a field, it is not actually copied when it is captured by the closure.
+Instead, when accessing helper its getter is invoked. This can be made
+explicit by replacing <code class="highlighter-rouge">helper.toString</code> by the invocation of its getter,
+<code class="highlighter-rouge">this.helper.toString</code>. Consequently, the <code class="highlighter-rouge">fun</code> closure captures <code class="highlighter-rouge">this</code>, not
+just a copy of <code class="highlighter-rouge">helper</code>. However, <code class="highlighter-rouge">this</code> is a reference to class <code class="highlighter-rouge">Main</code> which
+is not serializable.</p>
+
+<p>The above example is not the only possible situation in which a closure can
+capture a reference to <code class="highlighter-rouge">this</code> or to an enclosing object in an unintended way.
+Thus, runtime errors when serializing closures are common.</p>
+
+<h2 id="basic-usage">Basic Usage</h2>
+
+<p>Spores have a few modes of usage. The simplest form is:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>val s = spore {
+  val h = helper
+  (x: Int) =&gt; {
+    val result = x + " " + h.toString
+    println("The result is: " + result)
+  }
+}
+</code></pre>
+</div>
+
+<p>In this example, no transformation is actually performed. Instead, the
+compiler simply ensures that the spore is <em>well-formed</em>, i.e., anything that’s
+captured is explicitly listed as a value definition before the spore’s
+closure. This ensures that the enclosing <code class="highlighter-rouge">this</code> instance is not accidentally
+captured, in this example.</p>
+
+<p>Spores can also be used in for-comprehensions:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>for { i &lt;- collection
+      j &lt;- doSomething(i)
+} yield s"${capture(i)}: result: $j"
+</code></pre>
+</div>
+
+<p>Here, the fact that a spore is created is implicit, that is, the <code class="highlighter-rouge">spore</code>
+marker is not used explicitly. Spores come into play because the underlying
+<code class="highlighter-rouge">map</code> method of the type of <code class="highlighter-rouge">doSomething(i)</code> takes a spore as a parameter. The
+<code class="highlighter-rouge">capture(i)</code> syntax is an alternative way of declaring captured variables, in
+particular for use in for-comprehensions.</p>
+
+<p>Finally, a regular function literal can be used as a spore. That is, a method
+that expects a spore can be passed a function literal so long as the function
+literal is well-formed.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>def sendOverWire(s: Spore[Int, Int]): Unit = ...
+sendOverWire((x: Int) =&gt; x * x - 2)
+</code></pre>
+</div>
+
+<h2 id="design">Design</h2>
+
+<p>The main idea behind spores is to provide an alternative way to create
+closure-like objects, in a way where the environment is controlled.</p>
+
+<p>A spore is created as follows.</p>
+
+<p><strong>Example 3:</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>val s = spore {
+  val h = helper
+  (x: Int) =&gt; {
+    val result = x + " " + h.toString
+    println("The result is: " + result)
+  }
+}
+</code></pre>
+</div>
+
+<p>The body of a spore consists of two parts:</p>
+
+<ol>
+  <li><strong>the spore header:</strong> a sequence of local value (val) declarations only, and</li>
+  <li><strong>the closure</strong>.</li>
+</ol>
+
+<p>In general, a <code class="highlighter-rouge">spore { ... }</code> expression has the following shape.</p>
+
+<p>Note that the value declarations described in point 1 above can be <code class="highlighter-rouge">implicit</code>
+but not <code class="highlighter-rouge">lazy</code>.</p>
+
+<p><strong>Figure 1:</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>spore {
+  val x_1: T_1 = init_1
+  ...
+  val x_n: T_n = init_n
+  (p_1: S_1, ..., p_m: S_m) =&gt; {
+    &lt;body&gt;
+  }
+}
+</code></pre>
+</div>
+
+<p>The types <code class="highlighter-rouge">T_1, ..., T_n</code> can also be inferred.</p>
+
+<p>The closure of a spore has to satisfy the following rule. All free variables
+of the closure body have to be either</p>
+
+<ol>
+  <li>parameters of the closure, or</li>
+  <li>declared in the preceding sequence of local value declarations, or</li>
+  <li>marked using <code class="highlighter-rouge">capture</code> (see corresponding section  below).</li>
+</ol>
+
+<p><strong>Example 4:</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>case class Person(name: String, age: Int)
+val outer1 = 0
+val outer2 = Person("Jim", 35)
+val s = spore {
+  val inner = outer2
+  (x: Int) =&gt; {
+    s"The result is: ${x + inner.age + outer1}"
+  }
+}
+</code></pre>
+</div>
+
+<p>In the above example, the spore’s closure is invalid, and would be rejected
+during compilation. The reason is that the variable <code class="highlighter-rouge">outer1</code> is neither a
+parameter of the closure nor one of the spore’s value declarations (the only
+value declaration is: <code class="highlighter-rouge">val inner = outer2</code>).</p>
+
+<h3 id="evaluation-semantics">Evaluation Semantics</h3>
+
+<p>In order to make the runtime behavior of a spore as intuitive as possible, the
+design leaves the evaluation semantics unchanged compared to regular closures.
+Basically, leaving out the <code class="highlighter-rouge">spore</code> marker results in a closure with the same
+runtime behavior.</p>
+
+<p>For example,</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>spore {
+  val l = this.logger
+  () =&gt; new LoggingActor(l)
+}
+</code></pre>
+</div>
+
+<p>and</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="err">val</span><span class="w"> </span><span class="err">l</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">this.logger</span><span class="w">
+  </span><span class="err">()</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="err">new</span><span class="w"> </span><span class="err">LoggingActor(l)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>have the same behavior at runtime. The rationale for this design decision is
+that the runtime behavior of closure-heavy code can already be hard to reason
+about. It would become even more difficult if we would introduce additional
+rules for spores.</p>
+
+<h3 id="spore-type">Spore Type</h3>
+
+<p>The type of the spore is determined by the type and arity of the closure. If
+the closure has type <code class="highlighter-rouge">A =&gt; B</code>, then the spore has type <code class="highlighter-rouge">Spore[A, B]</code>. For
+convenience we also define spore types for two or more parameters.</p>
+
+<p>In example 3, the type of s is <code class="highlighter-rouge">Spore[Int, Unit]</code>.
+Implementation
+The spore construct is a macro which</p>
+
+<ul>
+  <li>performs the checking described above, and which</li>
+  <li>replaces the spore body so that it creates an instance of one of the Spore traits, according to the arity of the closure of the spore.</li>
+</ul>
+
+<p>The <code class="highlighter-rouge">Spore</code> trait for spores of arity 1 is declared as follows:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>trait Spore[-T, +R] extends Function1[T, R]
+</code></pre>
+</div>
+
+<p>For each function arity there exists a corresponding <code class="highlighter-rouge">Spore</code> trait of the same
+arity (called <code class="highlighter-rouge">Spore2</code>, <code class="highlighter-rouge">Spore3</code>, etc.)</p>
+
+<h3 id="implicit-conversion">Implicit Conversion</h3>
+
+<p>Regular function literals can be implicitly converted to spores. This implicit
+conversion has two benefits:</p>
+
+<ol>
+  <li>it enables the use of spores in for-comprehensions.</li>
+  <li>it makes the spore syntax more lightweight, which is important in frameworks such as <a href="http://spark.incubator.apache.org/">Spark</a> where users often create many small function literals.</li>
+</ol>
+
+<p>This conversion is defined as a member of the <code class="highlighter-rouge">Spore</code> companion object, so
+it’s always in the implicit scope when passing a function literal as a method
+argument when a <code class="highlighter-rouge">Spore</code> is expected. For example, one can do the following:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>def sendOverWire(s: Spore[Int, Int]): Unit = ...
+sendOverWire((x: Int) =&gt; x * x - 2)
+</code></pre>
+</div>
+
+<p>This is arguably much lighter-weight than having to declare a spore before
+passing it to <code class="highlighter-rouge">sendOverWire</code>.</p>
+
+<p>In general, the implicit conversion will be successful if and only if the
+function literal is well-formed according to the spore rules (defined above in
+the <em>Design</em> section). Note that <em>only function literals can be converted to spores</em>.
+This is due to the fact that the body of the function literal has to be checked
+by the spore macro to make sure that the conversion is safe. For <em>named</em> function
+values (i.e., not literals) on the other hand, it’s not guaranteed that the
+function value’s body is available for the spore macro to check.</p>
+
+<h3 id="capture-syntax-and-for-comprehensions">Capture Syntax and For-Comprehensions</h3>
+
+<p>To enable the use of spores with for-comprehensions, a <code class="highlighter-rouge">capture</code> syntax has
+been introduced to assist in the spore checking.</p>
+
+<p>To see why this is necessary, let’s start with an example. Suppose we have a
+type for distributed collections:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>trait DCollection[A] {
+  def map[B](sp: Spore[A, B]): DCollection[B]
+  def flatMap[B](sp: Spore[A, DCollection[B]]): DCollection[B]
+}
+</code></pre>
+</div>
+
+<p>This type, <code class="highlighter-rouge">DCollection</code>, might be implemented in a way where the data is
+distributed across machines in a cluster. Thus, the functions passed to <code class="highlighter-rouge">map</code>,
+<code class="highlighter-rouge">flatMap</code>, etc. have to be serializable. A simple way to ensure this is to
+require these arguments to be spores. However, we also would like for-comprehensions
+like the following to work:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>def lookup(i: Int): DCollection[Int] = ...
+val indices: DCollection[Int] = ...
+
+for { i &lt;- indices
+      j &lt;- lookup(i)
+} yield j + i
+</code></pre>
+</div>
+
+<p>A problem here is that the desugaring done by the compiler for
+for-comprehensions doesn’t know anything about spores. This is what
+the compiler produces from the above expression:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>indices.flatMap(i =&gt; lookup(i).map(j =&gt; j + i))
+</code></pre>
+</div>
+
+<p>The problem is that <code class="highlighter-rouge">(j =&gt; j + i)</code> is not a spore. Furthermore, making it a
+spore is not straightforward, as we can’t change the way for-comprehensions
+are translated.</p>
+
+<p>We can overcome this by using the implicit conversion introduced in the
+previous section to convert the function literal implicitly to a spore.</p>
+
+<p>However, in continuing to look at this example, it’s evident that the lambda
+still has the wrong shape. The captured variable <code class="highlighter-rouge">i</code> is not declared in the
+spore header (the list of value definitions preceding the closure within the
+spore), like a spore demands.</p>
+
+<p>We can overcome this using the <code class="highlighter-rouge">capture</code> syntax – an alternative way of
+capturing paths. That is, instead of having to write:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="err">val</span><span class="w"> </span><span class="err">captured</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">i</span><span class="w">
+  </span><span class="err">j</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="err">j</span><span class="w"> </span><span class="err">+</span><span class="w"> </span><span class="err">i</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>One can also write:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>(j =&gt; j + capture(i))
+</code></pre>
+</div>
+
+<p>Thus, the above for-comprehension can be rewritten using spores and <code class="highlighter-rouge">capture</code>
+as follows:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>for { i &lt;- indices
+      j &lt;- lookup(i)
+} yield j + capture(i)
+</code></pre>
+</div>
+
+<p>Here, <code class="highlighter-rouge">i</code> is “captured” as it occurs syntactically after the arrow of another
+generator (it occurs after <code class="highlighter-rouge">j &lt;- lookup(i)</code>, the second generator in the
+for-comprehension).</p>
+
+<p><strong>Note:</strong> anything that is “captured” using <code class="highlighter-rouge">capture</code> may only be a path.</p>
+
+<p><strong>A path</strong> (as defined by the Scala Language Specification, section 3.1) is:</p>
+
+<ul>
+  <li>The empty path ε (which cannot be written explicitly in user programs).</li>
+  <li><code class="highlighter-rouge">C.this</code>, where <code class="highlighter-rouge">C</code> references a class.</li>
+  <li><code class="highlighter-rouge">p.x</code> where <code class="highlighter-rouge">p</code> is a path and <code class="highlighter-rouge">x</code> is a stable member of <code class="highlighter-rouge">p</code>.</li>
+  <li><code class="highlighter-rouge">C.super.x</code> or <code class="highlighter-rouge">C.super[M].x</code> where <code class="highlighter-rouge">C</code> references a class and <code class="highlighter-rouge">x</code> references a stable member of the super class or designated parent class <code class="highlighter-rouge">M</code> of <code class="highlighter-rouge">C</code>.</li>
+</ul>
+
+<p>The reason why captured expressions are restricted to paths is that otherwise
+the two closures</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>(x =&gt; &lt;expr1&gt; + capture(&lt;expr2&gt;))
+</code></pre>
+</div>
+
+<p>and</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>(x =&gt; &lt;expr1&gt; + &lt;expr2&gt;)
+</code></pre>
+</div>
+
+<p>(where <code class="highlighter-rouge">&lt;expr1&gt;</code> and <code class="highlighter-rouge">&lt;expr2&gt;</code> are not just paths) would not have the same
+runtime behavior, because in the first case, the closure would have to be
+transformed in a way that would evaluate <code class="highlighter-rouge">&lt;expr2&gt;</code> “outside of the closure”.
+Not only would this complicate the reasoning about spore-based code (see the
+section Evaluation Semantics above), but it’s not clear what “outside of the
+closure” even means in a context such as for-comprehensions.</p>
+
+<h3 id="macro-expansion">Macro Expansion</h3>
+
+<p>An invocation of the spore macro expands the spore’s body as follows. Given
+the general shape of a spore as shown above, the spore macro produces the
+following code:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>  new &lt;spore implementation class&gt;[S_1, ..., S_m, R]({
+    val x_1: T_1 = init_1
+    ...
+    val x_n: T_n = init_n
+    (p_1: S_1, ..., p_m: S_m) =&gt; {
+      &lt;body&gt;
+    }
+  })
+</code></pre>
+</div>
+
+<p>Note that, after checking, the spore macro need not do any further
+transformation, since implementation details such as unneeded remaining outer
+references are removed by the new backend intended for inclusion in Scala
+2.11. It’s also useful to note that in some cases these unwanted outer
+references are already removed by the existing backend.</p>
+
+<p>The spore implementation classes follow a simple pattern. For example, for
+arity 1, the implementation class is declared as follows:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>  class SporeImpl[-T, +R](f: T =&gt; R) extends Spore[T, R] {
+    def apply(x: T): R = f(x)
+  }
+</code></pre>
+</div>
+
+<h3 id="type-inference">Type Inference</h3>
+
+<p>Similar to regular functions and closures, the type of a spore should be
+inferred. Inferring the type of a spore amounts to inferring the type
+arguments when instantiating a spore implementation class:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>  new &lt;spore implementation class&gt;[S_1, ..., S_m, R]({
+    // ...
+  })
+</code></pre>
+</div>
+
+<p>In the above expression, the type arguments <code class="highlighter-rouge">S_1, ..., S_m</code>, and <code class="highlighter-rouge">R</code> should be
+inferred from the expected type.</p>
+
+<p>Our current proposal is to solve this type inference problem in the context of
+the integration of Java SAM closures into Scala. Given that it is planned to
+eventually support such closures, and to support type inference for these
+closures as well, we plan to piggyback on the work done on type inference for
+SAMs in general to achieve type inference for spores.</p>
+
+<h2 id="motivating-examples-revisited">Motivating Examples, Revisited</h2>
+
+<p>We now revisit the motivating examples we described in the above section, this
+time in the context of spores.</p>
+
+<h3 id="futures-and-akka-actors-1">Futures and Akka actors</h3>
+
+<p>The safety of futures can be improved by requiring the body of a new future to
+be a nullary spore (a spore with an empty parameter list).</p>
+
+<p>Using spores, example 1 can be re-written as follows:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>def receive = {
+  case Request(data) =&gt;
+    future(spore {
+      val from = sender
+      val d = data
+      () =&gt; {
+        val result = transform(d)
+        from ! Response(result)
+      }
+    })
+}
+</code></pre>
+</div>
+
+<p>In this case, the problematic capturing of <code class="highlighter-rouge">this</code> is avoided, since the result
+of <code class="highlighter-rouge">this.sender</code> is assigned to the spore’s local value <code class="highlighter-rouge">from</code> when the spore
+is created. The spore conformity checking ensures that within the spore’s
+closure, only <code class="highlighter-rouge">from</code> and <code class="highlighter-rouge">d</code> are used.</p>
+
+<h3 id="serialization-1">Serialization</h3>
+
+<p>Using spores, example 2 can be re-written as follows:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>case class Helper(name: String)
+
+class Main {
+  val helper = Helper("the helper")
+
+  val fun: Spore[Int, Unit] = spore {
+    val h = helper
+    (x: Int) =&gt; {
+      val result = x + " " + h.toString
+      println("The result is: " + result)
+    }
+  }
+}
+</code></pre>
+</div>
+
+<p>Similar to example 1, the problematic capturing of <code class="highlighter-rouge">this</code> is avoided, since
+<code class="highlighter-rouge">helper</code> has to be assigned to a local value (here, <code class="highlighter-rouge">h</code>) so that it can be
+used inside the spore’s closure. As a result, <code class="highlighter-rouge">fun</code> can now be serialized
+without runtime errors, since <code class="highlighter-rouge">h</code> refers to a serializable object (a case
+class instance).</p>
+
+
+      <div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  
+    var disqus_shortname = 'scalasip'; // required: replace example with your forum shortname
+  
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    </div>
+    
+    <div class="span4">
+      <div id="scroller-anchor">
+  <div id="scroller">
+              
+        
+          <p class="contents">SIP Committee Decision</p>
+          <div class="alert-message warning" style="margin-left: 15px;">
+            <strong style="font-size: 15px;">Under Review</strong>
+            <p style="padding-top: 10px">Next iteration takes place in November 2016. Check <a href="http://localhost:4000/sips/minutes/sip-20th-september-minutes.html">September's minutes</a>.</p>
+          </div>            
+                        
+              
+    <p class="contents">Contents</p>
+    <div id="toc"></div>    
+  </div>
+</div>
+
+    </div>
+  
+  </div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<ul>
+			<li><h5>API</h5></li>
+			<li><a href="http://www.scala-lang.org/api/current/">Current</a></li>
+			<li><a href="http://www.scala-lang.org/files/archive/nightly/2.11.x/api/2.11.x/">Nightly</a></li>
+		</ul>
+		<ul>
+			<li><h5>Learn</h5></li>
+			<li><a href="/overviews">Guides & Overviews</a></li>
+			<li><a href="/tutorials">Tutorials</a></li>
+			<li><a href="/style">Scala Style Guide</a></li>
+		</ul>
+		<ul>
+			<li><h5>Quickref</h5></li>
+			<li><a href="/glossary">Glossary</a></li>
+			<li><a href="/cheatsheets">Cheatsheets</a></li>
+		</ul>
+		<ul>
+			<li><h5>Contribute</h5></li>
+			<li><a href="http://github.com/scala/scala.github.com">Source Code</a></li>
+			<li><a href="/contribute.html">Contributors Guide</a></li>
+			<li><a href="http://getsatisfaction.com/scaladocs">Suggestions</a></li>
+		</ul>
+		<ul>
+			<li><h5>Other Resources</h5></li>
+			<li><a href="/sips">Scala Improvement Process</a></li>
+		</ul>
+	</div>
+	<div class="container copyright">
+ 		<p>
+			Copyright &copy; 2011-2015 EPFL. All rights reserved.
+			<a href="https://github.com/scala/scala.github.com/commits/gh-pages.atom"><img align="right" height="20px" width="20px" src="/resources/images/rss.png" alt="RSS feed of updates to the github repo hosting this site"></a>
+		</p>
+	</div>
+</div>
+
+<!-- search -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+  apiKey: 'b66eaeec6bd214ea6c0fcd2d7b7fdfe8',
+  indexName: 'scala-docs',
+  inputSelector: '#q',
+	autocompleteOptions: {
+    debug: true
+  },
+  algoliaOptions: {
+		"hitsPerPage": 5,
+		"facetFilters": "(tags:en)"
+	}
+});
+</script>
+
+
+
+<script type="text/javascript">
+  $('#toc').toc({exclude: 'h1, h5, h6', context: '', autoId: true, numerate: false});
+</script>
+
+<script type="text/javascript">
+  $(function() {
+    moveScroller();
+  });
+</script>
+
+  </body>
+</html>
+
+    

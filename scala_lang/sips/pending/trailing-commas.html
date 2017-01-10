@@ -1,0 +1,540 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SIP-27 - Trailing Commas - Scala Documentation</title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+
+    <!-- prettify js and CSS -->
+    <link rel="stylesheet" href="/resources/stylesheets/prettify.css" type="text/css" />
+    <script src="/resources/javascript/prettify/prettify.js" type="text/javascript" ></script>
+
+
+    <!-- jquery js -->
+    <script src="/resources/javascript/jquery.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/effects.core.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/effects.highlight.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/moveScroller.js" type="text/javascript" ></script>
+
+    <!-- Bootstrap JS and CSS -->
+    <link rel="stylesheet" href="/resources/stylesheets/bootstrap.css" type="text/css" />
+	  <script src="/resources/javascript/bootstrap-dropdown.js" type="text/javascript" ></script>
+	  <script src="/resources/javascript/bootstrap-dropdown-app.js" type="text/javascript" ></script>
+
+    <!-- Base stylesheet for all pages -->
+    <link rel="stylesheet" href="/resources/stylesheets/base.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css" />
+    <link rel="stylesheet" href="/resources/stylesheets/search.css" type="text/css" />
+
+    <!-- table of contents js -->
+    <script src="/resources/javascript/toc.js" type="text/javascript" ></script>
+
+
+    <!-- styles for pager and table of contents -->
+    <link rel="stylesheet" href="/resources/stylesheets/pager.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/stylesheets/toc.css" type="text/css" />
+
+    <!-- google analytics -->
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-574683-5']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+
+    <!-- prettyprint js to prepend generated pre/code tags -->
+    <script type="text/javascript">
+      function styleCode()
+        {
+          if (typeof disableStyleCode != "undefined")
+          {
+              return;
+          }
+          var a = false;
+          $("pre code").parent().each(function()
+          {
+              if (!$(this).hasClass("prettyprint"))
+              {
+                  $(this).addClass("prettyprint lang-scala linenums");
+                  a = true
+              }
+          });
+          if (a) { prettyPrint() }
+      }
+    </script>
+
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+
+            $(".scroll").click(function(event){
+              event.preventDefault();
+              $('html,body').animate({scrollTop:$(this.hash).offset().top}, 500);
+              $('html,body').animate({scrollTop:$(this.hash).offset().top-=50}, 500);
+              $(this.hash).effect("highlight", {color: "#FFCC85"}, 3000);
+            });
+      });
+    </script>
+
+    <script type="text/javascript">
+      $(window).ready(function goToSubsection() {
+          if (window.location.hash)
+          {
+              $('html,body').animate({scrollTop:$(window.location.hash).offset().top}, 500);
+              $('html,body').animate({scrollTop:$(window.location.hash).offset().top-=50}, 500);
+              $(window.location.hash).effect("highlight", {color: "#FFCC85"}, 3000);
+          }
+        });
+    </script>
+
+    <style type="text/css">
+
+       p.contents {
+           margin-left: 15px;
+           font-weight: bold;
+           font-size: 16px;
+       }
+
+       div#toc ul {
+           list-style: none;
+       }
+
+       div#toc ul a {
+           display: block;
+           list-style: none;
+           line-height: 22px;
+           font-weight: bold;
+           width: 100%;
+       }
+
+      div#toc ul li ul {
+           list-style: disc;
+      }
+
+      div#toc ul li ul a {
+           line-height: 18px;
+           font-weight: normal;
+      }
+
+      div#toc ul li ul li ul {
+           list-style: square;
+      }
+       div#toc ul li ul li ul a {
+       }
+
+       div#scroller-anchor {
+           width: inherit;
+       }
+
+       div#scroller {
+           width: inherit;
+       }
+
+       div#guide-title {
+        text-transform: capitalize;
+        font-size: 16px;
+        padding-bottom: 6px;
+        color: #BFBFBF;
+        text-transform: uppercase;
+        font-weight: bold;
+       }
+
+       input, textarea, select, .uneditable-input {
+	       width: 165px;
+	     }
+
+    </style>
+
+</head>
+<body onload="styleCode()">
+    
+    <!-- Topbar
+    ================================================== -->
+    <div class="topbar" >
+      <div class="topbar-inner">
+        <div class="container">
+          <a class="brand" href="/sips/index.html"><img src="/resources/images/scala-logo.png"> Improvement Process</a>
+          <ul class="nav">
+           <li><a href="/sips/sip-list.html">SIP List</a></li>
+           <li><a href="/sips/minutes-list.html">Minutes</a></li>
+           <li><a href="/sips/sip-submission.html">Submitting a SIP</a></li>
+           <li><a href="/sips/slip-submission.html">Submitting a SLIP</a></li>
+           <li><a href="/sips/sip-tutorial.html">Tutorial: Writing a SIP</a></li>
+           <li><a href="https://groups.google.com/forum/#!forum/scala-sips">Mailing List</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+<div class="container">
+  <div class="row">    
+
+    <div class="span12">
+      <h1>SIP-27 - Trailing Commas</h1>    
+      <p><strong>By: Dale Wijnand</strong></p>
+
+<h2 id="history">History</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Version</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Jun 25th 2016</td>
+      <td>Initial Draft (<a href="https://github.com/scala/scala.github.com/pull/533">#533</a>)</td>
+    </tr>
+    <tr>
+      <td>Jun 27th 2016</td>
+      <td>New drawback: changing existing tools (<a href="https://github.com/scala/scala.github.com/pull/533">#533</a>)</td>
+    </tr>
+    <tr>
+      <td>Jun 27th 2016</td>
+      <td>New motivation: simplifies codegen (<a href="https://github.com/scala/scala.github.com/pull/533">#533</a>)</td>
+    </tr>
+    <tr>
+      <td>Aug 10th 2016</td>
+      <td>SIP numbered: Renamed to SIP-27 (<a href="https://github.com/scala/scala.github.com/pull/533">#533</a>)</td>
+    </tr>
+    <tr>
+      <td>Aug 10th 2016</td>
+      <td>Changed scala-commas URL (repo was moved) (<a href="https://github.com/scala/scala.github.com/pull/533">#533</a>)</td>
+    </tr>
+    <tr>
+      <td>Aug 10th 2016</td>
+      <td>Dialed back some of the language (<a href="https://github.com/scala/scala.github.com/pull/533">#533</a>)</td>
+    </tr>
+    <tr>
+      <td>Sep 04th 2016</td>
+      <td>Split the motivation into sections (<a href="https://github.com/scala/scala.github.com/pull/533">#533</a>)</td>
+    </tr>
+    <tr>
+      <td>Sep 04th 2016</td>
+      <td>New motivation: VCS authorship attribution (<a href="https://github.com/scala/scala.github.com/pull/533">#533</a>)</td>
+    </tr>
+    <tr>
+      <td>Sep 04th 2016</td>
+      <td>New drawback: Cross building hinderance (<a href="https://github.com/scala/scala.github.com/pull/533">#533</a>)</td>
+    </tr>
+    <tr>
+      <td>Sep 12th 2016</td>
+      <td>Remove cross building hinderance from drawbacks (<a href="https://github.com/scala/scala.github.com/pull/533">#533</a>)</td>
+    </tr>
+    <tr>
+      <td>Nov 12th 2016</td>
+      <td>Major rework: multi-line, 2 variants &amp; spec (<a href="https://github.com/scala/scala.github.com/pull/625">#625</a>)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="motivation">Motivation</h2>
+
+<h3 id="ease-of-modification">Ease of modification</h3>
+
+<p>When using a comma-separated sequence of elements on multiple lines, such as:</p>
+
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="nc">Seq</span><span class="o">(</span>
+  <span class="n">foo</span><span class="o">,</span>
+  <span class="n">bar</span><span class="o">,</span>
+  <span class="n">baz</span>
+<span class="o">)</span></code></pre></figure>
+
+<p>It is inconvenient to remove or comment out elements because the last element mustn’t have a trailing comma:</p>
+
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="nc">Seq</span><span class="o">(</span>
+  <span class="n">foo</span><span class="o">,</span>
+  <span class="n">bar</span><span class="o">,</span>
+<span class="c1">//  baz
+</span><span class="o">)</span>       <span class="o">//</span> <span class="n">error</span><span class="k">:</span> <span class="kt">illegal</span> <span class="kt">start</span> <span class="kt">of</span> <span class="kt">simple</span> <span class="kt">expression</span></code></pre></figure>
+
+<p>It is also inconvenient to reorder because every element but the last one must be followed by a comma:</p>
+
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">val</span> <span class="n">xs</span> <span class="k">=</span> <span class="nc">Seq</span><span class="o">(</span>
+  <span class="n">foo</span><span class="o">,</span>
+  <span class="n">baz</span>
+  <span class="n">bar</span><span class="o">,</span>
+<span class="o">)</span>       <span class="o">//</span> <span class="n">error</span><span class="k">:</span> <span class="kt">illegal</span> <span class="kt">start</span> <span class="kt">of</span> <span class="kt">simple</span> <span class="kt">expression</span></code></pre></figure>
+
+<h3 id="diff-noise-reduction">Diff noise reduction</h3>
+
+<p>Adding and removing commas also introduces unnecessary noise in diffs:</p>
+
+<figure class="highlight"><pre><code class="language-diff" data-lang="diff"><span class="gu">@@ -4,7 +4,8 @@
+</span> Seq(
+   foo,
+   bar,
+<span class="gd">-  baz
+</span><span class="gi">+  baz,
++  quux
+</span> )</code></pre></figure>
+
+<h3 id="vcs-authorship-attribution">VCS authorship attribution</h3>
+
+<p>Using the example above, adding a comma after <code class="highlighter-rouge">baz</code> also unnecessarily changed the authorship of the line.</p>
+
+<h3 id="simplify-code-generation">Simplify code generation</h3>
+
+<p>Allowing trailing commas would also simplify generating Scala source code.</p>
+
+<h3 id="long-standing-ticket">Long standing ticket</h3>
+
+<p>(<a href="https://issues.scala-lang.org/browse/SI-4986">SI-4986</a>) was opened in 2011 requesting support for trailing commas, referencing that it facilitates code generation by tools and allows easier sorting of values. It was initially in the context of import selectors but later also for other constructs in the syntax.</p>
+
+<h3 id="real-world-use-cases">Real-world use-cases</h3>
+
+<p>Some real-world use-cases where elements of a sequence are typically added, removed or moved are:</p>
+
+<ul>
+  <li>invoking constructors or methods (such as <code class="highlighter-rouge">apply</code> or <code class="highlighter-rouge">copy</code>) which present a lot of options defined with default values</li>
+  <li><code class="highlighter-rouge">settings(...)</code> arguments or elements of <code class="highlighter-rouge">libraryDependencies</code>, <code class="highlighter-rouge">scalacOptions</code> or <code class="highlighter-rouge">javaOptions</code> sequences in sbt</li>
+</ul>
+
+<h2 id="design-decisions">Design Decisions</h2>
+
+<h3 id="multi-line">Multi-line</h3>
+
+<p>It is not the intent of introducing trailing commas to promote a code style such as:</p>
+
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">val</span> <span class="n">xs</span> <span class="k">=</span> <span class="nc">Seq</span><span class="o">(</span><span class="n">foo</span><span class="o">,</span> <span class="n">baz</span><span class="o">,</span> <span class="n">bar</span><span class="o">,</span> <span class="o">)</span></code></pre></figure>
+
+<p>for a number of reasons:</p>
+
+<ol>
+  <li>Subjectively, it’s an ugly style.</li>
+  <li>Some people utilise commas as a mechanism for counting, so introducing an optional trailing commas interferes with this technique; when elements are one by line, then line-counting can be used.</li>
+  <li>Adding or removing elements is less cumbersome on one line.</li>
+  <li>Commenting out elements isn’t any less cumbersome with an optional trailing comma.</li>
+</ol>
+
+<p>Trailing comma support is therefore restricted to only comma-separated elements that are on separate lines:</p>
+
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">val</span> <span class="n">xs</span> <span class="k">=</span> <span class="nc">Seq</span><span class="o">(</span>
+  <span class="n">foo</span><span class="o">,</span>
+  <span class="n">baz</span><span class="o">,</span>
+  <span class="n">bar</span><span class="o">,</span>
+<span class="o">)</span></code></pre></figure>
+
+<h3 id="what-parts-of-the-scala-grammar-to-change">What parts of the Scala grammar to change</h3>
+
+<p>There are a number of different parts of the Scala grammar that are comma-separated and, therefore, could support trailing commas. Specifically:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">ArgumentExprs</code></li>
+  <li><code class="highlighter-rouge">Params</code> and <code class="highlighter-rouge">ClassParams</code></li>
+  <li><code class="highlighter-rouge">SimpleExpr1</code></li>
+  <li><code class="highlighter-rouge">TypeArgs</code>, <code class="highlighter-rouge">TypeParamClause</code> and <code class="highlighter-rouge">FunTypeParamClause</code></li>
+  <li><code class="highlighter-rouge">SimpleType</code> and <code class="highlighter-rouge">FunctionArgTypes</code></li>
+  <li><code class="highlighter-rouge">SimplePattern</code></li>
+  <li><code class="highlighter-rouge">ImportSelectors</code></li>
+  <li><code class="highlighter-rouge">Import</code></li>
+  <li><code class="highlighter-rouge">Bindings</code></li>
+  <li><code class="highlighter-rouge">ids</code>, <code class="highlighter-rouge">ValDcl</code>, <code class="highlighter-rouge">VarDcl</code>, <code class="highlighter-rouge">VarDef</code> and <code class="highlighter-rouge">PatDef</code></li>
+</ul>
+
+<p>With this proposal I would like to present 2 variants:</p>
+
+<ol>
+  <li>
+    <p>The first variant adds trailing comma support to only multi-line <code class="highlighter-rouge">ArgumentExprs</code>, <code class="highlighter-rouge">Params</code> and <code class="highlighter-rouge">ClassParams</code>, which I consider to be the parts of the grammar that would most benefit from trailing commas.</p>
+  </li>
+  <li>
+    <p>The second variant adds trailing comma support to the whole grammar (again, only for multi-line), which means more consistency, but also supporting trailing commas in places that in practice don’t really require it as much, such as <code class="highlighter-rouge">ids</code>.</p>
+  </li>
+</ol>
+
+<p>In this proposal, only the first variant is considered: trailing comma support for <code class="highlighter-rouge">ArgumentExprs</code>, <code class="highlighter-rouge">Params</code> and <code class="highlighter-rouge">ParamClasses</code> for the sake of simplicity.</p>
+
+<p>See below for more details on what that would mean.</p>
+
+<h4 id="changing-argumentexprs">Changing <code class="highlighter-rouge">ArgumentExprs</code></h4>
+
+<p><strong>Spec change</strong></p>
+
+<figure class="highlight"><pre><code class="language-diff" data-lang="diff">         Exprs ::= Expr {‘,’ Expr}
+<span class="gd">-ArgumentExprs ::= ‘(’ [Exprs] ‘)’
+</span><span class="gi">+ArgumentExprs ::= ‘(’ [Exprs] [‘,’] ‘)'</span></code></pre></figure>
+
+<p><strong>Example</strong></p>
+
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="nc">Seq</span><span class="o">(</span>
+  <span class="n">foo</span><span class="o">,</span>
+  <span class="n">bar</span><span class="o">,</span>
+  <span class="n">baz</span><span class="o">,</span>
+<span class="o">)</span></code></pre></figure>
+
+<h2 id="params-and-classparams"><code class="highlighter-rouge">Params</code> and <code class="highlighter-rouge">ClassParams</code></h2>
+
+<p><strong>Spec change</strong></p>
+
+<figure class="highlight"><pre><code class="language-diff" data-lang="diff">       Params ::=  Param {‘,’ Param}
+<span class="gd">- ParamClause ::=  [nl] ‘(’ [Params] ‘)’
+-ParamClauses ::=  {ParamClause} [[nl] ‘(’ ‘implicit’ Params ‘)’]
+</span><span class="gi">+ ParamClause ::=  [nl] ‘(’ [Params] [‘,’] ‘)’
++ParamClauses ::=  {ParamClause} [[nl] ‘(’ ‘implicit’ Params [‘,’] ‘)’]
+</span>
+       ClassParams ::=  ClassParam {‘,’ ClassParam}
+<span class="gd">- ClassParamClause ::=  [nl] ‘(’ [ClassParams] ‘)’
+-ClassParamClauses ::=  {ClassParamClause} [[nl] ‘(’ ‘implicit’ ClassParams ‘)’]
+</span><span class="gi">+ ClassParamClause ::=  [nl] ‘(’ [ClassParams] [‘,’] ‘)’
++ClassParamClauses ::=  {ClassParamClause} [[nl] ‘(’ ‘implicit’ ClassParams [‘,’] ‘)’]</span></code></pre></figure>
+
+<p><strong>examples</strong></p>
+
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">def</span> <span class="n">bippy</span><span class="o">(</span>
+  <span class="n">foo</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span>
+  <span class="n">bar</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span>
+  <span class="n">baz</span><span class="k">:</span> <span class="kt">Boolean</span><span class="o">,</span>
+<span class="o">)</span>
+
+<span class="k">class</span> <span class="nc">Bippy</span><span class="o">(</span>
+  <span class="n">foo</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span>
+  <span class="n">bar</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span>
+  <span class="n">baz</span><span class="k">:</span> <span class="kt">Boolean</span><span class="o">,</span>
+<span class="o">)</span></code></pre></figure>
+
+<h2 id="implementation">Implementation</h2>
+
+<p>The implementation of trailing commas is is limited to changing Parsers.scala in the Scala compiler. An implementation of this proposal can be found at <a href="https://github.com/scala/scala/pull/524://github.com/scala/scala/pull/5245">scala/scala#5245</a>.</p>
+
+<h2 id="drawbackstrade-offs">Drawbacks/Trade-offs</h2>
+
+<p>One drawback, or trade-off, to this change is that it adds an alternative way in which it is possible to do something in Scala. But I believe that the pragmatic advantage of being able to have trailing commas is worth this drawback.</p>
+
+<p>Another drawback, given this is a change in syntax, is that it requires changing the existing tools, such as those that parse Scala: intellij-scala, scalariform, scala.meta and scalaparse.</p>
+
+<h2 id="alternatives">Alternatives</h2>
+
+<p>As an alternative to changing the language, there already exists today a compiler plugin called <a href="https://github.com/47deg/scala-commas">scala-commas</a> that provides a variant of this feature. It also provides some evidence that people would even use unsupported compiler apis and reflection to add this functionality, even when such a plugin won’t compose with other plugins well, though arguably only weak evidence as it’s a young and obscure plugin.</p>
+
+<h2 id="references">References</h2>
+
+<ol>
+  <li><a href="https://issues.scala-lang.org/browse/SI-4986">SI-4986</a></li>
+  <li><a href="https://github.com/scala/scala/pull/524://github.com/scala/scala/pull/5245">scala/scala#5245</a></li>
+  <li><a href="https://github.com/47deg/scala-commas">scala-commas</a></li>
+</ol>
+
+
+      <div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  
+    var disqus_shortname = 'scalasip'; // required: replace example with your forum shortname
+  
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    </div>
+    
+    <div class="span4">
+      <div id="scroller-anchor">
+  <div id="scroller">
+              
+        
+          <p class="contents">SIP Committee Decision</p>
+          <div class="alert-message warning" style="margin-left: 15px;">
+            <strong style="font-size: 15px;">Under Review</strong>
+            <p style="padding-top: 10px">The following proposal needs to be updated, since only the specialized case version (with new lines) has been accepted. For more information, check the <a href="http://docs.scala-lang.org/sips/minutes/sip-20th-september-minutes.html">minutes</a>.</p>
+          </div>            
+                        
+              
+    <p class="contents">Contents</p>
+    <div id="toc"></div>    
+  </div>
+</div>
+
+    </div>
+  
+  </div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<ul>
+			<li><h5>API</h5></li>
+			<li><a href="http://www.scala-lang.org/api/current/">Current</a></li>
+			<li><a href="http://www.scala-lang.org/files/archive/nightly/2.11.x/api/2.11.x/">Nightly</a></li>
+		</ul>
+		<ul>
+			<li><h5>Learn</h5></li>
+			<li><a href="/overviews">Guides & Overviews</a></li>
+			<li><a href="/tutorials">Tutorials</a></li>
+			<li><a href="/style">Scala Style Guide</a></li>
+		</ul>
+		<ul>
+			<li><h5>Quickref</h5></li>
+			<li><a href="/glossary">Glossary</a></li>
+			<li><a href="/cheatsheets">Cheatsheets</a></li>
+		</ul>
+		<ul>
+			<li><h5>Contribute</h5></li>
+			<li><a href="http://github.com/scala/scala.github.com">Source Code</a></li>
+			<li><a href="/contribute.html">Contributors Guide</a></li>
+			<li><a href="http://getsatisfaction.com/scaladocs">Suggestions</a></li>
+		</ul>
+		<ul>
+			<li><h5>Other Resources</h5></li>
+			<li><a href="/sips">Scala Improvement Process</a></li>
+		</ul>
+	</div>
+	<div class="container copyright">
+ 		<p>
+			Copyright &copy; 2011-2015 EPFL. All rights reserved.
+			<a href="https://github.com/scala/scala.github.com/commits/gh-pages.atom"><img align="right" height="20px" width="20px" src="/resources/images/rss.png" alt="RSS feed of updates to the github repo hosting this site"></a>
+		</p>
+	</div>
+</div>
+
+<!-- search -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+  apiKey: 'b66eaeec6bd214ea6c0fcd2d7b7fdfe8',
+  indexName: 'scala-docs',
+  inputSelector: '#q',
+	autocompleteOptions: {
+    debug: true
+  },
+  algoliaOptions: {
+		"hitsPerPage": 5,
+		"facetFilters": "(tags:en)"
+	}
+});
+</script>
+
+
+
+<script type="text/javascript">
+  $('#toc').toc({exclude: 'h1, h5, h6', context: '', autoId: true, numerate: false});
+</script>
+
+<script type="text/javascript">
+  $(function() {
+    moveScroller();
+  });
+</script>
+
+  </body>
+</html>
+
+    

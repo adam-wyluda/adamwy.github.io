@@ -1,0 +1,577 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SIP Meeting Minutes - 20th September 2016 - Scala Documentation</title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+
+    <!-- prettify js and CSS -->
+    <link rel="stylesheet" href="/resources/stylesheets/prettify.css" type="text/css" />
+    <script src="/resources/javascript/prettify/prettify.js" type="text/javascript" ></script>
+
+
+    <!-- jquery js -->
+    <script src="/resources/javascript/jquery.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/effects.core.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/effects.highlight.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/moveScroller.js" type="text/javascript" ></script>
+
+    <!-- Bootstrap JS and CSS -->
+    <link rel="stylesheet" href="/resources/stylesheets/bootstrap.css" type="text/css" />
+	  <script src="/resources/javascript/bootstrap-dropdown.js" type="text/javascript" ></script>
+	  <script src="/resources/javascript/bootstrap-dropdown-app.js" type="text/javascript" ></script>
+
+    <!-- Base stylesheet for all pages -->
+    <link rel="stylesheet" href="/resources/stylesheets/base.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css" />
+    <link rel="stylesheet" href="/resources/stylesheets/search.css" type="text/css" />
+
+    <!-- table of contents js -->
+    <script src="/resources/javascript/toc.js" type="text/javascript" ></script>
+
+
+    <!-- styles for pager and table of contents -->
+    <link rel="stylesheet" href="/resources/stylesheets/pager.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/stylesheets/toc.css" type="text/css" />
+
+    <!-- google analytics -->
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-574683-5']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+
+    <!-- prettyprint js to prepend generated pre/code tags -->
+    <script type="text/javascript">
+      function styleCode()
+        {
+          if (typeof disableStyleCode != "undefined")
+          {
+              return;
+          }
+          var a = false;
+          $("pre code").parent().each(function()
+          {
+              if (!$(this).hasClass("prettyprint"))
+              {
+                  $(this).addClass("prettyprint lang-scala linenums");
+                  a = true
+              }
+          });
+          if (a) { prettyPrint() }
+      }
+    </script>
+
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+
+            $(".scroll").click(function(event){
+              event.preventDefault();
+              $('html,body').animate({scrollTop:$(this.hash).offset().top}, 500);
+              $('html,body').animate({scrollTop:$(this.hash).offset().top-=50}, 500);
+              $(this.hash).effect("highlight", {color: "#FFCC85"}, 3000);
+            });
+      });
+    </script>
+
+    <script type="text/javascript">
+      $(window).ready(function goToSubsection() {
+          if (window.location.hash)
+          {
+              $('html,body').animate({scrollTop:$(window.location.hash).offset().top}, 500);
+              $('html,body').animate({scrollTop:$(window.location.hash).offset().top-=50}, 500);
+              $(window.location.hash).effect("highlight", {color: "#FFCC85"}, 3000);
+          }
+        });
+    </script>
+
+    <style type="text/css">
+
+       p.contents {
+           margin-left: 15px;
+           font-weight: bold;
+           font-size: 16px;
+       }
+
+       div#toc ul {
+           list-style: none;
+       }
+
+       div#toc ul a {
+           display: block;
+           list-style: none;
+           line-height: 22px;
+           font-weight: bold;
+           width: 100%;
+       }
+
+      div#toc ul li ul {
+           list-style: disc;
+      }
+
+      div#toc ul li ul a {
+           line-height: 18px;
+           font-weight: normal;
+      }
+
+      div#toc ul li ul li ul {
+           list-style: square;
+      }
+       div#toc ul li ul li ul a {
+       }
+
+       div#scroller-anchor {
+           width: inherit;
+       }
+
+       div#scroller {
+           width: inherit;
+       }
+
+       div#guide-title {
+        text-transform: capitalize;
+        font-size: 16px;
+        padding-bottom: 6px;
+        color: #BFBFBF;
+        text-transform: uppercase;
+        font-weight: bold;
+       }
+
+       input, textarea, select, .uneditable-input {
+	       width: 165px;
+	     }
+
+    </style>
+
+</head>
+<body onload="styleCode()">
+    
+    <!-- Topbar
+    ================================================== -->
+    <div class="topbar" >
+      <div class="topbar-inner">
+        <div class="container">
+          <a class="brand" href="/sips/index.html"><img src="/resources/images/scala-logo.png"> Improvement Process</a>
+          <ul class="nav">
+           <li><a href="/sips/sip-list.html">SIP List</a></li>
+           <li><a href="/sips/minutes-list.html">Minutes</a></li>
+           <li><a href="/sips/sip-submission.html">Submitting a SIP</a></li>
+           <li><a href="/sips/slip-submission.html">Submitting a SLIP</a></li>
+           <li><a href="/sips/sip-tutorial.html">Tutorial: Writing a SIP</a></li>
+           <li><a href="https://groups.google.com/forum/#!forum/scala-sips">Mailing List</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+<div class="wrapper">
+  <div class="container">
+    <div class="row">
+    
+      <h1>SIP Meeting Minutes - 20th September 2016</h1>    
+    
+      <div class="span10">
+        <h1 id="minutes">Minutes</h1>
+
+<p>The following agenda was distributed to attendees:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Topic</th>
+      <th>Reviewer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://github.com/scala/scala.github.com/pull/567">SIP-NN: Scala Meta SIP</a></td>
+      <td>Iulian Dragos and Josh Suereth</td>
+    </tr>
+    <tr>
+      <td><a href="http://docs.scala-lang.org/sips/pending/spores.html">SIP-21: Spores</a></td>
+      <td>Martin Odersky</td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/scala/slip/pull/30">SIP-26: Unsigned Integer Data Types</a></td>
+      <td>Martin Odersky</td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/scala/scala.github.com/pull/533#issuecomment-232959066">SIP-27: Trailing commas</a></td>
+      <td>Eugene Burmako</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Jorge Vicente Cantero was the Process Lead and acting secretary of the meeting.</p>
+
+<ul>
+  <li><strong>Accepted</strong>: SIP-27: Trailing commas</li>
+  <li><strong>Rejected</strong>: SIP-26: Unsigned Integer Data Types</li>
+  <li><strong>Under review</strong>: SIP-21: Spores</li>
+  <li><strong>Numbered</strong>: SIP-28: Inline (part of Scala Meta SIP)</li>
+  <li><strong>Numbered</strong>: SIP-29: Meta (part of Scala Meta SIP)</li>
+</ul>
+
+<h2 id="date-time-and-location">Date, Time and Location</h2>
+
+<p>The meeting took place at 5:00pm Central European Time / 8:00am Pacific Daylight
+Time on Tuesday, September 20th, 2016 via Google Hangouts.</p>
+
+<p>Minutes were taken by Jorge Vicente Cantero, acting secretary.</p>
+
+<h2 id="attendees">Attendees</h2>
+
+<p>Attendees Present:</p>
+
+<ul>
+  <li>Martin Odersky (<a href="https://github.com/odersky">@odersky</a>), EPFL</li>
+  <li>Seth Tisue (<a href="https://github.com/SethTisue">@SethTisue</a>), EPFL</li>
+  <li>Iulian Dragos (<a href="https://github.com/dragos">@dragos</a>), Independent</li>
+  <li>Heather Miller (<a href="https://github.com/heathermiller">@heathermiller</a>), Scala Center</li>
+  <li>Sébastien Doeraene (<a href="https://github.com/sjrd">@sjrd</a>), EPFL</li>
+  <li>Eugene Burmako (<a href="https://github.com/xeno-by">@xeno-by</a>), EPFL</li>
+  <li>Josh Suereth (<a href="https://github.com/jsuereth">@jsuereth</a>), Google</li>
+  <li>Jorge Vicente Cantero (<a href="https://github.com/jvican">@jvican</a>), Process Lead</li>
+</ul>
+
+<h2 id="guests">Guests</h2>
+
+<ul>
+  <li>Dale Wijnand (<a href="https://github.com/dwijnand">@dwijnand</a>), author of SIP-27</li>
+</ul>
+
+<h2 id="apologies">Apologies</h2>
+
+<ul>
+  <li>Andrew Marki (<a href="https://github.com/som-snytt">@som-snytt</a>), independent</li>
+  <li>Adriaan Moors (<a href="https://github.com/adriaanm">@adriaanm</a>), Lightbend</li>
+</ul>
+
+<h2 id="proceedings">Proceedings</h2>
+<p>### Opening Remarks</p>
+
+<p>As acting Process Lead, Jorge gave the welcome to Iulian Dragos, who has just
+joined the Committee. He’s a natural fit for the Committee, because of
+his historical significance in the evolution of Scala and his vast experience in
+the current Scala compiler.</p>
+
+<p>Following to his introduction, he described the main points to the agenda and
+proceed to introduce the discussions.</p>
+
+<h3 id="discussion-of-sip-nn-scala-meta-sip">Discussion of SIP-NN: Scala Meta SIP</h3>
+
+<p>Josh and Iulian are the reviewers of the proposal. Josh starts explaining what
+the proposal is about. Scala Meta is split into two main parts: inline
+and meta. The purpose of this meeting is to number the proposal and kick start a
+previous discussion. Jorge proposes to vote. Iulian proposes to consider that
+inline and meta should be separate SIPs.</p>
+
+<p>Seth asks for further information on the interdependency. Sébastien answers that
+there are two aspects to this.</p>
+
+<p>Firstly, inline is necessary for meta blocks to see ASTs of method arguments.
+Without inline, meta blocks would only see formal parameters of the enclosing
+method. Secondly, inline precaches method arguments in temporary variables, and
+that is undesirable for meta, because, again meta needs to see ASTs of actual
+arguments, not references to variables, where these arguments are
+precached. Eugene claims that we could see inline as just a mechanism to get the
+right hand side of a method definition and puts it in the call-site. Eugene also
+clarifies that the dependency between the two is dual: inline also depends on
+meta, because inline also accounts for the presence of meta. Martin is not sure
+if that’s completely true; his inline implementation in Dotty (that doesn’t
+support meta yet) doesn’t feature this dependency.</p>
+
+<p>Sébastien claims that one could argue that inline does not depend on meta, and
+that the requirement of recursively inlining arguments and method definitions
+before the macro expansion is unique to meta, not inline.</p>
+
+<p>Josh understands that both parts are specially hooked together so that their
+interaction has concrete results. Martin argues that it would make sense to
+split both proposals and study them independently if we can give some guarantees
+on the finally-accepted proposals. Martin proposes to have two different
+proposals but to accept inline only when we know the future of meta. Eugene
+votes in favor conditionally, he emphasizes that the meta-inline dependency
+should be honored in the proposals review. Everyone in the meeting agrees.</p>
+
+<p><strong>Outcome</strong>: The Committee will review two independent SIPs out of the original
+Meta proposal: inline and meta. All the attendees agree unanimously. They are
+numbered SIP-28 and SIP-29 respectively.</p>
+
+<h3 id="discussion-of-sip-21-spores">Discussion of SIP-21: Spores</h3>
+
+<p>Martin introduces the spores proposal and its history, that dates back to 2013.
+He thinks that spores are very useful for controlling the environment of a
+function, but he doesn’t think that they should go into the compiler, as they
+are already implemented as a macro.</p>
+
+<p>Sébastien points out that the proposal needs to be updated. A major point of
+contention for the spores implementation is that 2.12 introduces Scala SAM
+types, and implicit conversions between functions and spores will not kick in
+because the right hand side will automatically get the spore type. Removing this
+limitation is fairly easy, though: just introduce an abstract member in the
+spore class definition to avoid the automatic conversion to a SAM type. This has
+no performance hit on the eventual representation of a spore into JVM classes,
+since JVM SAM types cannot be used.</p>
+
+<p>Heather joins the conversation. Jorge explains the current discussion and Martin
+asks her what’s her opinion on not including spores into the compiler. She
+says that could be left out and she mentions that spores can only provide a
+shallow analysis, a “skin-deep” check of what’s captured.  Pickling provided a
+transitive way of checking the spores contract, but the proposal doesn’t take it
+into account. Everyone agrees that the proposal should be more general and only
+focus on ways to control the captured environment. Sébastien proposes a
+typeclass-based way of overcoming the current limitations of spores, but it’s
+yet to be seen its feasibility in practice. Martin suggests that as the
+Committee should analyze spores as it is right now. Heather emphasizes that the
+current design is not very useful, so she asks whether we should keep it as such
+or try to improve it.</p>
+
+<p>Martin encourages to improve the spores proposal, but suggests to close the
+proposal because it’s not yet ready. Heather proposes to give the proposal
+another iteration to update and improve it.</p>
+
+<p><strong>Outcome</strong>: The spores proposal will have another iteration in two months
+(November). By then, Heather is asked to update the proposal and try to find out
+a way to provide more thorough checks (spores transitivity).</p>
+
+<h3 id="discussion-of-sip-26-unsigned-integer-data-types">Discussion of SIP-26: Unsigned Integer Data Types</h3>
+
+<p>Sébastien introduces his updates on the proposal. He’s tried hard to remove the
+performance regression in his implementation, but he hasn’t found a way. He
+describes that the implementation is still 6% slower because of performance hits
+in the hashCode and equals implementation of a case class. To work around this
+issue, two things are required:</p>
+
+<ul>
+  <li>Changing the underlying implementation of byte and short ints.</li>
+  <li>Making the super class of unsigned integer extend <em>java.lang.Number</em></li>
+</ul>
+
+<p>The second option is not feasible because unsigned numbers are AnyVals, and they
+can only extend <code class="highlighter-rouge">Object</code>. Working around this in the backend is, in Sébastien’s
+opinion, not an exciting adventure to embark on: a lot of patches and quirky
+fixes are required in the compiler. Sébastien, recognizing his unability to fix
+the issue, recommends to reject the proposal.</p>
+
+<p>Josh needs to leave. Eugene wonders if these problems are only JVM-specific.
+Sébastien replies that both yes and no, and he confirms that unsigned integers
+will be implemented in Scalajs alone, so the implementation won’t be
+platform-independent. Eugene is interested in knowing if there will be any code
+duplication in the implementation, and Sébastien doesn’t think so, since Scala
+Native implements unsigned integer in a different way.</p>
+
+<p><strong>Outcome</strong>: The proposal is rejected unanimously.</p>
+
+<h3 id="discussion-of-sip-27-trailing-commas">Discussion of SIP-27: Trailing commas</h3>
+
+<p>Jorge welcomes the guest Dale Wijnand, author of the trailing commas proposal.
+Jorge also expects the discussion about the proposal to shed some light on its
+future status, be it rejected, accepted or given another iteration.</p>
+
+<p>Eugene introduces the updates on the proposal. Dale has asked several questions
+to the committee, the most important being if they would accept trailing commas
+only for multi-line comma separated lines. The Committee focuses on this main
+question, although some other questions about the trailing commas specification
+are on the table.</p>
+
+<p>Sébastien points out that it’s a good compromise, he personally likes it. He
+compares trailing commas to the semantics of semicolons in Scala. Martin is not
+convinced by the specialized version and makes the points that trailing commas
+wouldn’t be like semicolons, because you can write several semicolons together,
+when the equivalent in trailing commas should emit an error. Martin thinks that
+it messes with another fundamental concept of the language and doesn’t think it
+deserves to drop all the fundamental ideas for good language design. He proposes
+that trailing commas should be implemented in the sbt parser if the main use
+case is sbt.</p>
+
+<p>Heather is starting to see the IDE argument more favorably, and she is on the
+fence about the proposal. She invites Dale to interject about the “IDE” argument
+(namely, that IDEs should make easier to deal with trailing commas). Dale thinks
+that Scala gives a lot of syntactic sugar and ease to developers by design, in
+its compiler. He encourages solving editing problems into the compiler as well,
+since they greatly affect developers’ life.</p>
+
+<p>Iulian is not in favor for the multi-line specialized case, he would certainly
+use the feature but he doesn’t think it should be only for the multi-line case.
+He points out that Scala had this feature a while ago, and then it was removed.
+He sees the clear benefits of the proposal (configuration files, for instance),
+but he’s still against the specialized case version.</p>
+
+<p>Seth is on the fence about this proposal as well. He leans against it, but not
+strongly against it. He says it sorrowfully, because he considers that Dale’s
+work has been great and that the problem he tries to solve is real.</p>
+
+<p>Jorge, seeing everyone’s reactions, proposes to vote on the proposal. In his
+view, it doesn’t make sense to give it another iteration and make everyone
+spend more time on it. At this point, the Committee doesn’t have more meaningful
+feedback to improve the proposal, and decisions need to be made.</p>
+
+<p>4 people of the Committee voted yes, 2 no (Martin and Seth). Martin needs to
+leaves the room. After the acceptance of the proposal, the Committee proceeds to
+decide whether the specialized-case version should be the accepted one. Everyone
+in the meeting votes yes. At the time of the meeting, the Committee doesn’t know
+if Martin will veto the proposal (as the lead language designer of Scala, he has
+this right).</p>
+
+<p><strong>Outcome</strong>: Martin does not veto the proposal and trailing commas are accepted.
+The Committee proposes the Compiler team to include trailing commas in a future
+Scala release.  The concrete version will be suggested by the compiler
+maintainers soon.</p>
+
+<h2 id="closing-remarks">Closing remarks</h2>
+<p>See you next time!</p>
+
+        
+      </div>
+    
+      <div class="span6">
+        <h3>Pending SIPs</h3>
+<ul class="post-list">
+  
+    <li><a href="/sips/pending/inline-meta.html">SIP-28 and SIP-29 - Inline meta</a> <span class="date">( Sep 2016 )</span>
+    
+      
+        <span class="label notice">Numbered</span>
+      
+    
+    </li>
+  
+    <li><a href="/sips/pending/trailing-commas.html">SIP-27 - Trailing Commas</a> <span class="date">( Jun 2016 )</span>
+    
+      
+        <span class="label warning">Under Review</span>
+      
+    
+    </li>
+  
+    <li><a href="/sips/pending/static-members.html">SIP 25 - @static fields and methods in Scala objects(SI-4581)</a> <span class="date">( Jan 2016 )</span>
+    
+    </li>
+  
+    <li><a href="/sips/pending/trait-parameters.html">SIP 25 - Trait Parameters</a> <span class="date">( Jun 2015 )</span>
+    
+    </li>
+  
+    <li><a href="/sips/pending/repeated-byname.html">SIP-24 - Repeated By Name Parameters</a> <span class="date">( Jun 2015 )</span>
+    
+    </li>
+  
+    <li><a href="/sips/pending/42.type.html">SIP-23 - Literal-based singleton types</a> <span class="date">( Jun 2014 )</span>
+    
+    </li>
+  
+    <li><a href="/sips/pending/async.html">SIP-22 - Async</a> <span class="date">( Jun 2013 )</span>
+    
+      
+        <span class="label light-warning">Postponed</span>
+      
+    
+    </li>
+  
+    <li><a href="/sips/pending/spores.html">SIP-21 - Spores</a> <span class="date">( Jun 2013 )</span>
+    
+      
+        <span class="label warning">Under Review</span>
+      
+    
+    </li>
+  
+    <li><a href="/sips/pending/improved-lazy-val-initialization.html">SIP-20 - Improved Lazy Vals Initialization</a> <span class="date">( May 2013 )</span>
+    
+      
+        <span class="label warning">Under Review</span>
+      
+    
+    </li>
+  
+</ul>
+
+      </div>
+    
+	
+    </div>
+  </div>
+  <div class="push"></div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<ul>
+			<li><h5>API</h5></li>
+			<li><a href="http://www.scala-lang.org/api/current/">Current</a></li>
+			<li><a href="http://www.scala-lang.org/files/archive/nightly/2.11.x/api/2.11.x/">Nightly</a></li>
+		</ul>
+		<ul>
+			<li><h5>Learn</h5></li>
+			<li><a href="/overviews">Guides & Overviews</a></li>
+			<li><a href="/tutorials">Tutorials</a></li>
+			<li><a href="/style">Scala Style Guide</a></li>
+		</ul>
+		<ul>
+			<li><h5>Quickref</h5></li>
+			<li><a href="/glossary">Glossary</a></li>
+			<li><a href="/cheatsheets">Cheatsheets</a></li>
+		</ul>
+		<ul>
+			<li><h5>Contribute</h5></li>
+			<li><a href="http://github.com/scala/scala.github.com">Source Code</a></li>
+			<li><a href="/contribute.html">Contributors Guide</a></li>
+			<li><a href="http://getsatisfaction.com/scaladocs">Suggestions</a></li>
+		</ul>
+		<ul>
+			<li><h5>Other Resources</h5></li>
+			<li><a href="/sips">Scala Improvement Process</a></li>
+		</ul>
+	</div>
+	<div class="container copyright">
+ 		<p>
+			Copyright &copy; 2011-2015 EPFL. All rights reserved.
+			<a href="https://github.com/scala/scala.github.com/commits/gh-pages.atom"><img align="right" height="20px" width="20px" src="/resources/images/rss.png" alt="RSS feed of updates to the github repo hosting this site"></a>
+		</p>
+	</div>
+</div>
+
+<!-- search -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+  apiKey: 'b66eaeec6bd214ea6c0fcd2d7b7fdfe8',
+  indexName: 'scala-docs',
+  inputSelector: '#q',
+	autocompleteOptions: {
+    debug: true
+  },
+  algoliaOptions: {
+		"hitsPerPage": 5,
+		"facetFilters": "(tags:en)"
+	}
+});
+</script>
+
+
+
+<script type="text/javascript">
+  $('#toc').toc({exclude: 'h1, h5, h6', context: '', autoId: true, numerate: false});
+</script>
+
+<script type="text/javascript">
+  $(function() {
+    moveScroller();
+  });
+</script>
+
+  </body>
+</html>
+
+    

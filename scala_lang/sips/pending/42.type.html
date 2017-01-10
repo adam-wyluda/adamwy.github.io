@@ -1,0 +1,629 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SIP-23 - Literal-based singleton types - Scala Documentation</title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+
+    <!-- prettify js and CSS -->
+    <link rel="stylesheet" href="/resources/stylesheets/prettify.css" type="text/css" />
+    <script src="/resources/javascript/prettify/prettify.js" type="text/javascript" ></script>
+
+
+    <!-- jquery js -->
+    <script src="/resources/javascript/jquery.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/effects.core.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/effects.highlight.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/moveScroller.js" type="text/javascript" ></script>
+
+    <!-- Bootstrap JS and CSS -->
+    <link rel="stylesheet" href="/resources/stylesheets/bootstrap.css" type="text/css" />
+	  <script src="/resources/javascript/bootstrap-dropdown.js" type="text/javascript" ></script>
+	  <script src="/resources/javascript/bootstrap-dropdown-app.js" type="text/javascript" ></script>
+
+    <!-- Base stylesheet for all pages -->
+    <link rel="stylesheet" href="/resources/stylesheets/base.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css" />
+    <link rel="stylesheet" href="/resources/stylesheets/search.css" type="text/css" />
+
+    <!-- table of contents js -->
+    <script src="/resources/javascript/toc.js" type="text/javascript" ></script>
+
+
+    <!-- styles for pager and table of contents -->
+    <link rel="stylesheet" href="/resources/stylesheets/pager.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/stylesheets/toc.css" type="text/css" />
+
+    <!-- google analytics -->
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-574683-5']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+
+    <!-- prettyprint js to prepend generated pre/code tags -->
+    <script type="text/javascript">
+      function styleCode()
+        {
+          if (typeof disableStyleCode != "undefined")
+          {
+              return;
+          }
+          var a = false;
+          $("pre code").parent().each(function()
+          {
+              if (!$(this).hasClass("prettyprint"))
+              {
+                  $(this).addClass("prettyprint lang-scala linenums");
+                  a = true
+              }
+          });
+          if (a) { prettyPrint() }
+      }
+    </script>
+
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+
+            $(".scroll").click(function(event){
+              event.preventDefault();
+              $('html,body').animate({scrollTop:$(this.hash).offset().top}, 500);
+              $('html,body').animate({scrollTop:$(this.hash).offset().top-=50}, 500);
+              $(this.hash).effect("highlight", {color: "#FFCC85"}, 3000);
+            });
+      });
+    </script>
+
+    <script type="text/javascript">
+      $(window).ready(function goToSubsection() {
+          if (window.location.hash)
+          {
+              $('html,body').animate({scrollTop:$(window.location.hash).offset().top}, 500);
+              $('html,body').animate({scrollTop:$(window.location.hash).offset().top-=50}, 500);
+              $(window.location.hash).effect("highlight", {color: "#FFCC85"}, 3000);
+          }
+        });
+    </script>
+
+    <style type="text/css">
+
+       p.contents {
+           margin-left: 15px;
+           font-weight: bold;
+           font-size: 16px;
+       }
+
+       div#toc ul {
+           list-style: none;
+       }
+
+       div#toc ul a {
+           display: block;
+           list-style: none;
+           line-height: 22px;
+           font-weight: bold;
+           width: 100%;
+       }
+
+      div#toc ul li ul {
+           list-style: disc;
+      }
+
+      div#toc ul li ul a {
+           line-height: 18px;
+           font-weight: normal;
+      }
+
+      div#toc ul li ul li ul {
+           list-style: square;
+      }
+       div#toc ul li ul li ul a {
+       }
+
+       div#scroller-anchor {
+           width: inherit;
+       }
+
+       div#scroller {
+           width: inherit;
+       }
+
+       div#guide-title {
+        text-transform: capitalize;
+        font-size: 16px;
+        padding-bottom: 6px;
+        color: #BFBFBF;
+        text-transform: uppercase;
+        font-weight: bold;
+       }
+
+       input, textarea, select, .uneditable-input {
+	       width: 165px;
+	     }
+
+    </style>
+
+</head>
+<body onload="styleCode()">
+    
+    <!-- Topbar
+    ================================================== -->
+    <div class="topbar" >
+      <div class="topbar-inner">
+        <div class="container">
+          <a class="brand" href="/sips/index.html"><img src="/resources/images/scala-logo.png"> Improvement Process</a>
+          <ul class="nav">
+           <li><a href="/sips/sip-list.html">SIP List</a></li>
+           <li><a href="/sips/minutes-list.html">Minutes</a></li>
+           <li><a href="/sips/sip-submission.html">Submitting a SIP</a></li>
+           <li><a href="/sips/slip-submission.html">Submitting a SLIP</a></li>
+           <li><a href="/sips/sip-tutorial.html">Tutorial: Writing a SIP</a></li>
+           <li><a href="https://groups.google.com/forum/#!forum/scala-sips">Mailing List</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+<div class="container">
+  <div class="row">    
+
+    <div class="span12">
+      <h1>SIP-23 - Literal-based singleton types</h1>    
+      <p><strong>By: George Leontiev, Eugene Burmako, Jason Zaugg, Adriaan Moors, Paul Phillips</strong></p>
+
+<p><span class="label warning">Note: This SIP is considered a “good idea”, but is a work-in-process.</span>
+<span class="label warning">There is no guarantee that it will not be dropped if at some point it is decided that its foundation is not good enough.</span></p>
+
+<p><span class="label success">Champion: Adriaan Moors</span></p>
+
+<p><span class="label success">Last update: July 15, 2014</span></p>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>Singleton types bridge the gap between the value level and the type level and hence allow the exploration in Scala of techniques which would typically only be available in languages with support for full-spectrum dependent types.</p>
+
+<p>Scala’s type system can model constants (e.g. <code class="highlighter-rouge">42</code>, <code class="highlighter-rouge">"foo"</code>, <code class="highlighter-rouge">classOf[String]</code>). These are inferred in cases like <code class="highlighter-rouge">object O { final val x = 42 }</code>. They are used to denote and propagate compile time constants (See <a href="http://www.scala-lang.org/files/archive/spec/2.11/06-expressions.html">6.24 Constant Expressions</a> and discussion of “constant value definition” in <a href="http://www.scala-lang.org/files/archive/spec/2.11/04-basic-declarations-and-definitions.html">4.1 Value Declarations and Definitions</a>). However, there is no surface syntax to express such types. This makes people who need them, create macros that would provide workarounds to do just that (e.g. <a href="https://github.com/milessabin/shapeless/blob/master/core/src/main/scala/shapeless/singletons.scala">shapeless</a>). This can be changed in a relatively simple way, as the whole machinery to enable this is already present in the scala compiler.</p>
+
+<p>Another motivation for adding this functionality is the fact that it is already partially available in scala, but the way it is available makes interaction with this feature a bit inconsistent. Here’s what is possible in the current version of scala:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>scala&gt; val t = "test"
+t: String = test
+
+scala&gt; val r: t.type = t
+r: t.type = test
+</code></pre>
+</div>
+
+<p>But:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>scala&gt; val r: "test".type = "test"
+&lt;console&gt;:1: error: identifier expected but string literal found.
+       val r: "test".type = "test"
+              ^
+</code></pre>
+</div>
+
+<p>And:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>scala&gt; val r: 42.type = 42
+&lt;console&gt;:1: error: identifier expected but integer literal found.
+       val r: 42.type = 42
+              ^
+</code></pre>
+</div>
+
+<p>Or even:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>scala&gt; val t = 42
+t: Int = 42
+
+scala&gt; val r: t.type = t
+&lt;console&gt;:8: error: type mismatch;
+ found   : t.type (with underlying type Int)
+ required: AnyRef
+       val r: t.type = t
+              ^
+</code></pre>
+</div>
+
+<p>This looks like an inconsistency, which should be fixed. The proposed change fixes exactly that:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>scala&gt; val r: "test".type = "test"
+r: "test".type = test
+
+scala&gt; val r: 42.type = 42
+r: 42.type = 42
+</code></pre>
+</div>
+
+<p>or even:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>scala&gt; val r: 42 = 42
+r: 42.type = 42
+
+scala&gt; val t = 42
+t: Int = 42
+
+scala&gt; val r: t.type = t
+r: t.type = 42
+</code></pre>
+</div>
+
+<p>To summarize, scala has full support for literal-based singleton types, but language user has very limited possibilities for creating and using them. Two possible ways currently are asking the compiler to infer the singleton type by marking value as <code class="highlighter-rouge">final</code>, or use <code class="highlighter-rouge">.type</code> syntax, which is only available for stable identifiers pointing to values that conform to <code class="highlighter-rouge">AnyRef</code>.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<h3 id="any-vs-anyref">Any vs AnyRef</h3>
+
+<p>Currently there is a possibility to use singleton types in some contexts, but only on identifiers which point to a constant that conforms to <code class="highlighter-rouge">AnyRef</code>. This restriction is due to <code class="highlighter-rouge">Any</code> not having an <code class="highlighter-rouge">eq</code> method, which is what’s used for singleton type-equality check and pattern matching <a href="https://github.com/scala/scala/pull/3558">https://github.com/scala/scala/pull/3558</a>. This has been discussed on the mailing list <a href="https://groups.google.com/forum/#!msg/scala-internals/12h2TgDFnDM/Sq-EYi7VD7IJ">here</a> and <a href="https://groups.google.com/forum/#!msg/scala-internals/jsVlJI4H5OQ/BwdZT5hpKtsJ">here</a>, and there is a consent that this needs to be done.</p>
+
+<h3 id="inhabitants-of-the-type">Inhabitants of the type</h3>
+
+<p>Getting the inhabitant of a singleton type, as described by <a href="http://meta.plasm.us/posts/2013/06/28/singleton-types-for-literals-in-scala/">Travis Brown</a>, can be done with a macro, which is a part of the <a href="https://github.com/folone/scala/commit/094883efb4d1c50981cea41f049c3930c8efbc3c">proposed implementation</a>.</p>
+
+<p><strong>Note:</strong> This is one of the many parts of this SIP that are in flux, and are likely to change in the future. We might not need to generate instances of <code class="highlighter-rouge">SingleInhabitant</code> typeclass, but instead only use <code class="highlighter-rouge">&lt;: Singleton</code> type bound for this. See <a href="https://issues.scala-lang.org/browse/SI-5103">SI-5103</a>. The name is also likely to change to <code class="highlighter-rouge">valueOf[T]</code>.</p>
+
+<h2 id="possible-use-cases">Possible use cases</h2>
+
+<p>There are quite a few use cases we’ve collected on the <a href="https://groups.google.com/forum/#!topic/scala-language/9VEnFZImyJI">mailing list</a>. Some of them are as follows.</p>
+
+<h3 id="spire">Spire</h3>
+
+<p>Singleton types will be useful for defining a type like <code class="highlighter-rouge">Residue[13.type]</code> (Z/13Z, the group of integers modulo 13). We could then mandate that residues can be added only when they are parameterized on the same number. Possibly something like:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>case class Residue[N &lt;: Int : SingleInhabitant](n: Long) { lhs =&gt;
+   def +(rhs: Residue[N]): Residue[N] =
+     Residue((lhs.n + rhs.n) % inhabitant[N])
+}
+</code></pre>
+</div>
+
+<p>Another use is to help with property based testing. In Spire, there is a Ranged type that makes it easy to ask for numbers in a particular range in ScalaCheck:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>forAll { x: Ranged[Int, 1, 100] =&gt;
+   val n: Int = x.value // guaranteed to be 1 to 100
+}
+</code></pre>
+</div>
+
+<p>Currently Spire just builds some of the most common number literals and uses boilerplate to define the end points of <code class="highlighter-rouge">Ranged</code>. But this is another place where singleton types could really help make things clear. Here’s what <code class="highlighter-rouge">Ranged</code> could look like:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>class Ranged[From &lt;: Int : SingleInhabitant, To &lt;: Int : SingleInhabitant] {
+    def value = {
+      val rnd = new scala.util.Random
+      val from = inhabitant[From]
+      val to = inhabitant[To]
+      (from + rnd.nextInt(to - from + 1))
+  }
+}
+</code></pre>
+</div>
+
+<p>There is also all kinds of length/dimension checking and other standard cases where singleton types will help.</p>
+
+<h3 id="scalajs">Scala.js</h3>
+
+<p>There is an important use case for literal-based singleton types in Scala.js. In particular for Strings: declaring several overloads of a method that differ only in the actual strings in parameters, for example:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>trait HTMLCanvasElement extends HTMLElement {
+  def getContext(contextId: String): Any
+  def getContext(contextId: "2d".type): CanvasRenderingContext2D
+}
+</code></pre>
+</div>
+
+<p>so that at call-site:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>val anyContext = canvas.getContext("webgl")
+val context2D = canvas.getConttext("2d")
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">anyContext</code> is an <code class="highlighter-rouge">Any</code> but <code class="highlighter-rouge">context2D</code> is statically known to be a <code class="highlighter-rouge">CanvasRenderingContext2D</code>.</p>
+
+<p>Note: The way this currently works:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>scala&gt; :t canvas.getContext("webgl")
+Any
+
+scala&gt; :t canvas.getContext("2d")
+Any
+</code></pre>
+</div>
+
+<p>But</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>scala&gt; :t canvas.getContext("2d": "2d".type)
+CanvasRenderingContext2D
+</code></pre>
+</div>
+
+<h3 id="shapeless">Shapeless</h3>
+
+<p><a href="https://github.com/milessabin/shapeless/">Shapeless</a> is a project that makes heavy use of singleton types already. It has all the machinery in place to make working with them nicer. Hence, it is a source of inspiration for working on this SIP. This change does not bring much to the table for shapeless though. One of the useful cases would be an ability to explicitly specify types for e.g. records in a more convenient way than possible with the current version of scala:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>val book: "author" -&gt;&gt; String ::
+          "title" -&gt;&gt; String ::
+          "id" -&gt;&gt; Int ::
+          "price" -&gt;&gt; Double :: HNil =
+ ("author" -&gt;&gt; "Benjamin Pierce") ::
+ ("title"  -&gt;&gt; "Types and Programming Languages") ::
+ ("id"     -&gt;&gt;  262162091) ::
+ ("price"  -&gt;&gt;  44.11) ::
+ HNil
+</code></pre>
+</div>
+
+<h3 id="others">Others</h3>
+
+<p>Quite a few other projects find this feature relevant for more efficient work on the tasks they are solving: Slick, Spark, Scala RX, Scalding, Breeze.</p>
+
+<h2 id="proposal">Proposal</h2>
+
+<p>This document proposes to extend an existing very limited syntax for singleton types to a more general one. That is, possibility to use syntax for singleton types, as well as raw literals, in any type position. Here are several examples (taken from the <a href="https://github.com/folone/scala/blob/topic/42.type/test/files/run/42.type.scala">tests</a>):</p>
+
+<h3 id="simple-examples">Simple examples:</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>type _42 = 42.type
+type Unt = ().type
+type _1 = 1 // .type is optional for literals
+final val x = 1
+type one = x.type // … but mandatory for identifiers
+</code></pre>
+</div>
+
+<p>This is not allowed for the reason that we will have problems bootstrapping this</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>scala&gt; type _2 = (1+1).type
+&lt;console&gt;:1: error: '.' expected but identifier found.
+       type _2 = (1+1).type
+                   ^
+</code></pre>
+</div>
+
+<h3 id="using-it-with-vars">Using it with vars:</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>scala&gt; var x: 3.type = 3
+
+scala&gt; x = 42
+  &lt;console&gt;:8: error: type mismatch;
+   found   : 42.type (with underlying type Int)
+   required: 3.type
+         x = 42
+             ^
+</code></pre>
+</div>
+
+<h3 id="pattern-matching">Pattern-matching</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>val y: 5 = 5
+
+def g(x: Int) = x match {
+  case _: y.type =&gt; 0
+  case _: 7.type =&gt; 1
+  case _         =&gt; 2
+}
+</code></pre>
+</div>
+
+<h3 id="etc">Etc.</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>trait Succ[T] {
+  type Out
+  def apply(x: T): Out
+}
+
+implicit object One extends Succ[1.type] {
+  type Out = 2.type
+  def apply(x: 1.type) = 2
+}
+
+def f[T](x: T)(implicit succ: Succ[T]) = succ(x)
+
+def main(args: Array[String]): Unit = {
+  println(f(1))
+  // println(f(5))
+  println((g(1), g(5), g(7)))
+}
+</code></pre>
+</div>
+
+<h2 id="formalization">Formalization</h2>
+
+<p>The proposed change is essentially as follows (adding on the <a href="http://iainmcgin.github.io/scala-ref-markdown/ScalaReference.html#scala-syntax-summary">language reference</a>):</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>SimpleType        ::=  SimpleType TypeArgs
+                    |  SimpleType ‘#’ id
+                    |  StableId
+                    |  Path ‘.’ ‘type’
+                    |  Literal [‘.’ type]
+                    |  ‘(’ Types ‘)’
+</code></pre>
+</div>
+
+<p>A singleton type is of the form <code class="highlighter-rouge">p.type</code>, where <code class="highlighter-rouge">p</code> is a path pointing to a value. Or <code class="highlighter-rouge">literal[.type]</code> (in this case <code class="highlighter-rouge">.type</code> is optional, because when using a literal we always know if we are in a type- or term-parsing mode). The type denotes set of values consisting of a single value denoted by path <code class="highlighter-rouge">p</code>, or a <code class="highlighter-rouge">literal</code>.</p>
+
+<h2 id="implementation">Implementation</h2>
+
+<p>The singleton type part (not including <code class="highlighter-rouge">eq</code> on <code class="highlighter-rouge">Any</code>) is implemented on <a href="https://github.com/folone/scala/tree/topic/42.type">github</a>. There are currently several outstanding issues that need to be looked into. Namely, <code class="highlighter-rouge">ConstantType</code> folding and inlining of functions with singleton type result.</p>
+
+<p>The places where those issues might present themselves are marked with <code class="highlighter-rouge">TODO (folone)</code>, and can be found like this:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ ack “TODO \(folone\)” src/
+</code></pre>
+</div>
+
+<p>Other places where <code class="highlighter-rouge">ConstantType</code> is used can be found like this:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ grep -r --include="*.scala" "ConstantType" src/
+</code></pre>
+</div>
+
+<h2 id="some-details-on-the-optionality-of-type">Some details on the optionality of .type</h2>
+
+<p>While discussing this document, the agreement was that we should keep the mandatory <code class="highlighter-rouge">.type</code> for identifiers, to avoid situations described by Adriaan Moors:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>type T = Int
+final val T = 1
+val x: T = 2 // Which T is this: T, or T.type?
+</code></pre>
+</div>
+
+<p>but make it optional for literals, e.g. both <code class="highlighter-rouge">42.type</code> and <code class="highlighter-rouge">42</code> in type position are valid.</p>
+
+<p>This change is implemented in the branch, and needs a careful update of all the failed check files (partest can do that automatically: <code class="highlighter-rouge">partest --update-check</code>).</p>
+
+<h2 id="dependencies-on-other-sips">Dependencies on other SIPs</h2>
+
+<p>This project needs an <code class="highlighter-rouge">eq</code> method on <code class="highlighter-rouge">Any</code>.</p>
+
+<h2 id="related-open-tickets">Related open tickets</h2>
+
+<ul>
+  <li><a href="https://issues.scala-lang.org/browse/SI-8323">https://issues.scala-lang.org/browse/SI-8323</a></li>
+  <li><a href="https://issues.scala-lang.org/browse/SI-8564">https://issues.scala-lang.org/browse/SI-8564</a></li>
+  <li><a href="https://issues.scala-lang.org/browse/SI-7656">https://issues.scala-lang.org/browse/SI-7656</a></li>
+  <li><a href="https://issues.scala-lang.org/browse/SI-5103">https://issues.scala-lang.org/browse/SI-5103</a></li>
+</ul>
+
+<h2 id="weird-behaviour-collected-so-far">Weird behaviour collected so far</h2>
+
+<h3 id="inlining-of-functions">Inlining of functions</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>scala&gt; def test: 7.type = {
+     |   println("PANDA!")
+     |   7
+     | }
+test: 7.type
+
+scala&gt; test
+res0: 7.type = 7
+</code></pre>
+</div>
+
+<p><a href="https://github.com/folone/scala/blob/topic/42.type/src/compiler/scala/tools/nsc/transform/Constructors.scala#L643-L644">Suspected culprit</a></p>
+
+<p>Can hopefully be fixed by verifying that the body is pure (by means of SI-7656) before inlining it.</p>
+
+<h2 id="useful-links">Useful links</h2>
+
+<ul>
+  <li>Implementation: <a href="https://github.com/folone/scala/tree/topic/42.type">https://github.com/folone/scala/tree/topic/42.type</a></li>
+  <li>Initial announcement: <a href="https://groups.google.com/forum/#!topic/scala-language/9VEnFZImyJI">https://groups.google.com/forum/#!topic/scala-language/9VEnFZImyJI</a></li>
+  <li>SIP discussion: <a href="https://groups.google.com/forum/#!topic/scala-sips/YRHd8WW0V40">https://groups.google.com/forum/#!topic/scala-sips/YRHd8WW0V40</a></li>
+</ul>
+
+      <div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  
+    var disqus_shortname = 'scalasip'; // required: replace example with your forum shortname
+  
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    </div>
+    
+    <div class="span4">
+      <div id="scroller-anchor">
+  <div id="scroller">
+              
+    <p class="contents">Contents</p>
+    <div id="toc"></div>    
+  </div>
+</div>
+
+    </div>
+  
+  </div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<ul>
+			<li><h5>API</h5></li>
+			<li><a href="http://www.scala-lang.org/api/current/">Current</a></li>
+			<li><a href="http://www.scala-lang.org/files/archive/nightly/2.11.x/api/2.11.x/">Nightly</a></li>
+		</ul>
+		<ul>
+			<li><h5>Learn</h5></li>
+			<li><a href="/overviews">Guides & Overviews</a></li>
+			<li><a href="/tutorials">Tutorials</a></li>
+			<li><a href="/style">Scala Style Guide</a></li>
+		</ul>
+		<ul>
+			<li><h5>Quickref</h5></li>
+			<li><a href="/glossary">Glossary</a></li>
+			<li><a href="/cheatsheets">Cheatsheets</a></li>
+		</ul>
+		<ul>
+			<li><h5>Contribute</h5></li>
+			<li><a href="http://github.com/scala/scala.github.com">Source Code</a></li>
+			<li><a href="/contribute.html">Contributors Guide</a></li>
+			<li><a href="http://getsatisfaction.com/scaladocs">Suggestions</a></li>
+		</ul>
+		<ul>
+			<li><h5>Other Resources</h5></li>
+			<li><a href="/sips">Scala Improvement Process</a></li>
+		</ul>
+	</div>
+	<div class="container copyright">
+ 		<p>
+			Copyright &copy; 2011-2015 EPFL. All rights reserved.
+			<a href="https://github.com/scala/scala.github.com/commits/gh-pages.atom"><img align="right" height="20px" width="20px" src="/resources/images/rss.png" alt="RSS feed of updates to the github repo hosting this site"></a>
+		</p>
+	</div>
+</div>
+
+<!-- search -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+  apiKey: 'b66eaeec6bd214ea6c0fcd2d7b7fdfe8',
+  indexName: 'scala-docs',
+  inputSelector: '#q',
+	autocompleteOptions: {
+    debug: true
+  },
+  algoliaOptions: {
+		"hitsPerPage": 5,
+		"facetFilters": "(tags:en)"
+	}
+});
+</script>
+
+
+
+<script type="text/javascript">
+  $('#toc').toc({exclude: 'h1, h5, h6', context: '', autoId: true, numerate: false});
+</script>
+
+<script type="text/javascript">
+  $(function() {
+    moveScroller();
+  });
+</script>
+
+  </body>
+</html>
+
+    

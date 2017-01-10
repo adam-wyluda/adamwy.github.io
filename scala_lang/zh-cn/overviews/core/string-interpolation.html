@@ -1,0 +1,460 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>字符串插值 - Scala Documentation</title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+
+    <!-- prettify js and CSS -->
+    <link rel="stylesheet" href="/resources/stylesheets/prettify.css" type="text/css" />
+    <script src="/resources/javascript/prettify/prettify.js" type="text/javascript" ></script>
+
+
+    <!-- jquery js -->
+    <script src="/resources/javascript/jquery.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/effects.core.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/effects.highlight.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/moveScroller.js" type="text/javascript" ></script>
+
+    <!-- Bootstrap JS and CSS -->
+    <link rel="stylesheet" href="/resources/stylesheets/bootstrap.css" type="text/css" />
+	  <script src="/resources/javascript/bootstrap-dropdown.js" type="text/javascript" ></script>
+	  <script src="/resources/javascript/bootstrap-dropdown-app.js" type="text/javascript" ></script>
+
+    <!-- Base stylesheet for all pages -->
+    <link rel="stylesheet" href="/resources/stylesheets/base.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css" />
+    <link rel="stylesheet" href="/resources/stylesheets/search.css" type="text/css" />
+
+    <!-- table of contents js -->
+    <script src="/resources/javascript/toc.js" type="text/javascript" ></script>
+
+
+    <!-- styles for pager and table of contents -->
+    <link rel="stylesheet" href="/resources/stylesheets/pager.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/stylesheets/toc.css" type="text/css" />
+
+    <!-- google analytics -->
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-574683-5']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+
+    <!-- prettyprint js to prepend generated pre/code tags -->
+    <script type="text/javascript">
+      function styleCode()
+        {
+          if (typeof disableStyleCode != "undefined")
+          {
+              return;
+          }
+          var a = false;
+          $("pre code").parent().each(function()
+          {
+              if (!$(this).hasClass("prettyprint"))
+              {
+                  $(this).addClass("prettyprint lang-scala linenums");
+                  a = true
+              }
+          });
+          if (a) { prettyPrint() }
+      }
+    </script>
+
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+
+            $(".scroll").click(function(event){
+              event.preventDefault();
+              $('html,body').animate({scrollTop:$(this.hash).offset().top}, 500);
+              $('html,body').animate({scrollTop:$(this.hash).offset().top-=50}, 500);
+              $(this.hash).effect("highlight", {color: "#FFCC85"}, 3000);
+            });
+      });
+    </script>
+
+    <script type="text/javascript">
+      $(window).ready(function goToSubsection() {
+          if (window.location.hash)
+          {
+              $('html,body').animate({scrollTop:$(window.location.hash).offset().top}, 500);
+              $('html,body').animate({scrollTop:$(window.location.hash).offset().top-=50}, 500);
+              $(window.location.hash).effect("highlight", {color: "#FFCC85"}, 3000);
+          }
+        });
+    </script>
+
+    <style type="text/css">
+
+       p.contents {
+           margin-left: 15px;
+           font-weight: bold;
+           font-size: 16px;
+       }
+
+       div#toc ul {
+           list-style: none;
+       }
+
+       div#toc ul a {
+           display: block;
+           list-style: none;
+           line-height: 22px;
+           font-weight: bold;
+           width: 100%;
+       }
+
+      div#toc ul li ul {
+           list-style: disc;
+      }
+
+      div#toc ul li ul a {
+           line-height: 18px;
+           font-weight: normal;
+      }
+
+      div#toc ul li ul li ul {
+           list-style: square;
+      }
+       div#toc ul li ul li ul a {
+       }
+
+       div#scroller-anchor {
+           width: inherit;
+       }
+
+       div#scroller {
+           width: inherit;
+       }
+
+       div#guide-title {
+        text-transform: capitalize;
+        font-size: 16px;
+        padding-bottom: 6px;
+        color: #BFBFBF;
+        text-transform: uppercase;
+        font-weight: bold;
+       }
+
+       input, textarea, select, .uneditable-input {
+	       width: 165px;
+	     }
+
+    </style>
+
+</head>
+<body onload="styleCode()">
+
+    <!-- Topbar
+    ================================================== -->
+<div class="topbar">
+    <div class="topbar-inner">
+        <div class="container">
+            <a class="brand" href="/index.html"><img src="/resources/images/scala-logo.png"> Documentation</a>
+            <ul class="nav">
+
+                <li class="menu">
+                      <a href="#" class="menu">API</a>
+                      <ul class="menu-dropdown">
+                        <li><a href="http://www.scala-lang.org/api/current/">Current</a></li>
+                        <li><a href="http://www.scala-lang.org/files/archive/nightly/2.11.x/api/2.11.x/">Nightly</a></li>
+                        <!--<li class="divider"></li>
+                        <li><a href="#">Previous Versions</a></li>
+                        -->
+                      </ul>
+                </li>
+
+                <li class="menu">
+                      <a href="#" class="menu">Learn</a>
+                      <ul class="menu-dropdown">
+                        <li><a href="/overviews">Guides & Overviews</a></li>
+                        <li><a href="/tutorials">Tutorials</a></li>
+                        <li><a href="/style">Scala Style Guide</a></li>
+                      </ul>
+                </li>
+
+                <li class="menu">
+                      <a href="#" class="menu">Quickref</a>
+                      <ul class="menu-dropdown">
+                        <li><a href="/glossary">Glossary</a></li>
+                        <li><a href="/cheatsheets">Cheatsheets</a></li>
+                      </ul>
+                </li>
+
+                <li><a href="/contribute.html">Contribute</a></li>
+                <li><a href="/sips">SIPs/SLIPs</a></li>
+                <li>
+                    <form id="searchform" action="#">
+                        <input type="text" placeholder="Search in documentation..." class="field" name="q" id="q"/>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="span10"><h1>字符串插值</h1></div>
+
+    
+
+    
+
+    
+
+    <div class="span6">
+      
+      <ul class="langbar">
+        <li><a href="/overviews/core/string-interpolation" class="lang">English</a></li>
+        
+          
+          <li><a href="/es/overviews/core/string-interpolation" class="lang">Español</a></li>
+        
+          
+          <li><a href="/ja/overviews/core/string-interpolation" class="lang">日本語</a></li>
+        
+          
+          <li><a href="/zh-cn/overviews/core/string-interpolation" class="lang">中文 (简体)</a></li>
+        
+      </ul>
+      
+    </div>
+
+    <div class="span10">
+      <p><strong>Josh Suereth 著</strong></p>
+
+<h2 id="section">简介</h2>
+
+<p>自2.10.0版本开始，Scala提供了一种新的机制来根据数据生成字符串：字符串插值。字符串插值允许使用者将变量引用直接插入处理过的字面字符中。如下例：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>val name="James"
+println(s"Hello,$name")//Hello,James
+</code></pre>
+</div>
+
+<p>在上例中， s”Hello,$name” 是待处理字符串字面，编译器会对它做额外的工作。待处理字符串字面通过“号前的字符来标示（例如：上例中是s）。字符串插值的实现细节在 <a href="http://docs.scala-lang.org/sips/pending/string-interpolation.html">SIP-11</a> 中有全面介绍。</p>
+
+<h2 id="section-1">用法</h2>
+
+<p>Scala 提供了三种创新的字符串插值方法：s,f 和 raw.</p>
+
+<h3 id="s-">s 字符串插值器</h3>
+
+<p>在任何字符串前加上s，就可以直接在串中使用变量了。你已经见过这个例子：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>val name="James"
+println(s"Hello,$name")//Hello,James 此例中，$name嵌套在一个将被s字符串插值器处理的字符串中。插值器知道在这个字符串的这个地方应该插入这个name变量的值，以使输出字符串为Hello,James。使用s插值器，在这个字符串中可以使用任何在处理范围内的名字。
+</code></pre>
+</div>
+
+<p>字符串插值器也可以处理任意的表达式。例如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>println(s"1+1=${1+1}") 将会输出字符串1+1=2。任何表达式都可以嵌入到${}中。
+</code></pre>
+</div>
+
+<h3 id="f-">f 插值器</h3>
+
+<p>在任何字符串字面前加上 f，就可以生成简单的格式化串，功能相似于其他语言中的 printf 函数。当使用 f 插值器的时候，所有的变量引用都应当后跟一个printf-style格式的字符串，如%d。看下面这个例子：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>val height=1.9d
+val name="James"
+println(f"$name%s is $height%2.2f meters tall")//James is 1.90 meters tall f 插值器是类型安全的。如果试图向只支持 int 的格式化串传入一个double 值，编译器则会报错。例如：
+
+val height:Double=1.9d
+
+scala&gt;f"$height%4d"
+&lt;console&gt;:9: error: type mismatch;
+ found : Double
+ required: Int
+           f"$height%4d"
+              ^ f 插值器利用了java中的字符串数据格式。这种以%开头的格式在 [Formatter javadoc] 中有相关概述。如果在具体变量后没有%，则格式化程序默认使用 %s（串型）格式。
+</code></pre>
+</div>
+
+<h3 id="raw-">raw 插值器</h3>
+
+<p>除了对字面值中的字符不做编码外，raw 插值器与 s 插值器在功能上是相同的。如下是个被处理过的字符串：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>scala&gt;s"a\nb"
+res0:String= 
+a
+b 这里，s 插值器用回车代替了\n。而raw插值器却不会如此处理。
+
+scala&gt;raw"a\nb"
+res1:String=a\nb 当不想输入\n被转换为回车的时候，raw 插值器是非常实用的。
+</code></pre>
+</div>
+
+<p>除了以上三种字符串插值器外，使用者可以自定义插值器。</p>
+
+<h3 id="section-2">高级用法</h3>
+
+<p>在Scala中，所有处理过的字符串字面值都进行了简单编码转换。任何时候编译器遇到一个如下形式的字符串字面值：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>id"string content" 它都会被转换成一个StringContext实例的call(id)方法。这个方法在隐式范围内仍可用。只需要简单得 建立一个隐类，给StringContext实例增加一个新方法，便可以定义我们自己的字符串插值器。如下例：
+
+//注意：为了避免运行时实例化，我们从AnyVal中继承。 
+//更多信息请见值类的说明
+implicit class JsonHelper(val sc:StringContext) extends AnyVal{
+  def json(args:Any*):JSONObject=sys.error("TODO-IMPLEMENT")
+}
+
+def giveMeSomeJson(x:JSONObject):Unit=...
+
+giveMeSomeJson(json"{name:$name,id:$id}") 在这个例子中，我们试图通过字符串插值生成一个JSON文本语法。隐类 JsonHelper 作用域内使用该语法，且这个JSON方法需要一个完整的实现。只不过，字符串字面值格式化的结果不是一个字符串，而是一个JSON对象。
+</code></pre>
+</div>
+
+<p>当编译器遇到”{name:$name,id:$id”}”，它将会被重写成如下表达式：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>new StringContext("{name:",",id:","}").json(name,id)
+</code></pre>
+</div>
+
+<p>隐类则被重写成如下形式</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>new JsonHelper(new StringContext("{name:",",id:","}")).json(name,id)
+</code></pre>
+</div>
+
+<p>所以，JSON方法可以访问字符串的原生片段而每个表达式都是一个值。这个方法的一个简单但又令人迷惑的例子：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>implicit class JsonHelper(val sc:StringContext) extends AnyVal{
+  def json(args:Any*):JSONObject={
+    val strings=sc.parts.iterator
+    val expressions=args.iterator
+    var buf=new StringBuffer(strings.next)
+    while(strings.hasNext){
+      buf append expressions.next
+      buf append strings.next
+    }
+    parseJson(buf)
+  }
+}
+</code></pre>
+</div>
+
+<p>被处理过的字符串的每部分都是StringContext的成员。每个表达式的值都将传入到JSON方法的args参数。JSON方法接受这些值并合成一个大字符串，然后再解析成JSON格式。有一种更复杂的实现可以避免合成字符串的操作，它只是简单的直接通过原生字符串和表达式值构建JSON。</p>
+
+<h2 id="section-3">限制</h2>
+
+<p>字符串插值目前对模式匹配语句不适用。此特性将在2.11版本中生效。</p>
+
+      <div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  
+    var disqus_shortname = 'scalasip'; // required: replace example with your forum shortname
+  
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    </div>
+    
+    <div class="span6">
+      <div id="scroller-anchor">
+  <div id="scroller">
+              
+    <p class="contents">Contents</p>
+    <div id="toc"></div>    
+  </div>
+</div>
+
+    </div>
+    
+	
+  </div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<ul>
+			<li><h5>API</h5></li>
+			<li><a href="http://www.scala-lang.org/api/current/">Current</a></li>
+			<li><a href="http://www.scala-lang.org/files/archive/nightly/2.11.x/api/2.11.x/">Nightly</a></li>
+		</ul>
+		<ul>
+			<li><h5>Learn</h5></li>
+			<li><a href="/overviews">Guides & Overviews</a></li>
+			<li><a href="/tutorials">Tutorials</a></li>
+			<li><a href="/style">Scala Style Guide</a></li>
+		</ul>
+		<ul>
+			<li><h5>Quickref</h5></li>
+			<li><a href="/glossary">Glossary</a></li>
+			<li><a href="/cheatsheets">Cheatsheets</a></li>
+		</ul>
+		<ul>
+			<li><h5>Contribute</h5></li>
+			<li><a href="http://github.com/scala/scala.github.com">Source Code</a></li>
+			<li><a href="/contribute.html">Contributors Guide</a></li>
+			<li><a href="http://getsatisfaction.com/scaladocs">Suggestions</a></li>
+		</ul>
+		<ul>
+			<li><h5>Other Resources</h5></li>
+			<li><a href="/sips">Scala Improvement Process</a></li>
+		</ul>
+	</div>
+	<div class="container copyright">
+ 		<p>
+			Copyright &copy; 2011-2015 EPFL. All rights reserved.
+			<a href="https://github.com/scala/scala.github.com/commits/gh-pages.atom"><img align="right" height="20px" width="20px" src="/resources/images/rss.png" alt="RSS feed of updates to the github repo hosting this site"></a>
+		</p>
+	</div>
+</div>
+
+<!-- search -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+  apiKey: 'b66eaeec6bd214ea6c0fcd2d7b7fdfe8',
+  indexName: 'scala-docs',
+  inputSelector: '#q',
+	autocompleteOptions: {
+    debug: true
+  },
+  algoliaOptions: {
+		"hitsPerPage": 5,
+		"facetFilters": "(tags:en)"
+	}
+});
+</script>
+
+
+
+<script type="text/javascript">
+  $('#toc').toc({exclude: 'h1, h5, h6', context: '', autoId: true, numerate: false});
+</script>
+
+<script type="text/javascript">
+  $(function() {
+    moveScroller();
+  });
+</script>
+
+  </body>
+</html>
+
+    

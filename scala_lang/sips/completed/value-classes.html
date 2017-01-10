@@ -1,0 +1,736 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SIP-15 - Value Classes - Scala Documentation</title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+
+    <!-- prettify js and CSS -->
+    <link rel="stylesheet" href="/resources/stylesheets/prettify.css" type="text/css" />
+    <script src="/resources/javascript/prettify/prettify.js" type="text/javascript" ></script>
+
+
+    <!-- jquery js -->
+    <script src="/resources/javascript/jquery.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/effects.core.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/effects.highlight.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/moveScroller.js" type="text/javascript" ></script>
+
+    <!-- Bootstrap JS and CSS -->
+    <link rel="stylesheet" href="/resources/stylesheets/bootstrap.css" type="text/css" />
+	  <script src="/resources/javascript/bootstrap-dropdown.js" type="text/javascript" ></script>
+	  <script src="/resources/javascript/bootstrap-dropdown-app.js" type="text/javascript" ></script>
+
+    <!-- Base stylesheet for all pages -->
+    <link rel="stylesheet" href="/resources/stylesheets/base.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css" />
+    <link rel="stylesheet" href="/resources/stylesheets/search.css" type="text/css" />
+
+    <!-- table of contents js -->
+    <script src="/resources/javascript/toc.js" type="text/javascript" ></script>
+
+
+    <!-- styles for pager and table of contents -->
+    <link rel="stylesheet" href="/resources/stylesheets/pager.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/stylesheets/toc.css" type="text/css" />
+
+    <!-- google analytics -->
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-574683-5']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+
+    <!-- prettyprint js to prepend generated pre/code tags -->
+    <script type="text/javascript">
+      function styleCode()
+        {
+          if (typeof disableStyleCode != "undefined")
+          {
+              return;
+          }
+          var a = false;
+          $("pre code").parent().each(function()
+          {
+              if (!$(this).hasClass("prettyprint"))
+              {
+                  $(this).addClass("prettyprint lang-scala linenums");
+                  a = true
+              }
+          });
+          if (a) { prettyPrint() }
+      }
+    </script>
+
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+
+            $(".scroll").click(function(event){
+              event.preventDefault();
+              $('html,body').animate({scrollTop:$(this.hash).offset().top}, 500);
+              $('html,body').animate({scrollTop:$(this.hash).offset().top-=50}, 500);
+              $(this.hash).effect("highlight", {color: "#FFCC85"}, 3000);
+            });
+      });
+    </script>
+
+    <script type="text/javascript">
+      $(window).ready(function goToSubsection() {
+          if (window.location.hash)
+          {
+              $('html,body').animate({scrollTop:$(window.location.hash).offset().top}, 500);
+              $('html,body').animate({scrollTop:$(window.location.hash).offset().top-=50}, 500);
+              $(window.location.hash).effect("highlight", {color: "#FFCC85"}, 3000);
+          }
+        });
+    </script>
+
+    <style type="text/css">
+
+       p.contents {
+           margin-left: 15px;
+           font-weight: bold;
+           font-size: 16px;
+       }
+
+       div#toc ul {
+           list-style: none;
+       }
+
+       div#toc ul a {
+           display: block;
+           list-style: none;
+           line-height: 22px;
+           font-weight: bold;
+           width: 100%;
+       }
+
+      div#toc ul li ul {
+           list-style: disc;
+      }
+
+      div#toc ul li ul a {
+           line-height: 18px;
+           font-weight: normal;
+      }
+
+      div#toc ul li ul li ul {
+           list-style: square;
+      }
+       div#toc ul li ul li ul a {
+       }
+
+       div#scroller-anchor {
+           width: inherit;
+       }
+
+       div#scroller {
+           width: inherit;
+       }
+
+       div#guide-title {
+        text-transform: capitalize;
+        font-size: 16px;
+        padding-bottom: 6px;
+        color: #BFBFBF;
+        text-transform: uppercase;
+        font-weight: bold;
+       }
+
+       input, textarea, select, .uneditable-input {
+	       width: 165px;
+	     }
+
+    </style>
+
+</head>
+<body onload="styleCode()">
+    
+    <!-- Topbar
+    ================================================== -->
+    <div class="topbar" >
+      <div class="topbar-inner">
+        <div class="container">
+          <a class="brand" href="/sips/index.html"><img src="/resources/images/scala-logo.png"> Improvement Process</a>
+          <ul class="nav">
+           <li><a href="/sips/sip-list.html">SIP List</a></li>
+           <li><a href="/sips/minutes-list.html">Minutes</a></li>
+           <li><a href="/sips/sip-submission.html">Submitting a SIP</a></li>
+           <li><a href="/sips/slip-submission.html">Submitting a SLIP</a></li>
+           <li><a href="/sips/sip-tutorial.html">Tutorial: Writing a SIP</a></li>
+           <li><a href="https://groups.google.com/forum/#!forum/scala-sips">Mailing List</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+<div class="container">
+  <div class="row">    
+
+    <div class="span12">
+      <h1>SIP-15 - Value Classes</h1>    
+      <p><strong>By: Martin Odersky and Jeff Olson and Paul Phillips and Joshua Suereth</strong></p>
+
+<h2 id="history">History</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Version</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Jan 30th 2012</td>
+      <td>Original inline classes proposal</td>
+    </tr>
+    <tr>
+      <td>Feb 7th 2012</td>
+      <td>Changed inline classes to value classes, added Josh Suereth as author.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>This is a proposal to introduce syntax for classes in Scala that can get
+completely inlined, so operations on these classes have zero overhead compared
+to external methods. Some use cases for inlined classes are:</p>
+
+<ul>
+  <li><em>Inlined implicit wrappers</em>. Methods on those wrappers would be translated to
+extensions methods.</li>
+  <li><em>New numeric classes</em>, such as unsigned ints. There would no longer need to be
+a boxing overhead for such classes. So this is similar to value types in .NET.</li>
+  <li>Classes representing <em>units of measure</em>. Again, no boxing overhead would be
+incurred for these classes.</li>
+</ul>
+
+<p>The proposal is currently in an early stage. It’s not yet been implemented, and
+the proposed implementation strategy is too complicated to be able to predict
+with certainty that it will work as specified. Consequently, details of the
+proposal might change driven by implementation concerns.</p>
+
+<h2 id="value-classes">Value Classes</h2>
+
+<p>The gist of the proposal is to allow user-defined classes to extend from AnyVal
+in situations like this:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>class C (val u: U) extends AnyVal {
+  def m1(ps1) = ...
+  ...
+  def mN(psN) = ...
+}
+</code></pre>
+</div>
+
+<p>Such classes are called <em>value classes</em>. A value class <code class="highlighter-rouge">C</code> must satisfy the
+following criteria:</p>
+
+<ol>
+  <li><code class="highlighter-rouge">C</code> must have exactly one parameter, which is marked with <code class="highlighter-rouge">val</code> and which has
+public accessibility. The type of that parameter (e.g. <code class="highlighter-rouge">U</code> above) is called
+the <em>underlying type</em> of <code class="highlighter-rouge">C</code></li>
+  <li><code class="highlighter-rouge">C</code> may not have <code class="highlighter-rouge">@specialized</code> type parameters.</li>
+  <li>The underlying type of <code class="highlighter-rouge">C</code> may not be a value class.</li>
+  <li><code class="highlighter-rouge">C</code> may not have secondary constructors.</li>
+  <li><code class="highlighter-rouge">C</code> may not define concrete <code class="highlighter-rouge">equals</code> or <code class="highlighter-rouge">hashCode</code> methods.</li>
+  <li><code class="highlighter-rouge">C</code> must be either a toplevel class or a member of a statically accessible
+object.</li>
+  <li><code class="highlighter-rouge">C</code> must be ephemeral.</li>
+</ol>
+
+<p>A class or trait <code class="highlighter-rouge">C</code> is <em>ephemeral</em> if the following holds:</p>
+
+<ol>
+  <li><code class="highlighter-rouge">C</code> may not declare fields (other than the parameter of a value class).</li>
+  <li><code class="highlighter-rouge">C</code> may not contain object definitions.</li>
+  <li><code class="highlighter-rouge">C</code> may not have initialization statements.</li>
+</ol>
+
+<p>We say that a value class <code class="highlighter-rouge">C</code> <em>unboxes directly</em> to a class <code class="highlighter-rouge">D</code> if the
+underlying type of <code class="highlighter-rouge">C</code> is a type-instance of <code class="highlighter-rouge">D</code>. Indirect unboxing is the
+transitive closure of direct unboxing. A value class may not unbox directly or
+indirectly to itself.</p>
+
+<p>The following implicit assumptions apply to value classes.</p>
+
+<ol>
+  <li>Value classes are implicitly treated as final, so they cannot be extended by
+other classes.</li>
+  <li>
+    <p>Value classes are implicitly assumed to have structural equality and hash codes. I.e.
+their <code class="highlighter-rouge">equals</code> and <code class="highlighter-rouge">hashCode</code> methods are taken to be defined as follows:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> def equals(other: Any) = other match {
+   case that: C =&gt; this.u == that.u
+   case _ =&gt; false
+ }
+ def hashCode = u.hashCode
+</code></pre>
+    </div>
+  </li>
+</ol>
+
+<h2 id="universal-traits">Universal traits</h2>
+
+<p>Scala’s rule for inheritance do not permit value classes to extend traits that
+extend from <code class="highlighter-rouge">AnyRef</code>. To permit value classes to extend traits, we introduce
+<em>universal traits</em>, which extend from <code class="highlighter-rouge">Any</code>. A universal trait <code class="highlighter-rouge">T</code> needs to
+explicitly extend class <code class="highlighter-rouge">Any</code>. In the example below, <code class="highlighter-rouge">Equals</code> is a universal
+trait with superclass <code class="highlighter-rouge">Any</code>, but <code class="highlighter-rouge">Ordered</code>’s superclass is still assumed to be
+<code class="highlighter-rouge">AnyRef</code>.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>trait Equals[T] extends Any { ... }
+trait Ordered[T] extends Equal[T] { ... }
+</code></pre>
+</div>
+
+<p>To turn <code class="highlighter-rouge">Ordered</code> into a universal trait, add an explicit superclass <code class="highlighter-rouge">Any</code>:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>trait Ordered[T] extends Any with Equal[T] { ... }
+</code></pre>
+</div>
+
+<p>Like value classes, universal traits need to be ephemeral.</p>
+
+<h2 id="expansion-of-value-classes">Expansion of value classes.</h2>
+
+<p>Value classes are expanded as follows. For concreteness, we assume a value class
+<code class="highlighter-rouge">Meter</code> that is defined like this:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>class Meter(val underlying: Double) extends AnyVal with Printable {
+   def plus (other: Meter): Meter =
+      new Meter(this.underlying + other.underlying)
+   def divide (factor: Double): Meter = new Meter(this.underlying / factor)
+   def less (other: Meter): Boolean = this.underlying &lt; other.underlying
+   override def toString: String = underlying.toString + “m”
+}
+</code></pre>
+</div>
+
+<p>For simplicity we assume that all expansion steps are done on erased types.</p>
+
+<h3 id="step-1-extracting-methods">Step 1: Extracting methods.</h3>
+
+<p>Let the <em>extractable methods</em> of a value class be all methods that are directly
+declared in the class (as opposed to being inherited) and that do not contain a
+super call in their body. For each extractable method <code class="highlighter-rouge">m</code>, we create another
+method named <code class="highlighter-rouge">extension$m</code> in the companion object of that class (if no
+companion object exists, a fresh one is <em>created</em>). The <code class="highlighter-rouge">extension$m</code> method
+takes an additional parameter in first position which is named <code class="highlighter-rouge">$this</code> and has
+the value class as type. Generally, in a value class</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>class C(val u: U) extends AnyVal
+</code></pre>
+</div>
+
+<p>a method</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>def m(params): R = body
+</code></pre>
+</div>
+
+<p>is expanded to the following method in the companion object of class <code class="highlighter-rouge">C</code>:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>def extension$m($this: C, params): R = body2
+</code></pre>
+</div>
+
+<p>Here <code class="highlighter-rouge">body2</code> is the same as <code class="highlighter-rouge">body</code> with each occurence of <code class="highlighter-rouge">this</code> or <code class="highlighter-rouge">C.this</code>
+replaced by <code class="highlighter-rouge">$this</code>. The original method <code class="highlighter-rouge">m</code> in <code class="highlighter-rouge">C</code> will be changed to</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>def m(params): R = C.extension$m(this, params)
+</code></pre>
+</div>
+
+<p>Overloaded methods may be augmented with an additional integer to distinguish
+them after types are erased (see the transformations of the <code class="highlighter-rouge">divide</code> method in
+the following steps).</p>
+
+<p>Also in this step, synthetic <code class="highlighter-rouge">hashCode</code> and <code class="highlighter-rouge">equals</code> methods are added to the
+class.</p>
+
+<p>In our example, the <code class="highlighter-rouge">Meter</code> class would be expanded as follows:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>class Meter(val underlying: Double) extends AnyVal with Printable {
+    def plus (other: Meter): Meter =
+       Meter.extension$plus(this, other)
+    def divide (other: Meter): Double =
+       Meter.extension1$divide(this, other)
+    def divide (factor: Double): Meter =
+       Meter.extension2$divide(this, factor)
+    def less (other: Meter): Boolean =
+       Meter.extension$less(this, other)
+    override def toString: String =
+       Meter.extension$toString(this)
+    override def equals(other: Any) =
+       Meter.extension$equals(this)
+    override def hashCode =
+       Meter.extension$hashCode(this)
+}
+object Meter {
+   def extension$plus($this: Meter, other: Meter) =
+     new Meter($this.underlying + other.underlying)
+   def extension1$divide($this: Meter, other: Meter): Double =
+     $this.underlying / other.underlying
+   def extension2$divide($this: Meter, factor: Double): Meter =
+     new Meter($this.underlying / factor)
+   def extension$less($this: Meter, other: Meter): Boolean =
+      $this.underlying &lt; other.underlying
+   def extension$toString($this: Meter): String =
+      $this.underlying.toString + “m”
+   def extension$equals($this: Meter, other: Any) = other match {
+      case that: Meter =&gt; $this.underlying == that.underlying
+      case _ =&gt; false
+   }
+   def extension$hashCode($this: Meter) = $this.underlying
+}
+</code></pre>
+</div>
+
+<h3 id="step-2-rerouting-calls">Step 2: Rerouting calls</h3>
+
+<p>In this step any call to a method that got extracted in step 1 into a companion
+object gets redirected to the newly created method in that companion object.
+Generally, a call</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>p.m(args)
+</code></pre>
+</div>
+
+<p>where <code class="highlighter-rouge">m</code> is an extractable method declared in a value class <code class="highlighter-rouge">C</code> gets rewritten to</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>C.extension$m(p, args)
+</code></pre>
+</div>
+
+<p>For instance the two calls in the following code fragment</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>val x, y: Meter
+x.plus(y)
+x.toString
+</code></pre>
+</div>
+
+<p>would be rewritten to</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Meter.extension$plus(x, y)
+Meter.extension$toString(x)
+</code></pre>
+</div>
+
+<h3 id="step-3-erasure">Step 3: Erasure</h3>
+
+<p>Next, we introduce for each value class <code class="highlighter-rouge">C</code> a new type <code class="highlighter-rouge">C$unboxed</code> (this type
+will be eliminated again in step 4). The newly generated type is assumed to have
+no members and to be completely outside the normal Scala class hierarchy. That
+is, it is a subtype of no other type and is a supertype only of <code class="highlighter-rouge">scala.Nothing</code>.</p>
+
+<p>We now replace every occurence of the type <code class="highlighter-rouge">C</code> in a symbol’s type or in a tree’s
+type annotation by <code class="highlighter-rouge">C$unboxed</code>. There are however the following two exceptions
+to this rule:</p>
+
+<ol>
+  <li>
+    <p>Type tests are left unaffected. So, in the type test below, <code class="highlighter-rouge">C</code> is left as it
+is.</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> e.isInstanceOf[C]
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>All occurences of methods in class <code class="highlighter-rouge">C</code> are left unaffected.</p>
+  </li>
+</ol>
+
+<p>We then re-typecheck the program, performing the following adaptations if types
+do not match up.</p>
+
+<ol>
+  <li>
+    <p>If <code class="highlighter-rouge">e</code> is an expression of type <code class="highlighter-rouge">C$unboxed</code>, and the expected type is some other
+type <code class="highlighter-rouge">T</code>, <code class="highlighter-rouge">e</code> is converted to type <code class="highlighter-rouge">C</code> using</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> new C(e.asInstanceOf[U])
+</code></pre>
+    </div>
+
+    <p>where <code class="highlighter-rouge">U</code> is the underlying type of <code class="highlighter-rouge">C</code>. After that, further adaptations may
+be effected on <code class="highlighter-rouge">C</code>, employing the usual rules of erasure typing. Similarly,
+if a selection is performed on an expression of type <code class="highlighter-rouge">C$unboxed</code>, the
+expression is first converted to type <code class="highlighter-rouge">C</code> using the conversion above.</p>
+  </li>
+  <li>
+    <p>If the expected type of an expression <code class="highlighter-rouge">e</code> of type <code class="highlighter-rouge">T</code> is <code class="highlighter-rouge">C$unboxed</code>, then
+<code class="highlighter-rouge">e</code> is first adapted with expected type <code class="highlighter-rouge">C</code> giving <code class="highlighter-rouge">e2</code>, and <code class="highlighter-rouge">e2</code> then is
+converted to <code class="highlighter-rouge">C$unboxed</code> using</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> e2.u.asInstanceOf[C$unboxed]
+</code></pre>
+    </div>
+
+    <p>where <code class="highlighter-rouge">u</code> is the name of the value parameter of <code class="highlighter-rouge">C</code>. Similarly, if an
+expression <code class="highlighter-rouge">e</code> is explicitly converted using</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> e.asInstanceOf[C$unboxed]
+</code></pre>
+    </div>
+
+    <p>then <code class="highlighter-rouge">e</code> is first converted to type <code class="highlighter-rouge">C</code>, giving <code class="highlighter-rouge">e2</code>, and the cast is then
+replaced by</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> e2.u.asInstanceOf[C$unboxed]
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>The rules for conversions from and to arrays over value classes are analogous
+to the rules for arrays over primitive value classes.</p>
+  </li>
+</ol>
+
+<p>Value classes are rewritten at this stage to normal reference classes. That is,
+their parent changes from <code class="highlighter-rouge">AnyVal</code> to <code class="highlighter-rouge">java.lang.Object</code>. The <code class="highlighter-rouge">AnyVal</code> type
+itself is also rewritten during erasure to <code class="highlighter-rouge">java.lang.Object</code>, so the change
+breaks no subtype relationships.</p>
+
+<p>We finally perform the following peephole optimizations:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>new C(e).u               ==&gt; e
+new C(e).isInstanceOf[C] ==&gt; true
+new C(e) == new C(f)     ==&gt; e == f
+new C(e) != new C(f)     ==&gt; e != f
+</code></pre>
+</div>
+
+<h3 id="step-4-cleanup">Step 4: Cleanup</h3>
+
+<p>In the last step, all occurrences of type <code class="highlighter-rouge">C$unboxed</code> are replaced by the
+underlying type of <code class="highlighter-rouge">C</code>. Any redundant casts of the form</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>e.asInstanceOf[T]
+</code></pre>
+</div>
+
+<p>where <code class="highlighter-rouge">e</code> is already of type <code class="highlighter-rouge">T</code> are removed and replaced by <code class="highlighter-rouge">e</code>.</p>
+
+<h2 id="examples">Examples</h2>
+
+<h3 id="example-1">Example 1</h3>
+
+<p>The program statements on the left are converted using steps 1 to 3 to the
+statements on the right.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>var m, n: Meter           var m, n: Meter$unboxed
+var o: AnyRef             var o: AnyRef
+m = n                     m = n
+o = m                     o = new Meter(m.asInstanceOf[Double])
+m.print                   new Meter(m.asInstanceOf[Double]).print
+m less n                  Meter.extension$less(m, n)
+m.toString                Meter.extension$toString(m)
+m.isInstanceOf[Ordered]   new Meter(m.asInstanceOf[Double]).isInstanceOf[Ordered]
+m.asInstanceOf[Ordered]   new Meter(m.asInstanceOf[Double]).asInstanceOf[Ordered]
+o.isInstanceOf[Meter]     o.isInstanceOf[Meter]
+o.asInstanceOf[Meter]     o.asInstanceOf[Meter].underlying.asInstanceOf[Meter$unboxed]
+m.isInstanceOf[Meter]     new Meter(m.asInstanceOf[Double]).isInstanceOf[Meter]
+m.asInstanceOf[Meter]     m.asInstanceOf[Meter$unboxed]
+</code></pre>
+</div>
+
+<p>Including the cleanup step 4 the same program statements are converted as
+follows.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>var m, n: Meter           var m, n: Double
+var o: Any                var o: Any
+m = n                     m = n
+o = m                     o = new Meter(m)
+m.print                   new Meter(m).print
+m less n                  Meter.extension$less(m, n)
+m.toString                Meter.extension$toString(m)
+m.isInstanceOf[Ordered]   new Meter(m).isInstanceOf[Ordered]
+m.asInstanceOf[Ordered]   new Meter(m).asInstanceOf[Ordered]
+o.isInstanceOf[Meter]     o.isInstanceOf[Meter]
+o.asInstanceOf[Meter]     o.asInstanceOf[Meter].underlying
+m.isInstanceOf[Meter]     new Meter(m).isInstanceOf[Meter]
+m.asInstanceOf[Meter]     m.asInstanceOf[Double]
+</code></pre>
+</div>
+
+<h3 id="example-2">Example 2</h3>
+
+<p>After all 4 steps the <code class="highlighter-rouge">Meter</code> class is translated to the following code.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>class Meter(val underlying: Double) extends AnyVal with Printable {
+   def plus (other: Meter): Meter = 
+     new Meter(Meter.extension$plus(this.underlying, other.underlying))
+   def divide (other: Meter): Double = 
+     Meter.extension1$divide(this.underlying, other)
+   def divide (factor: Double): Meter = 
+     new Meter(Meter.extension2$divide(this.underlying, factor))
+   def less (other: Meter): Boolean = 
+     Meter.extension$less(this.underlying, other)
+   override def toString: String = 
+     Meter.extension$toString(this.underlying)
+   override def equals(other: Any) = 
+     Meter.extension$equals(this)
+   override def hashCode = 
+     Meter.extension$hashCode(this)
+}
+object Meter {
+  def extension$plus($this: Double, other: Double) = 
+    $this + other
+  def extension1$divide($this: Double, other: Double): Double = 
+    $this / other
+  def extension2$divide($this: Double, factor: Double): Double = 
+    $this / factor)
+  def extension$less($this: Double, other: Double): Boolean =
+    $this &lt; other
+  def extension$toString($this: Double): String = 
+    $this.toString + “m”
+  def extension$equals($this: Double, other: Object) = other match {
+    case that: Meter =&gt; $this == that.underlying
+    case _ =&gt; false
+  }
+  def extension$hashCode($this: Double) = $this.hashCode
+}
+</code></pre>
+</div>
+
+<p>Note that the two <code class="highlighter-rouge">divide</code> methods end up with the same type in object <code class="highlighter-rouge">Meter</code>.
+(The fact that they also have the same body is accidental). That’s why we needed
+to distinguish them by adding an integer number.</p>
+
+<p>The same situation can arise in other circumstances as well: Two overloaded
+methods might end up with the same type after erasure. In the general case,
+Scala would treat this situation as an error, as it would for other types that
+get erased. So we propose to solve only the specific problem that multiple
+overloaded methods in a value class itself might clash after erasure.</p>
+
+<h2 id="further-optimizations">Further Optimizations?</h2>
+
+<p>The proposal foresees that only methods defined directly in a value class get
+expanded in the companion object; methods inherited from universal traits are
+unaffected. For instance, in the example above</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>m.print
+</code></pre>
+</div>
+
+<p>would translate to</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>new Meter(m).print
+</code></pre>
+</div>
+
+<p>We might at some point want to investigate ways how inherited trait methods can
+also be inlined. For the moment this is outside the scope of the proposal.</p>
+
+      
+    </div>
+    
+    <div class="span4">
+      <div id="scroller-anchor">
+  <div id="scroller">
+              
+        
+          <p class="contents">SIP Committee Decision</p>
+          <div class="alert-message success" style="margin-left: 15px;">
+            <strong style="font-size: 15px;">Accepted</strong>
+            <p>This is in Accepted status.  There is concern for numerical computing.  We think future SIP(s), using work from SIP-15, can provide more benefit to numerical computing users. The SIP as it exists benefits all users of implicit enrichment classes, and takes us much further to unboxed high performance code. This SIP does not exclude further work towards improving numerical computing in Scala.</p>
+          </div>  
+                        
+              
+    <p class="contents">Contents</p>
+    <div id="toc"></div>    
+  </div>
+</div>
+
+    </div>
+  
+  </div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<ul>
+			<li><h5>API</h5></li>
+			<li><a href="http://www.scala-lang.org/api/current/">Current</a></li>
+			<li><a href="http://www.scala-lang.org/files/archive/nightly/2.11.x/api/2.11.x/">Nightly</a></li>
+		</ul>
+		<ul>
+			<li><h5>Learn</h5></li>
+			<li><a href="/overviews">Guides & Overviews</a></li>
+			<li><a href="/tutorials">Tutorials</a></li>
+			<li><a href="/style">Scala Style Guide</a></li>
+		</ul>
+		<ul>
+			<li><h5>Quickref</h5></li>
+			<li><a href="/glossary">Glossary</a></li>
+			<li><a href="/cheatsheets">Cheatsheets</a></li>
+		</ul>
+		<ul>
+			<li><h5>Contribute</h5></li>
+			<li><a href="http://github.com/scala/scala.github.com">Source Code</a></li>
+			<li><a href="/contribute.html">Contributors Guide</a></li>
+			<li><a href="http://getsatisfaction.com/scaladocs">Suggestions</a></li>
+		</ul>
+		<ul>
+			<li><h5>Other Resources</h5></li>
+			<li><a href="/sips">Scala Improvement Process</a></li>
+		</ul>
+	</div>
+	<div class="container copyright">
+ 		<p>
+			Copyright &copy; 2011-2015 EPFL. All rights reserved.
+			<a href="https://github.com/scala/scala.github.com/commits/gh-pages.atom"><img align="right" height="20px" width="20px" src="/resources/images/rss.png" alt="RSS feed of updates to the github repo hosting this site"></a>
+		</p>
+	</div>
+</div>
+
+<!-- search -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+  apiKey: 'b66eaeec6bd214ea6c0fcd2d7b7fdfe8',
+  indexName: 'scala-docs',
+  inputSelector: '#q',
+	autocompleteOptions: {
+    debug: true
+  },
+  algoliaOptions: {
+		"hitsPerPage": 5,
+		"facetFilters": "(tags:en)"
+	}
+});
+</script>
+
+
+
+<script type="text/javascript">
+  $('#toc').toc({exclude: 'h1, h5, h6', context: '', autoId: true, numerate: false});
+</script>
+
+<script type="text/javascript">
+  $(function() {
+    moveScroller();
+  });
+</script>
+
+  </body>
+</html>
+
+    

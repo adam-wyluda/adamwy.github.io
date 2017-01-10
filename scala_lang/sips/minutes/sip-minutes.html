@@ -1,0 +1,528 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SIP Meeting Minutes - 25th October 2016 - Scala Documentation</title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+
+    <!-- prettify js and CSS -->
+    <link rel="stylesheet" href="/resources/stylesheets/prettify.css" type="text/css" />
+    <script src="/resources/javascript/prettify/prettify.js" type="text/javascript" ></script>
+
+
+    <!-- jquery js -->
+    <script src="/resources/javascript/jquery.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/effects.core.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/effects.highlight.js" type="text/javascript" ></script>
+    <script src="/resources/javascript/moveScroller.js" type="text/javascript" ></script>
+
+    <!-- Bootstrap JS and CSS -->
+    <link rel="stylesheet" href="/resources/stylesheets/bootstrap.css" type="text/css" />
+	  <script src="/resources/javascript/bootstrap-dropdown.js" type="text/javascript" ></script>
+	  <script src="/resources/javascript/bootstrap-dropdown-app.js" type="text/javascript" ></script>
+
+    <!-- Base stylesheet for all pages -->
+    <link rel="stylesheet" href="/resources/stylesheets/base.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css" />
+    <link rel="stylesheet" href="/resources/stylesheets/search.css" type="text/css" />
+
+    <!-- table of contents js -->
+    <script src="/resources/javascript/toc.js" type="text/javascript" ></script>
+
+
+    <!-- styles for pager and table of contents -->
+    <link rel="stylesheet" href="/resources/stylesheets/pager.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/stylesheets/toc.css" type="text/css" />
+
+    <!-- google analytics -->
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-574683-5']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+
+    <!-- prettyprint js to prepend generated pre/code tags -->
+    <script type="text/javascript">
+      function styleCode()
+        {
+          if (typeof disableStyleCode != "undefined")
+          {
+              return;
+          }
+          var a = false;
+          $("pre code").parent().each(function()
+          {
+              if (!$(this).hasClass("prettyprint"))
+              {
+                  $(this).addClass("prettyprint lang-scala linenums");
+                  a = true
+              }
+          });
+          if (a) { prettyPrint() }
+      }
+    </script>
+
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+
+            $(".scroll").click(function(event){
+              event.preventDefault();
+              $('html,body').animate({scrollTop:$(this.hash).offset().top}, 500);
+              $('html,body').animate({scrollTop:$(this.hash).offset().top-=50}, 500);
+              $(this.hash).effect("highlight", {color: "#FFCC85"}, 3000);
+            });
+      });
+    </script>
+
+    <script type="text/javascript">
+      $(window).ready(function goToSubsection() {
+          if (window.location.hash)
+          {
+              $('html,body').animate({scrollTop:$(window.location.hash).offset().top}, 500);
+              $('html,body').animate({scrollTop:$(window.location.hash).offset().top-=50}, 500);
+              $(window.location.hash).effect("highlight", {color: "#FFCC85"}, 3000);
+          }
+        });
+    </script>
+
+    <style type="text/css">
+
+       p.contents {
+           margin-left: 15px;
+           font-weight: bold;
+           font-size: 16px;
+       }
+
+       div#toc ul {
+           list-style: none;
+       }
+
+       div#toc ul a {
+           display: block;
+           list-style: none;
+           line-height: 22px;
+           font-weight: bold;
+           width: 100%;
+       }
+
+      div#toc ul li ul {
+           list-style: disc;
+      }
+
+      div#toc ul li ul a {
+           line-height: 18px;
+           font-weight: normal;
+      }
+
+      div#toc ul li ul li ul {
+           list-style: square;
+      }
+       div#toc ul li ul li ul a {
+       }
+
+       div#scroller-anchor {
+           width: inherit;
+       }
+
+       div#scroller {
+           width: inherit;
+       }
+
+       div#guide-title {
+        text-transform: capitalize;
+        font-size: 16px;
+        padding-bottom: 6px;
+        color: #BFBFBF;
+        text-transform: uppercase;
+        font-weight: bold;
+       }
+
+       input, textarea, select, .uneditable-input {
+	       width: 165px;
+	     }
+
+    </style>
+
+</head>
+<body onload="styleCode()">
+    
+    <!-- Topbar
+    ================================================== -->
+    <div class="topbar" >
+      <div class="topbar-inner">
+        <div class="container">
+          <a class="brand" href="/sips/index.html"><img src="/resources/images/scala-logo.png"> Improvement Process</a>
+          <ul class="nav">
+           <li><a href="/sips/sip-list.html">SIP List</a></li>
+           <li><a href="/sips/minutes-list.html">Minutes</a></li>
+           <li><a href="/sips/sip-submission.html">Submitting a SIP</a></li>
+           <li><a href="/sips/slip-submission.html">Submitting a SLIP</a></li>
+           <li><a href="/sips/sip-tutorial.html">Tutorial: Writing a SIP</a></li>
+           <li><a href="https://groups.google.com/forum/#!forum/scala-sips">Mailing List</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+<div class="wrapper">
+  <div class="container">
+    <div class="row">
+    
+      <h1>SIP Meeting Minutes - 25th October 2016</h1>    
+    
+      <div class="span10">
+        <h1 id="minutes">Minutes</h1>
+
+<p>The following agenda was distributed to attendees:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Topic</th>
+      <th>Reviewer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Discussion of the voting system</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td><a href="http://docs.scala-lang.org/sips/pending/improved-lazy-val-initialization.html">SIP-20: Improved Lazy Val Initialization</a></td>
+      <td>Sébastien Doeraene</td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/scala/scala.github.com/pull/533#issuecomment-232959066">SIP-27: Trailing commas</a></td>
+      <td>Eugene Burmako</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Jorge Vicente Cantero was the Process Lead and acting secretary of the meeting.</p>
+
+<ul>
+  <li><strong>Decided to reaccept for review</strong>: SIP-27: Trailing commas</li>
+  <li><strong>Under review</strong>: SIP-20: Improved Lazy Val Initialization</li>
+</ul>
+
+<h2 id="date-time-and-location">Date, Time and Location</h2>
+
+<p>The meeting took place at 5:00pm Central European Time / 8:00am Pacific Daylight
+Time on Tuesday, October 25th, 2016 via Google Hangouts.</p>
+
+<p>Minutes were taken by Jorge Vicente Cantero, acting secretary.</p>
+
+<h2 id="attendees">Attendees</h2>
+
+<p>Attendees Present:</p>
+
+<ul>
+  <li>Martin Odersky (<a href="https://github.com/odersky">@odersky</a>), EPFL</li>
+  <li>Seth Tisue (<a href="https://github.com/SethTisue">@SethTisue</a>), Lightbend</li>
+  <li>Iulian Dragos (<a href="https://github.com/dragos">@dragos</a>), Independent</li>
+  <li>Heather Miller (<a href="https://github.com/heathermiller">@heathermiller</a>), Scala Center</li>
+  <li>Sébastien Doeraene (<a href="https://github.com/sjrd">@sjrd</a>), EPFL</li>
+  <li>Eugene Burmako (<a href="https://github.com/xeno-by">@xeno-by</a>), EPFL</li>
+  <li>Jorge Vicente Cantero (<a href="https://github.com/jvican">@jvican</a>), Process Lead</li>
+  <li>Adriaan Moors (<a href="https://github.com/adriaanm">@adriaanm</a>), Lightbend</li>
+</ul>
+
+<h2 id="apologies">Apologies</h2>
+
+<ul>
+  <li>Josh Suereth (<a href="https://github.com/jsuereth">@jsuereth</a>), Google</li>
+</ul>
+
+<h2 id="proceedings">Proceedings</h2>
+
+<h3 id="opening-remarks">Opening Remarks</h3>
+
+<p>After some controversy sprung by the <a href="https://github.com/scala/scala-lang/pull/477">latest SIP-27
+vote</a>, the SIP Process Lead
+cancelled the vote on the SIP-27: Trailing Commas, and invited the Committee to
+discuss new voting rules to help clarify the process voting system.</p>
+
+<p>The issue was caused by a legal void on the rounding of the 70% rule.
+Traditionally, votes are not rounded up. However, the SIP Process Lead
+took the decision to round up the SIP-27 vote percentage, which was 66%.
+This decision was taken in the best spirit of the rule, which was only introduced
+to ensure that simple majorities (50%) are not enough for accepting a proposal.</p>
+
+<p>Before the meeting, the SIP Process Lead shared this email with all the
+Committee members:</p>
+
+<blockquote>
+  <p>The majority-plus-two rule sets a concrete threshold and fits the spirit of
+the rule (not having simple majority, but a
+<a href="https://en.wikipedia.org/wiki/Supermajority">supermajority</a>). The 70% rule is
+too strict, especially for committees that are not big, as ours. After some
+research, we can choose the <a href="https://en.wikipedia.org/wiki/Supermajority#Two-thirds_vote">two-thirds
+rule</a> used in a
+lot of political parties, parliaments, boards and committees.</p>
+</blockquote>
+
+<h3 id="deciding-the-voting-system">Deciding the voting system</h3>
+
+<p>Sébastien starts the discussion pointing out that he would like to have a simple
+percentage, without any rounding. Heather argues that this percentage changes
+depending on the number of the present Committee Members. Seth comments that
+it has been proposed in several online channels that all the Committee members
+should vote, even if they cannot attend the meeting. All the Committee agrees on
+this, but the main consequence is that the voting period is not predictable
+anymore, since there’s not a fixed deadline to vote. Martin proposes to choose
+this fixed deadline case-by-case.</p>
+
+<p>Martin proposes that there’s a meta rule to only accept a proposal if 50% of
+all the Committee members vote for it, and then to have another percentage on
+the actual vote. Seth, Eugene and Heather don’t like this idea. Heather brings
+up the issue of abstentions, should they still be considered as no’s even if
+people are on vacation or cannot vote?. Adriaan says this is a fair concern, and
+thinks that there should be a fixed deadline for voting.</p>
+
+<p>All the Committee agrees that with the new rules the Committee wouldn’t vote
+publicly, because Committee members can notify their vote after the meeting and
+before the fixed deadline.</p>
+
+<p>Martin proposes to keep the old rules, the 70% percentage rule. Jorge proposes
+to have simpler and more predictable rules, and replace 70% with the two-thirds
+rule. Martin comes back to the abstentions point: he doesn’t want them to be
+considered as no, because with the current rules Committee members could block
+the whole decision process. Some Committee members point out that this wouldn’t
+happen because then the quorum wouldn’t be reached. The discussion shifts
+towards the quorum point: is it necessary anymore? Heather and Adriaan say that
+it is, because it ensures that a reasonable number of Committee members meet to
+discuss proposals and convince each other about the pros and cons. All the
+Committee finally decides to not consider abstentions as no’s. Adriaan, however,
+suggests that we should penalize people that abstain too often.</p>
+
+<p>Martin proposes a new system that helps survive the abstention issue mentioned
+before. For a proposal to pass, at least 50% of all the Committee 
+and two-thirds of all the people voting (not counting abstentions) must accept
+it. The quorum rule is kept. After some discussion, the Committee unanimously
+votes in favor of Martin’s new system, along with not considering abstentions as
+no’s and allowing all the Committee members to vote after the meeting.  These
+rules are formalized <a href="https://github.com/scala/scala.github.com/pull/632">here</a>.</p>
+
+<h3 id="discussion-of-sip-27-trailing-commas">Discussion of SIP-27: Trailing Commas</h3>
+
+<p>Eugene describes what happened in the last meeting. Martin asks if there is a
+concrete proposal. Jorge says that he thinks that Dale would push for the new
+line specialized case. Martin proposes to push for a more concrete proposal
+because the specification cannot be so open-ended to properly analyze the
+consequences of the suggested changes. Therefore, he suggests to vote on the
+proposal to see either if we continue its review or we stop its discussion.</p>
+
+<p>Seth and Adriaan voice their opinions on trailing commas again, they don’t agree
+this is a problem that should be solved in the language. Martin changes his view
+on the subject, and provided that the proposal does no harm to the syntax of the
+language and doesn’t cause problems, he would accept the change. He also says
+that it wouldn’t be good to contradict last month’s vote on the proposal.
+Heather says that she’s in favor of trailing commas because makes beginners be
+less confused by the syntax and help people get started with the language.
+Iulian doesn’t like the specialized version, he would prefer a general version.
+Josh is not present, but he will vote via email in the next week.</p>
+
+<p><strong>Outcome</strong>: All the Committee (except Seth and Adriaan) decides to vote on
+accepting the proposal again for a final review. For this review, Dale has to
+update his proposal championing for one of the different changes to the syntax,
+and making a succinct specification whose consequences can be analysed by the
+Committee.  Trailing commas will be reviewed in November.</p>
+
+<h3 id="discussion-of-sip-20-improved-lazy-val-initialization">Discussion of SIP-20: Improved Lazy Val Initialization</h3>
+
+<p>Sébastien comments the changes that Dmitry has introduced to the proposal.
+Several new schemes have been added to the proposal based on his experience in
+Dotty, in which the championed scheme is already implemented.</p>
+
+<p>There are no clear winner in the case of local lazy vals, but there seems to be
+two clear candidates for the non-local lazy vals
+(<a href="http://docs.scala-lang.org/sips/pending/improved-lazy-val-initialization.html">V4</a>
+and
+<a href="http://docs.scala-lang.org/sips/pending/improved-lazy-val-initialization.html">V6</a>).
+Both are faster than the existing implementation in the contended case but V4
+general is 4x and V6 is only 2x. However, for the uncontended case V4 general is
+30% slower than the existing implementation, while V6 is on par, up to +-5%.
+Dmitry recommends the V6 case because it’s a <em>pure</em> win. Memory-wise, V6 would
+have a smaller memory footprint.</p>
+
+<p>Sébastien comments on the increase of the bytecode for the getter of the lazy
+val, which is 4x bigger. This could make a difference, although the benchmarks
+do not show any negative impact of it (probably because the previous
+implementation was bigger than the limits set by the JVM to benefit from
+code inlining).</p>
+
+<p>Jorge comments that there’s no implementation of this proposal for scalac. This
+means that someone should step up and provide such implementation, because
+Dmitry does not have time for it. Adriaan comments on the fact that V6 uses
+<code class="highlighter-rouge">sun.misc.Unsafe</code>, which he prefers that the compiler doesn’t depend on to run
+in other platforms that don’t allow it (Google App Engine). Sébastien highlights
+that the proposal could use var handles, which are planned to be shipped on Java
+9.</p>
+
+<p>Heather proposes to mark this proposal as dormant, since it’s lacking an
+implementation. She wants to let other people claim its ownership and provide an
+implementation if they care about this issue. Jorge proposes to ask first Dmitry
+if he wants to champion V4, otherwise it would be marked as dormant.</p>
+
+<p><strong>Outcome</strong>: The Committee agrees to wait for Dmitry’s response and then mark
+the proposal as dormant. The idea is to let someone pick it up and provide an
+implementation. Ideally, this implementation should run on Java 8 and not
+depend on var handles.</p>
+
+<h2 id="closing-remarks">Closing remarks</h2>
+<p>See you next time!</p>
+
+        
+      </div>
+    
+      <div class="span6">
+        <h3>Pending SIPs</h3>
+<ul class="post-list">
+  
+    <li><a href="/sips/pending/inline-meta.html">SIP-28 and SIP-29 - Inline meta</a> <span class="date">( Sep 2016 )</span>
+    
+      
+        <span class="label notice">Numbered</span>
+      
+    
+    </li>
+  
+    <li><a href="/sips/pending/trailing-commas.html">SIP-27 - Trailing Commas</a> <span class="date">( Jun 2016 )</span>
+    
+      
+        <span class="label warning">Under Review</span>
+      
+    
+    </li>
+  
+    <li><a href="/sips/pending/static-members.html">SIP 25 - @static fields and methods in Scala objects(SI-4581)</a> <span class="date">( Jan 2016 )</span>
+    
+    </li>
+  
+    <li><a href="/sips/pending/trait-parameters.html">SIP 25 - Trait Parameters</a> <span class="date">( Jun 2015 )</span>
+    
+    </li>
+  
+    <li><a href="/sips/pending/repeated-byname.html">SIP-24 - Repeated By Name Parameters</a> <span class="date">( Jun 2015 )</span>
+    
+    </li>
+  
+    <li><a href="/sips/pending/42.type.html">SIP-23 - Literal-based singleton types</a> <span class="date">( Jun 2014 )</span>
+    
+    </li>
+  
+    <li><a href="/sips/pending/async.html">SIP-22 - Async</a> <span class="date">( Jun 2013 )</span>
+    
+      
+        <span class="label light-warning">Postponed</span>
+      
+    
+    </li>
+  
+    <li><a href="/sips/pending/spores.html">SIP-21 - Spores</a> <span class="date">( Jun 2013 )</span>
+    
+      
+        <span class="label warning">Under Review</span>
+      
+    
+    </li>
+  
+    <li><a href="/sips/pending/improved-lazy-val-initialization.html">SIP-20 - Improved Lazy Vals Initialization</a> <span class="date">( May 2013 )</span>
+    
+      
+        <span class="label warning">Under Review</span>
+      
+    
+    </li>
+  
+</ul>
+
+      </div>
+    
+	
+    </div>
+  </div>
+  <div class="push"></div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<ul>
+			<li><h5>API</h5></li>
+			<li><a href="http://www.scala-lang.org/api/current/">Current</a></li>
+			<li><a href="http://www.scala-lang.org/files/archive/nightly/2.11.x/api/2.11.x/">Nightly</a></li>
+		</ul>
+		<ul>
+			<li><h5>Learn</h5></li>
+			<li><a href="/overviews">Guides & Overviews</a></li>
+			<li><a href="/tutorials">Tutorials</a></li>
+			<li><a href="/style">Scala Style Guide</a></li>
+		</ul>
+		<ul>
+			<li><h5>Quickref</h5></li>
+			<li><a href="/glossary">Glossary</a></li>
+			<li><a href="/cheatsheets">Cheatsheets</a></li>
+		</ul>
+		<ul>
+			<li><h5>Contribute</h5></li>
+			<li><a href="http://github.com/scala/scala.github.com">Source Code</a></li>
+			<li><a href="/contribute.html">Contributors Guide</a></li>
+			<li><a href="http://getsatisfaction.com/scaladocs">Suggestions</a></li>
+		</ul>
+		<ul>
+			<li><h5>Other Resources</h5></li>
+			<li><a href="/sips">Scala Improvement Process</a></li>
+		</ul>
+	</div>
+	<div class="container copyright">
+ 		<p>
+			Copyright &copy; 2011-2015 EPFL. All rights reserved.
+			<a href="https://github.com/scala/scala.github.com/commits/gh-pages.atom"><img align="right" height="20px" width="20px" src="/resources/images/rss.png" alt="RSS feed of updates to the github repo hosting this site"></a>
+		</p>
+	</div>
+</div>
+
+<!-- search -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+  apiKey: 'b66eaeec6bd214ea6c0fcd2d7b7fdfe8',
+  indexName: 'scala-docs',
+  inputSelector: '#q',
+	autocompleteOptions: {
+    debug: true
+  },
+  algoliaOptions: {
+		"hitsPerPage": 5,
+		"facetFilters": "(tags:en)"
+	}
+});
+</script>
+
+
+
+<script type="text/javascript">
+  $('#toc').toc({exclude: 'h1, h5, h6', context: '', autoId: true, numerate: false});
+</script>
+
+<script type="text/javascript">
+  $(function() {
+    moveScroller();
+  });
+</script>
+
+  </body>
+</html>
+
+    
